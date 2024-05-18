@@ -43,7 +43,7 @@ const NavbarUser= () => {
           {isMenuOpen ? (
             <HiOutlineXMark
               onClick={onToggleMenu}
-              className='text-black text-2xl cursor-pointer'
+              className='text-amber-600 text-2xl cursor-pointer'
               style={{ marginLeft: 'auto' }}
             />
           ) : (
@@ -55,7 +55,7 @@ const NavbarUser= () => {
         </div>
       </div>
 
-      <div className={`nav-links flex flex-col md:flex-row justify-between md:items-center m-5 md:m-0  bg-white px-5 py-3  ${isMenuOpen ? 'block' : 'hidden'} md:flex md:w-full`}>
+      <div className={`nav-links flex flex-col md:flex-row justify-between md:items-center mx-5 mt-5 md:m-0  bg-white px-5 py-3  ${isMenuOpen ? 'block' : 'hidden'} md:flex md:w-full`}>
         <ul className="flex flex-col md:flex-row gap-6 md:gap-10 md:items-center md:mx-auto">
         <li><a href="/" className={`text-black text-base font-medium ${activeMenuItem === 2 ? 'text-amber-400' : 'hover:text-amber-300'}`} onClick={() => handleMenuItemClick(2)}>Home</a></li>
           <li className='relative'>
@@ -79,7 +79,7 @@ const NavbarUser= () => {
         </ul>
       </div>
 
-      <div className={`nav-auth flex flex-col md:flex-row justify-between md:items-center bg-white px-5 py-3 m-5 md:m-0   ${isMenuOpen ? 'block' : 'hidden'} md:flex md:w-1/4`}>
+      <div className={`nav-auth flex flex-col md:flex-row justify-between md:items-center bg-white px-5 py-3 mx-5 md:m-0   ${isMenuOpen ? 'block' : 'hidden'} md:flex md:w-1/4`}>
         <ul className='flex flex-col md:flex-row gap-3 md:gap-5 md:items-center md:mx-auto'>
           <li><a href={route('login')} className={`bg-amber-400 px-4 py-2 rounded-lg text-white text-base font-medium ${activeMenuItem === 4 ? 'text-black' : 'hover:bg-amber-300 text-white'}`} onClick={() => handleMenuItemClick(4)}>Login</a></li>
           <li><a href={route('register')} className={`text-amber-400 text-base font-semibold ${activeMenuItem === 5 ? 'text-amber-400' : 'hover:text-amber-300'}`} onClick={() => handleMenuItemClick(5)}>Register</a></li>

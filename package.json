@@ -20,6 +20,7 @@
         "vite": "^5.0.0"
     },
     "dependencies": {
+        "aos": "^2.3.4",
         "react-icons": "^5.2.1",
         "react-simple-typewriter": "^5.0.1",
         "react-typed": "^2.0.12"
