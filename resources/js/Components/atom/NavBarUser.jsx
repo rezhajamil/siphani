@@ -57,7 +57,7 @@ const NavbarUser= () => {
 
       <div className={`nav-links flex flex-col md:flex-row justify-between md:items-center m-5 md:m-0  bg-white px-5 py-3  ${isMenuOpen ? 'block' : 'hidden'} md:flex md:w-full`}>
         <ul className="flex flex-col md:flex-row gap-6 md:gap-10 md:items-center md:mx-auto">
-        <li><a href="#" className={`text-black text-base font-medium ${activeMenuItem === 2 ? 'text-amber-400' : 'hover:text-amber-300'}`} onClick={() => handleMenuItemClick(2)}>Home</a></li>
+        <li><a href="/" className={`text-black text-base font-medium ${activeMenuItem === 2 ? 'text-amber-400' : 'hover:text-amber-300'}`} onClick={() => handleMenuItemClick(2)}>Home</a></li>
           <li className='relative'>
           <div className='flex flex-row gap-2 items-center cursor-pointer' onClick={onToggleProfileDropdown}>
               <button className={`text-black text-base font-medium ${activeMenuItem === 1 ? 'text-amber-400' : 'hover:text-amber-300'} relative`}>Produk</button>
