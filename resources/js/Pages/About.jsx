@@ -7,7 +7,7 @@ export default function Produk({ auth }) {
         <>
         <Template>
             <Head title="Produk" />
-            <div className='w-full bg-white min-h-screen py-10 px-16 flex justify-between items-center flex-row'>
+            <div className='w-full bg-gray-50 min-h-screen py-10 px-16 flex justify-between items-center flex-row'>
                 <div className='flex flex-col w-1/2'>
                     <h1 className='bg-lime-500 text-white text-4xl font-semibold mb-6 w-fit'>Tentang Kami</h1>
                     <p className='font-medium text-md text-justify'>Kami menghubungkan petani langsung dengan konsumen, menciptakan sebuah ekosistem yang menguntungkan bagi semua pihak. Untuk para petani, inilah kesempatan emas untuk menjual hasil panen Anda langsung ke pembeli tanpa biaya perantara besar, memastikan Anda mendapatkan keuntungan maksimal</p>
