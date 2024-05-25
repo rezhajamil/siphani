@@ -19,7 +19,7 @@ const NavbarUser= () => {
   };
 
   return (
-    <nav className='sticky top-0 flex flex-col md:flex-row justify-between w-full shadow-lg'>
+    <nav className='sticky top-0 z-50 flex flex-col md:flex-row justify-between w-full shadow-lg'>
       <div className={`flex flex-row justify-between items-center px-5 py-3 ${isMenuOpen ? 'bg-transparent' : 'bg-white'} md:bg-white md:w-1/6 md:justify-center `}>
         {/* <Image
           src="/logo-satgas.png"
@@ -58,22 +58,7 @@ const NavbarUser= () => {
       <div className={`nav-links flex flex-col md:flex-row justify-between md:items-center mx-5 mt-5 md:m-0  bg-white px-5 py-3  ${isMenuOpen ? 'block' : 'hidden'} md:flex md:w-full`}>
         <ul className="flex flex-col md:flex-row gap-6 md:gap-10 md:items-center md:mx-auto">
         <li><a href="/" className={`text-black text-base font-medium ${activeMenuItem === 2 ? 'text-amber-400' : 'hover:text-amber-300'}`} onClick={() => handleMenuItemClick(2)}>Home</a></li>
-          <li className='relative'>
-          <div className='flex flex-row gap-2 items-center cursor-pointer' onClick={onToggleProfileDropdown}>
-              <button className={`text-black text-base font-medium ${activeMenuItem === 1 ? 'text-amber-400' : 'hover:text-amber-300'} relative`}>Produk</button>
-              {isProfileDropdownOpen ? (
-                <HiChevronUp className='text-base font-semibold hover:text-amber-300' />
-              ) : (
-                <HiChevronDown className='text-base font-semibold hover:text-amber-300' />
-              )}
-          </div>
-            {isProfileDropdownOpen && (
-              <ul className="relative md:absolute left-0 mt-2 min-w-max bg-white rounded-md shadow-lg">
-                <li><a href="#" className="block px-4 py-2 text-black text-base font-medium hover:text-amber-300">Pertanian</a></li>
-                <li><a href="#" className="block px-4 py-2 text-black text-base font-medium hover:text-amber-300">Perkebunann</a></li>
-              </ul>
-            )}
-          </li>
+          <li><a href="#" className={`text-black text-base font-medium ${activeMenuItem === 2 ? 'text-amber-400' : 'hover:text-amber-300'}`} onClick={() => handleMenuItemClick(2)}>Produk</a></li>
           <li><a href="#" className={`text-black text-base font-medium ${activeMenuItem === 2 ? 'text-amber-400' : 'hover:text-amber-300'}`} onClick={() => handleMenuItemClick(2)}>Belanja</a></li>
           <li><a href="#" className={`text-black text-base font-medium ${activeMenuItem === 2 ? 'text-amber-400' : 'hover:text-amber-300'}`} onClick={() => handleMenuItemClick(2)}>Tentang Kami</a></li>
         </ul>
@@ -81,8 +66,8 @@ const NavbarUser= () => {
 
       <div className={`nav-auth flex flex-col md:flex-row justify-between md:items-center bg-white px-5 py-3 mx-5 md:m-0   ${isMenuOpen ? 'block' : 'hidden'} md:flex md:w-1/4`}>
         <ul className='flex flex-col md:flex-row gap-3 md:gap-5 md:items-center md:mx-auto'>
-          <li><a href={route('login')} className={`bg-amber-400 px-4 py-2 rounded-lg text-white text-base font-medium ${activeMenuItem === 4 ? 'text-black' : 'hover:bg-amber-300 text-white'}`} onClick={() => handleMenuItemClick(4)}>Login</a></li>
-          <li><a href={route('register')} className={`text-amber-400 text-base font-semibold ${activeMenuItem === 5 ? 'text-amber-400' : 'hover:text-amber-300'}`} onClick={() => handleMenuItemClick(5)}>Register</a></li>
+          <li><a href={route('login')} className={`bg-amber-500 px-4 py-2 rounded-lg text-white text-base font-medium ${activeMenuItem === 4 ? 'text-black' : 'hover:bg-amber-300 text-white'}`} onClick={() => handleMenuItemClick(4)}>Login</a></li>
+          <li><a href={route('register')} className={`text-amber-500 text-base font-semibold ${activeMenuItem === 5 ? 'text-amber-500' : 'hover:text-amber-300'}`} onClick={() => handleMenuItemClick(5)}>Register</a></li>
         </ul>
       </div>
 
