@@ -26,7 +26,7 @@ const Navbar= ({ menuItems, authItems }) => {
           {isMenuOpen ? (
             <HiOutlineXMark
               onClick={onToggleMenu}
-              className='text-amber-600 text-2xl cursor-pointer'
+              className='text-white text-2xl cursor-pointer'
               style={{ marginLeft: 'auto' }}
             />
           ) : (

@@ -32,6 +32,11 @@ export default function Register() {
 
             <form onSubmit={submit}>
                 <div>
+                    <h1 className='text-center my-3 text-2xl font-bold'>Selamat Datang Kembali!</h1>
+                    <div className='flex flex-row gap-2 justify-center mb-4'>
+                        <p className='text-center text-sm font-light'>Sudah punya akun?</p>
+                        <a href='/login' className='text-sm font-semibold text-amber-500 cursor-pointer'>Log in Sekarang</a>
+                    </div>
                     <InputLabel htmlFor="name" value="Name" />
 
                     <TextInput
@@ -99,15 +104,8 @@ export default function Register() {
                     <InputError message={errors.password_confirmation} className="mt-2" />
                 </div>
 
-                <div className="flex items-center justify-end mt-4">
-                    <Link
-                        href={route('login')}
-                        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                        Already registered?
-                    </Link>
-
-                    <PrimaryButton className="ms-4" disabled={processing}>
+                <div className="flex items-center justify-center mt-4">
+                    <PrimaryButton className="w-fit" disabled={processing}>
                         Register
                     </PrimaryButton>
                 </div>
