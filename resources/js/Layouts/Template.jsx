@@ -11,7 +11,7 @@ import 'aos/dist/aos.css'; // You can also use <link> for styles
   ];
 
   const authItems = [
-    { href: '/login', label: 'Login', className: 'bg-amber-500 px-4 py-2 rounded-lg text-white text-base font-medium' },
+    { href: '/login', label: 'Login', className: 'bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium' },
     // Item lainnya
   ];
 

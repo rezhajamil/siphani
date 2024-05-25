@@ -74,7 +74,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     </li>
                     </ul>
                     <p className='text-center'>Pesan dan nikmati hasil panen yang segar dari petani lokal</p>
-                    <button className="bg-amber-500 px-4 py-2 rounded-lg text-white text-base font-medium text-center w-fit mx-auto mt-3 hover:bg-amber-400">Mulai Belanja</button>
+                    <button className="bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium text-center w-fit mx-auto mt-3 hover:bg-amber-400">Mulai Belanja</button>
         </div>
         </Template>
 
