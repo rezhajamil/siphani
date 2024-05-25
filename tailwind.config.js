@@ -18,6 +18,9 @@ export default {
                 'mono': ['ui-monospace', 'SFMono-Regular'],
                 'monasans': ['Mona Sans', ...defaultTheme.fontFamily.sans],
             },
+            textAlign: {
+                'justify': 'justify',
+            },
         },
     },
 

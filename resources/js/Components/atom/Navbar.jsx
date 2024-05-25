@@ -19,7 +19,7 @@ const Navbar= ({ menuItems, authItems }) => {
   };
 
   return (
-    <nav className='sticky top-0 z-50 flex flex-col md:flex-row justify-between w-full shadow-lg'>
+    <nav className='fixed top-0 z-50 flex flex-col md:flex-row justify-between w-full shadow-md'>
       <div className={`flex flex-row justify-between items-center px-5 py-3 ${isMenuOpen ? 'bg-transparent' : 'bg-white'} md:bg-white md:w-1/6 md:justify-center `}>
         <img src="storage/images/logo-siphani.png" alt="logo" className="w-[100px] h-[40px] object-cover" />
         <div className='flex md:hidden'>
