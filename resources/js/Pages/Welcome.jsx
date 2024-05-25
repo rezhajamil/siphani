@@ -16,7 +16,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 className="w-full min-h-[90vh] bg-cover bg-no-repeat py-10 px-16 flex justify-center items-center flex flex-col"
                 style={{ backgroundImage: 'linear-gradient(to bottom, rgba(254, 182, 0, 3), transparent), url(storage/images/pertanian.jpg)', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover' }}>
                 <div className='flex flex-col justify-center mx-auto mt-20 mb-10'>
-                    <h1 className='text-white text-3xl md:text-5xl font-extrabold tracking-tight text-center'>Jual Hasil Panen</h1>
+                    <h1 className='text-white text-3xl md:text-5xl font-extrabold tracking-tight md:text-center'>Jual Hasil Panen</h1>
                     <h1 className='text-white text-3xl md:text-5xl font-extrabold tracking-tight font-sans md:text-center mt-1 w-fit md:mx-auto'>Langsung ke Pembeli</h1>
                     <p className='text-white  text-md md:text-xl bg-lime-500 px-3 py-1 w-fit mt-5 md:mx-auto'> Belanja Hasil Pertanian</p>
                     <p className='text-white text-md md:text-xl bg-lime-500 px-3 py-1 w-fit mt-2 md:mx-auto'> Mudah dan Hemat!</p>
@@ -74,7 +74,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     </li>
                     </ul>
                     <p className='text-center'>Pesan dan nikmati hasil panen yang segar dari petani lokal</p>
-                    <button className="bg-amber-500 px-4 py-2 rounded-lg text-white text-base font-medium text-center w-fit mx-auto mt-3 hover:bg-amber-400">Mulai Belanja</button>
+                    <button className="bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium text-center w-fit mx-auto mt-3 hover:bg-amber-400">Mulai Belanja</button>
         </div>
         </Template>
 

@@ -5,17 +5,15 @@ import 'aos/dist/aos.css'; // You can also use <link> for styles
 
 
   const menuItems = [
-    { href: '/', text: 'Home' },
-    { href: '/produk', text: 'Produk' },
-    { href: '/tentang-kami', text: 'Tentang Kami' }
+
   ];
 
   const authItems = [
-    { href: '/login', label: 'Login', className: 'bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium' },
+    { href: '/register', label: 'Register', className: 'bg-amber-500 px-4 py-2 rounded-lg text-white text-base font-medium' },
     // Item lainnya
   ];
 
-export default function Template({ auth, children }) {
+export default function AuthLayout({ auth, children }) {
     return (
         <>
         <Navbar menuItems={menuItems} authItems={authItems} />
