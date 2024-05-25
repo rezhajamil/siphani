@@ -26,28 +26,28 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         <>
             <Navbar menuItems={menuItems} authItems={authItems} />
             <div
-                className="w-full h-[90vh] bg-cover bg-no-repeat py-10 px-16 flex justify-center items-center flex flex-col"
-                style={{ backgroundImage: 'linear-gradient(to bottom, transparent, rgba(254, 182, 0, 3)), url(storage/images/pertanian.jpg)', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover' }}>
+                className="w-full min-h-[90vh] bg-cover bg-no-repeat py-10 px-16 flex justify-center items-center flex flex-col"
+                style={{ backgroundImage: 'linear-gradient(to bottom, rgba(254, 182, 0, 3), transparent), url(storage/images/pertanian.jpg)', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover' }}>
                 <div className='flex flex-col justify-center mx-auto mt-20 mb-10'>
-                    <h1 className='text-3xl md:text-4xl font-extrabold tracking-tight font-sans'>Jual Hasil Panen Langsung</h1>
-                    <h1 className='text-3xl md:text-4xl font-extrabold tracking-tight font-sans md:text-center mt-5 w-fit md:mx-auto'>ke Pembeli</h1>
-                    <p className='text-white text-xl bg-lime-500 px-3 py-1 w-fit mt-5 md:mx-auto'> Belanja Hasil Pertanian</p>
-                    <p className='text-white text-xl bg-lime-500 px-3 py-1 w-fit mt-2 md:mx-auto'> Mudah dan Hemat!</p>
+                    <h1 className='text-white text-3xl md:text-5xl font-extrabold tracking-tight'>Jual Hasil Panen Langsung</h1>
+                    <h1 className='text-white text-3xl md:text-5xl font-extrabold tracking-tight font-sans md:text-center mt-1 w-fit md:mx-auto'>ke Pembeli</h1>
+                    <p className='text-white  text-md md:text-xl bg-lime-500 px-3 py-1 w-fit mt-5 md:mx-auto'> Belanja Hasil Pertanian</p>
+                    <p className='text-white text-md md:text-xl bg-lime-500 px-3 py-1 w-fit mt-2 md:mx-auto'> Mudah dan Hemat!</p>
                 </div>
 
-                <div className='mt-10'>
-                <ul className='flex flex-col md:flex-row gap-5 justify-center items-center'>
-                    <li className='bg-amber-200 p-3 rounded-lg flex flex-col md:flex-row items-center justify-center gap-3 w-1/3 cursor-pointer'>
+                <div>
+                <ul className='flex flex-col md:flex-row gap-5 justify-center md:items-center'>
+                    <li className='bg-amber-200 p-3 rounded-lg flex md:flex-row items-center justify-center gap-3 md:w-1/3 cursor-pointer'>
                     <img src="storage/images/padi.png" alt="step3" className="w-[80px] h-[80px] object-cover rounded-lg" />
                         <div className='flex flex-col'>
-                        <h1 className='text-xl font-bold'>Produk Segar Berkualitas</h1>
-                        <p className='font-medium text-xs w-fit'> Anda bisa mendapatkan hasil pertanian segar dan berkualitas tinggi setiap kali berbelanja di website ini</p>
+                        <h1 className='text-md md:text-xl font-bold'>Produk Segar Berkualitas</h1>
+                        <p className='text-md md:text-xlfont-medium text-xs w-fit'> Anda bisa mendapatkan hasil pertanian segar dan berkualitas tinggi setiap kali berbelanja di website ini</p>
                         </div>
                     </li>
-                    <li className='bg-amber-200 p-3 rounded-lg flex flex-col md:flex-row items-center justify-center gap-3 w-1/3 cursor-pointer'>
+                    <li className='bg-amber-200 p-3 rounded-lg flex md:flex-row items-center justify-center gap-3 md:w-1/3 cursor-pointer'>
                     <img src="storage/images/petani.png" alt="step3" className="w-[80px] h-[80px] object-cover rounded-lg" />
                         <div className='flex flex-col'>
-                        <h1 className='text-xl font-bold'>Dukung Petani Lokal</h1>
+                        <h1 className='text-md md:text-xl font-bold'>Dukung Petani Lokal</h1>
                         <p className='font-medium text-xs w-fit'> Dengan berbelanja melalui website ini, Anda secara langsung mendukung petani lokal dan ekonomi lokal</p>
                         </div>
                     </li>
