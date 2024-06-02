@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\Dashboard\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Dashboard\HomeController as DashboardHomeController;
+use App\Http\Controllers\Dashboard\Seller\ProductController as SellerProductController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,37 +21,26 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-Route::get('/produk', function () {
-    return Inertia::render('Produk', [
-        'canLogin' => Route::has('login'),
-    ]);
-});
-
-Route::get('/tentang-kami', function () {
-    return Inertia::render('About', [
-        'canLogin' => Route::has('login'),
-    ]);
-});
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/produk', [HomeController::class, 'product']);
+Route::get('/tentang-kami', [HomeController::class, 'about']);
 
 
-
+Route::get('user/change-role', [UserController::class, 'changeRole']);
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::prefix('dashboard')->name('dashboard.')->group(function () {
+        Route::get('/', [DashboardHomeController::class, 'index']);
+
+        Route::prefix('admin')->name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
+            Route::resource('user', AdminUserController::class);
+            Route::get('toggle-status/{user}', [AdminUserController::class, 'toggleStatus'])->name('toggle-status');
+        });
+
+        Route::prefix('seller')->name('seller.')->middleware(['checkUserRole:seller'])->group(function () {
+            Route::resource('product', SellerProductController::class);
+        });
+    });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

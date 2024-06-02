@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Unit;
+use App\Models\Category;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class UnitSeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,21 +15,18 @@ class UnitSeeder extends Seeder
     {
         $data = [
             [
-                'name' => 'Piece'
+                'name' => 'Padi'
             ],
             [
-                'name' => 'Kg'
+                'name' => 'Jagung'
             ],
             [
-                'name' => 'Ton'
-            ],
-            [
-                'name' => 'Box'
+                'name' => 'Cabai'
             ],
         ];
 
         foreach ($data as $key => $d) {
-            Unit::create($d);
+            Category::create($d);
         }
     }
 }
