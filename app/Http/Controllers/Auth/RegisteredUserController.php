@@ -33,13 +33,26 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
+            'phone' => 'required|numeric|unique:users.phone',
+            'whatsapp' => 'required|numeric|unique:users.whatsapp',
+            'gender' => 'required',
+            'avatar' => 'image|nullable',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
+        if ($request->hasFile('avatar')) {
+            $url = $request->avatar->store('avatar');
+        }
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
+            'whatsapp' => $request->whatsapp,
+            'gender' => $request->gender,
+            'avatar' => $url ?? null,
+            'role' => 'Buyer',
             'password' => Hash::make($request->password),
         ]);
 
