@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Dashboard\HomeController as DashboardHomeController;
 use App\Http\Controllers\Dashboard\Seller\ProductController as SellerProductController;
+use App\Http\Controllers\ShopController as SellerShopController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -39,6 +40,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('seller')->name('seller.')->middleware(['checkUserRole:seller'])->group(function () {
             Route::resource('product', SellerProductController::class);
+            Route::resource('shop', SellerShopController::class);
         });
     });
 });
