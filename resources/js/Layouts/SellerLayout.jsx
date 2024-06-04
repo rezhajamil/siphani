@@ -1,21 +1,20 @@
-"use client"
-import { Link, Head } from '@inertiajs/react';
 import Navbar from '@/Components/atom/Navbar';
 // You can also use <link> for styles
 
 
   const menuItems = [
-    { href: '/', text: 'Home' },
+    { href: '/', text: 'Dashboard' },
+    { href: '/profile', text: 'Profile Toko' },
     { href: '/produk', text: 'Produk' },
-    { href: '/tentang-kami', text: 'Tentang Kami' }
+    { href: '/order', text: 'Order' }
   ];
 
   const authItems = [
-    { href: '/login', label: 'Login', className: 'bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium' },
+    { href: '/buyer', label: 'Pembeli', className: 'bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium' },
     // Item lainnya
   ];
 
-export default function Template({ auth, children }) {
+export default function SellerLayout({ auth, children }) {
     return (
         <>
         <Navbar menuItems={menuItems} authItems={authItems} />
