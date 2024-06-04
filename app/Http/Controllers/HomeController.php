@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Dashboard/Seller/Home');
+        return Inertia::render('Welcome');
     }
 
     public function product(Request $request)

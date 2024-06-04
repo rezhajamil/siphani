@@ -30,18 +30,20 @@ Route::get('/tentang-kami', [HomeController::class, 'about']);
 Route::get('user/change-role', [UserController::class, 'changeRole']);
 Route::middleware('auth')->group(function () {
 
-    Route::prefix('dashboard')->name('dashboard.')->group(function () {
-        Route::get('/', [DashboardHomeController::class, 'index']);
+});
 
-        Route::prefix('admin')->name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
-            Route::resource('user', AdminUserController::class);
-            Route::get('toggle-status/{user}', [AdminUserController::class, 'toggleStatus'])->name('toggle-status');
-        });
 
-        Route::prefix('seller')->name('seller.')->middleware(['checkUserRole:seller'])->group(function () {
-            Route::resource('product', SellerProductController::class);
-            Route::resource('shop', SellerShopController::class);
-        });
+Route::prefix('dashboard')->name('dashboard.')->group(function () {
+    Route::get('/', [DashboardHomeController::class, 'index']);
+
+    Route::prefix('admin')->name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
+        Route::resource('user', AdminUserController::class);
+        Route::get('toggle-status/{user}', [AdminUserController::class, 'toggleStatus'])->name('toggle-status');
+    });
+
+    Route::prefix('seller')->name('seller.')->middleware(['checkUserRole:seller'])->group(function () {
+        Route::resource('product', SellerProductController::class);
+        Route::resource('shop', SellerShopController::class);
     });
 });
 

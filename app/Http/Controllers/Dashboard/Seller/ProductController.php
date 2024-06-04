@@ -121,7 +121,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product = Product::with(['shop.user', 'images', 'tags'])->find($product->id);
+        $product = Product::with(['name', 'images', 'price', 'stock',])->find($product->id);
 
         return Inertia::render('Dashboard/Seller/Product/Show', compact('product'));
     }

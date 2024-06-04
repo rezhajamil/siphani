@@ -3,8 +3,7 @@ import Navbar from '@/Components/atom/Navbar';
 
 
   const menuItems = [
-    { href: '/', text: 'Dashboard' },
-    { href: '/profile', text: 'Profile Toko' },
+    { href: '/', text: 'Profile Toko' },
     { href: '/produk', text: 'Produk' },
     { href: '/order', text: 'Order' }
   ];

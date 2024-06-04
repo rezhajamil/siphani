@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('gender', ['Pria', 'Wanita']);
             $table->string('address');
             $table->string('avatar')->nullable();
-            $table->enum('role', ['Seller', 'Buyer']);
+            $table->enum('role', ['Admin', 'Seller', 'Buyer']);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

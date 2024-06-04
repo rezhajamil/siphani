@@ -32,14 +32,14 @@ export default function Login({ status, canResetPassword }) {
             <Head title="Log in" />
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-
-        <form onSubmit={submit}>
-        <div>
             <h1 className='text-center my-3 text-2xl font-bold'>Selamat Datang!</h1>
             <div className='flex flex-row gap-2 justify-center mb-4'>
                     <p className='text-center text-sm font-light'>Belum punya akun?</p>
                     <a href='/register' className='text-sm font-semibold text-amber-500 cursor-pointer'>Register Sekarang</a>
             </div>
+        <form onSubmit={submit} className='flex flex-col items-center'>
+        <div className='justify-center items-center md:w-1/4 p-5'>
+        <div>
             <InputLabel htmlFor="email" value="Email" />
 
             <TextInput
@@ -55,7 +55,6 @@ export default function Login({ status, canResetPassword }) {
 
             <InputError message={errors.email} className="mt-2" />
         </div>
-
         <div className="mt-4">
             <InputLabel htmlFor="password" value="Password" />
 
@@ -72,7 +71,9 @@ export default function Login({ status, canResetPassword }) {
             <InputError message={errors.password} className="mt-2" />
         </div>
 
-        <div className="block mt-4 flex flex-row justify-between">
+        </div>
+
+        <div className="block flex flex-col md:flex-row justify-between gap-2 md:gap-20">
             <label className="flex items-center">
                 <Checkbox
                     name="remember"
