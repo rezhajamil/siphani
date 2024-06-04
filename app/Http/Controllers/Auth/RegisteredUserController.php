@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
         }
 
         $user = User::create([
-            'name' => $request->name,
+            'name' => ucwords($request->name),
             'email' => $request->email,
             'phone' => $request->phone,
             'whatsapp' => $request->whatsapp,
