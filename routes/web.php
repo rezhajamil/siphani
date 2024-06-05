@@ -7,6 +7,7 @@ use App\Http\Controllers\ShopController as SellerShopController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,29 +23,29 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/produk', [HomeController::class, 'product']);
-Route::get('/tentang-kami', [HomeController::class, 'about']);
+Route::get('/', [HomeController::class, 'index'])->name('/');
+Route::get('/produk', [HomeController::class, 'product'])->name('produk');
+Route::get('/tentang-kami', [HomeController::class, 'about'])->name('tentang-kami');
 
 
 Route::get('user/change-role', [UserController::class, 'changeRole']);
+Route::get('user/change-role?role=seller', [UserController::class, 'changeRole'])->name('change-seller');
 Route::middleware('auth')->group(function () {
+    Route::prefix('dashboard')->name('dashboard.')->group(function () {
+        Route::get('/', [DashboardHomeController::class, 'index']);
 
-});
+        Route::prefix('admin')->name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
+            Route::resource('user', AdminUserController::class);
+            Route::get('toggle-status/{user}', [AdminUserController::class, 'toggleStatus'])->name('toggle-status');
+        });
 
-
-Route::prefix('dashboard')->name('dashboard.')->group(function () {
-    Route::get('/', [DashboardHomeController::class, 'index']);
-
-    Route::prefix('admin')->name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
-        Route::resource('user', AdminUserController::class);
-        Route::get('toggle-status/{user}', [AdminUserController::class, 'toggleStatus'])->name('toggle-status');
-    });
-
-    Route::prefix('seller')->name('seller.')->middleware(['checkUserRole:seller'])->group(function () {
-        Route::resource('product', SellerProductController::class);
-        Route::resource('shop', SellerShopController::class);
+        Route::prefix('seller')->name('seller.')->middleware(['checkUserRole:seller'])->group(function () {
+            Route::resource('product', SellerProductController::class);
+            Route::resource('shop', SellerShopController::class);
+            Route::get('/shop/create', [SellerShopController::class, 'create'])->name('shop.create');
+        });
     });
 });
+
 
 require __DIR__ . '/auth.php';

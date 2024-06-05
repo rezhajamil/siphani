@@ -18,6 +18,10 @@ const Navbar= ({ menuItems, authItems }) => {
     setActiveMenuItem(index);
   };
 
+  const getHref = (routeName) => {
+    return routeName && route().has(routeName) ? route(routeName) : '#';
+  };
+
   return (
     <nav className='fixed top-0 z-50 flex flex-col md:flex-row justify-between w-full shadow-md'>
       <div className={`flex flex-row justify-between items-center px-5 py-3 ${isMenuOpen ? 'bg-transparent' : 'bg-white'} md:bg-white md:w-1/6 md:justify-center `}>
@@ -43,7 +47,7 @@ const Navbar= ({ menuItems, authItems }) => {
         {menuItems.map((item, index) => (
             <li key={index}>
               <a
-                href={item.href}
+                href={getHref(item.route)}
                 className={`text-black text-base font-medium ${activeMenuItem === index ? 'text-amber-400' : 'hover:text-amber-300'}`}
                 onClick={() => handleMenuItemClick(index)}
               >
@@ -61,8 +65,8 @@ const Navbar= ({ menuItems, authItems }) => {
                 key={index}
               >
                 <a 
-                  href={item.href} 
-                  className={`${item.className} ${activeMenuItem === index + menuItems.length ? 'text-black' : 'hover:bg-amber-300 text-white'}`}
+                  href={getHref(item.route)}
+                  className={`${item.className} ${activeMenuItem === index + menuItems.length ? 'text-black' : 'hover:bg-amber-300 hover:text-white'}`}
                   onClick={() => handleMenuItemClick(index + menuItems.length)}
                 >
                   {item.label}

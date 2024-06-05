@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended('Dashboard/Seller/Home');
+        return redirect()->intended('Dashboard/Home');
     }
 
     /**

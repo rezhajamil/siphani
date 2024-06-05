@@ -3,13 +3,14 @@ import Navbar from '@/Components/atom/Navbar';
 
 
   const menuItems = [
-    { href: '/', text: 'Akun' },
-    { href: '/produk', text: 'Produk' },
-    { href: '/order', text: 'Order' }
+    { route: 'dashboard.', text: 'Akun' },
+    { route: '', text: 'Produk' },
+    { route: '', text: 'Order' }
   ];
 
   const authItems = [
-    { href: '/seller', label: 'Toko', className: 'bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium' },
+    { route: 'change-seller', label: 'Toko', className: 'bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium' },
+    { route: 'logout', label: 'Logout', className: 'bg-transparent px-4 py-3 rounded-lg text-amber-500 text-base font-medium'},
     // Item lainnya
   ];
 

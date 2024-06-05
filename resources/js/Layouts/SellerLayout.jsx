@@ -3,13 +3,14 @@ import Navbar from '@/Components/atom/Navbar';
 
 
   const menuItems = [
-    { href: '/', text: 'Profile Toko' },
-    { href: '/produk', text: 'Produk' },
-    { href: '/order', text: 'Order' }
+    { route: 'dashboard.', text: 'Dashboard' },
+    { route: 'dashboard.seller.shop.index', text: 'Profile Toko' },
+    { route: 'dashboard.seller.product.index', text: 'Produk' },
+    { route: null , text: 'Order' }
   ];
 
   const authItems = [
-    { href: '/buyer', label: 'Pembeli', className: 'bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium' },
+    { route: 'logout', label: 'Logout', className: 'bg-transparent px-4 py-3 rounded-lg text-amber-500 text-base font-medium'},
     // Item lainnya
   ];
 

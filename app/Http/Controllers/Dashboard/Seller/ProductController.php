@@ -66,9 +66,7 @@ class ProductController extends Controller
         return Inertia::render('Dashboard/Seller/Product/Create', compact('categories', 'units'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         $request->validate([

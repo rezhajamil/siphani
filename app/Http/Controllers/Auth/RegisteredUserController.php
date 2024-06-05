@@ -33,13 +33,15 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
-            'phone' => 'required|numeric|unique:users.phone',
-            'whatsapp' => 'required|numeric|unique:users.whatsapp',
+            'email' => 'required|string|lowercase|email|max:255|unique:users,email',
+            'phone' => 'required|numeric|unique:users,phone',
+            'whatsapp' => 'required|numeric|unique:users,whatsapp',
             'gender' => 'required',
+            'address' => 'required|string|max:255',
             'avatar' => 'image|nullable',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
 
         if ($request->hasFile('avatar')) {
             $url = $request->avatar->store('avatar');
@@ -51,6 +53,7 @@ class RegisteredUserController extends Controller
             'phone' => $request->phone,
             'whatsapp' => $request->whatsapp,
             'gender' => $request->gender,
+            'address' => $request->address,
             'avatar' => $url ?? null,
             'role' => 'Buyer',
             'password' => Hash::make($request->password),

@@ -14,20 +14,42 @@ export default function Register() {
         phone: '',
         whatsapp: '',
         gender:'',
+        addres: '',
         avatar: null,
         password: '',
+        password_confirmation: '',
     });
 
-    // useEffect(() => {
-    //     return () => {
-    //         reset('password', 'password_confirmation');
-    //     };
-    // }, []);
+    useEffect(() => {
+        return () => {
+            reset('password', 'password_confirmation');
+        };
+    }, []);
 
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('register'));
+        const formData = new FormData();
+        formData.append('name', data.name);
+        formData.append('email', data.email);
+        formData.append('phone', data.phone);
+        formData.append('whatsapp', data.whatsapp);
+        formData.append('address', data.address);
+        formData.append('gender', data.gender);
+        formData.append('avatar', data.avatar); // Tambahkan avatar ke FormData
+        formData.append('password', data.password);
+        formData.append('password_confirmation', data.password_confirmation);
+
+        post(route('register'), {
+            data: formData, // Kirim data sebagai FormData
+            onSuccess: () => {
+                window.location.href= "/login"
+            },
+        });
+    };
+
+    const handleFileChange = (e) => {
+        setData('avatar', e.target.files[0]);
     };
 
     return (
@@ -135,13 +157,29 @@ export default function Register() {
                         id="avatar"
                         type="file"
                         name="avatar"
-                        value={data.avatar}
+                        accept="image/*"
                         className="mt-1 block w-full p-2.5 focus:outline file:rounded-lg file:border-0 file:bg-amber-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-amber-400"
                         autoComplete="avatar"
-                        onChange={(e) => setData('avatar', e.target.value)}
+                        onChange={handleFileChange}
                     />
 
-                    <InputError message={errors.whastsapp} className="mt-2" />
+                    <InputError message={errors.avatar} className="mt-2" />
+                </div>
+
+                <div className="">
+                    <InputLabel htmlFor="address" value="Alamat" />
+
+                    <TextInput
+                        id="address"
+                        type="text"
+                        name="whatsapp"
+                        value={data.address}
+                        className="mt-1 block w-full"
+                        autoComplete="address"
+                        onChange={(e) => setData('address', e.target.value)}
+                    />
+
+                    <InputError message={errors.address} className="mt-2" />
                 </div>
 
                 <div className="">
@@ -161,6 +199,22 @@ export default function Register() {
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
+                <div className="">
+                        <InputLabel htmlFor="password_confirmation" value="Konfirmasi Password" />
+
+                        <TextInput
+                            id="password_confirmation"
+                            type="password"
+                            name="password_confirmation"
+                            value={data.password_confirmation}
+                            className="mt-1 block w-full"
+                            autoComplete="new-password"
+                            onChange={(e) => setData('password_confirmation', e.target.value)}
+                            required
+                        />
+
+                        <InputError message={errors.password_confirmation} className="mt-2" />
+                </div>
                 </div>
                 <div className="flex items-center justify-center mt-4">
                     <PrimaryButton className="w-full text-center" disabled={processing}>
