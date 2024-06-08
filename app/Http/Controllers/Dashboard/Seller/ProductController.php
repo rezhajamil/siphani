@@ -66,7 +66,6 @@ class ProductController extends Controller
         return Inertia::render('Dashboard/Seller/Product/Create', compact('categories', 'units'));
     }
 
-
     public function store(Request $request)
     {
         $request->validate([
@@ -119,7 +118,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product = Product::with(['name', 'images', 'price', 'stock',])->find($product->id);
+        $product = Product::with(['shop.user', 'images', 'tags'])->find($product->id);
 
         return Inertia::render('Dashboard/Seller/Product/Show', compact('product'));
     }

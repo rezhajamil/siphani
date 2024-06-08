@@ -17,12 +17,10 @@ class ShopController extends Controller
         $shop = Shop::where('user_id', Auth::user()->id)->first();
 
         if ($shop) {
-            // If the shop exists, show the shop details
             return Inertia::render('Shop/Index', [
                 'shop' => $shop,
             ]);
         } else {
-            // If the shop does not exist, redirect to the shop creation form
             return redirect()->route('dashboard.seller.shop.create');
         }
     }

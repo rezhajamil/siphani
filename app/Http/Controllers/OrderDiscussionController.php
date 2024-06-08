@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\OrderDiscussion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderDiscussionController extends Controller
 {
@@ -28,7 +29,18 @@ class OrderDiscussionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'message' => ['required'],
+            'order' => ['required']
+        ]);
+
+        $discuss = OrderDiscussion::create([
+            'user_id' => Auth::user()->id,
+            'order_id' => $request->order,
+            'message' => ucfirst($request->message)
+        ]);
+
+        return back();
     }
 
     /**
@@ -60,6 +72,9 @@ class OrderDiscussionController extends Controller
      */
     public function destroy(OrderDiscussion $orderDiscussion)
     {
-        //
+        $orderDiscussion = OrderDiscussion::find($orderDiscussion);
+        $orderDiscussion->delete();
+
+        return back();
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Notification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class NotificationController extends Controller
 {
@@ -12,7 +14,9 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        //
+        $notifications = Notification::with(['user', 'order'])->where('target_id', Auth::user()->id)->get();
+
+        return Inertia::render('Notification/Index', compact('notifications'));
     }
 
     /**
@@ -28,7 +32,21 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'order' => ['nullable', 'numeric'],
+            'target' => ['nullable', 'numeric'],
+            'message' => ['required'],
+        ]);
+
+        $notif = Notification::create([
+            'user_id' => Auth::user()->id,
+            'order_id' => $request->order,
+            'target_id' => $request->target,
+            'message' => $request->message,
+            'is_read' => 0,
+        ]);
+
+        return response($notif);
     }
 
     /**

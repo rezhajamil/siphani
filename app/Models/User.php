@@ -45,7 +45,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    protected $with = ['shop', 'orders', 'notifications'];
+    protected $with = ['shop.products.orders', 'orders', 'notifications'];
 
     public function shop()
     {

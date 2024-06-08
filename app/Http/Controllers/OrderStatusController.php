@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
+use App\Models\Order;
 use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 
@@ -50,9 +52,26 @@ class OrderStatusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, OrderStatus $orderStatus)
+    public function update(Request $request, $order_id)
     {
-        //
+        $request->validate([
+            'status' => $request->status
+        ]);
+
+        $order = Order::with(['status'])->find($order_id);
+
+        $order->status = $request->status;
+        $order->save();
+
+        $notif = Notification::create([
+            'user_id' => $order->user_id,
+            'order_id' => $order->id,
+            'target_id' => $order->user_id,
+            'message' => "Status pesanan anda berubah menjadi " . $order->status->name,
+            'is_read' => 0,
+        ]);
+
+        return back();
     }
 
     /**
