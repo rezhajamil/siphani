@@ -34,8 +34,6 @@ Route::get('/tentang-kami', [HomeController::class, 'about'])->name('tentang-kam
 
 Route::get('user/change-role', [UserController::class, 'changeRole']);
 Route::get('user/change-role?role=seller', [UserController::class, 'changeRole'])->name('change-seller');
-// Route::resource('product', SellerProductController::class);
-Route::get('product', [SellerProductController::class, 'store']);
 Route::middleware('auth')->group(function () {
     Route::put('/order-status/update/{order}', [OrderStatusController::class, 'update'])->name('order-status.update');
     Route::resource('notification', NotificationController::class);
@@ -52,6 +50,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('order', SellerOrderController::class);
         Route::resource('shop', SellerShopController::class);
         Route::get('/shop/create', [SellerShopController::class, 'create'])->name('shop.create');
+        Route::resource('product', SellerProductController::class);
     });
 });
 
