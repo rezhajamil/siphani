@@ -39,21 +39,19 @@ Route::middleware('auth')->group(function () {
     Route::resource('notification', NotificationController::class);
     Route::resource('order-discussion', OrderDiscussionController::class);
 
-    Route::prefix('dashboard')->name('dashboard.')->group(function () {
-        Route::get('/', [DashboardHomeController::class, 'index']);
+    Route::get('/dashboard', [DashboardHomeController::class, 'index'])->name('dashboard');
 
-        Route::prefix('admin')->name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
-            Route::resource('user', AdminUserController::class);
-            Route::get('toggle-status/{user}', [AdminUserController::class, 'toggleStatus'])->name('toggle-status');
-        });
+    Route::prefix('admin')->name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
+        Route::resource('user', AdminUserController::class);
+        Route::get('toggle-status/{user}', [AdminUserController::class, 'toggleStatus'])->name('toggle-status');
+    });
 
-        Route::prefix('seller')->name('seller.')->middleware(['checkUserRole:seller'])->group(function () {
-            Route::resource('product', SellerProductController::class);
-            Route::get('/product/create', [SellerProductController::class, 'create'])->name('product.create');
-            Route::resource('order', SellerOrderController::class);
-            Route::resource('shop', SellerShopController::class);
-            Route::get('/shop/create', [SellerShopController::class, 'create'])->name('shop.create');
-        });
+    Route::prefix('seller')->name('seller.')->middleware(['checkUserRole:seller'])->group(function () {
+        Route::resource('product', SellerProductController::class);
+        Route::get('/product/create', [SellerProductController::class, 'create'])->name('product.create');
+        Route::resource('order', SellerOrderController::class);
+        Route::resource('shop', SellerShopController::class);
+        Route::get('/shop/create', [SellerShopController::class, 'create'])->name('shop.create');
     });
 });
 

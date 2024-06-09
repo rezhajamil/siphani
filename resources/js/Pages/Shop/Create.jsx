@@ -28,10 +28,10 @@ export default function Create () {
         formData.append('maps', data.maps);
         formData.append('avatar', data.avatar); // Tambahkan avatar ke FormData
 
-        post(route('dashboard.seller.shop.store'), {
+        post(route('seller.shop.store'), {
             data: formData,
             onSuccess: () => {
-              route('dashboard.seller.shop');
+              route('seller.shop');
             },
         });
     };

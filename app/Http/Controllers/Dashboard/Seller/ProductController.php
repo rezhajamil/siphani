@@ -196,7 +196,7 @@ class ProductController extends Controller
             }
         }
 
-        return to_route('dashboard.seller.product.index')->with('success');
+        return to_route('seller.product.index')->with('success');
     }
 
     /**

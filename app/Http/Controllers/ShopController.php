@@ -21,7 +21,7 @@ class ShopController extends Controller
                 'shop' => $shop,
             ]);
         } else {
-            return redirect()->route('dashboard.seller.shop.create');
+            return redirect()->route('seller.shop.create');
         }
     }
 
@@ -33,7 +33,7 @@ class ShopController extends Controller
         $shop = Shop::where('user_id', Auth::user()->id)->first();
 
         if ($shop) {
-            return redirect()->route('dashboard.seller.shop.index');
+            return redirect()->route('seller.shop.index');
         } else {
             // If the shop does not exist, show the create form
             return Inertia::render('Shop/Create');
@@ -71,7 +71,7 @@ class ShopController extends Controller
             'avatar' => $url ?? null,
         ]);
 
-        return redirect()->route('dashboard.seller.shop.index');
+        return redirect()->route('seller.shop.index');
     }
 
     /**

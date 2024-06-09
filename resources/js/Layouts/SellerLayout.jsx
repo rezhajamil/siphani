@@ -3,8 +3,8 @@ import Navbar from '@/Components/atom/Navbar';
 
 const menuItems = [
   { route: 'dashboard.', text: 'Dashboard' },
-  { route: 'dashboard.seller.shop.index', text: 'Profile Toko' },
-  { route: 'dashboard.seller.product.index', text: 'Produk' },
+  { route: 'seller.shop.index', text: 'Profile Toko' },
+  { route: 'seller.product.index', text: 'Produk' },
   { route: null, text: 'Order' }
 ];
 
