@@ -93,6 +93,8 @@ class ProductController extends Controller
             'stock' => $request->stock,
         ]);
 
+        return $product;
+
         if ($product) {
             if ($request->tag) {
                 foreach ($request->tag as $key => $tag) {
@@ -196,7 +198,7 @@ class ProductController extends Controller
             }
         }
 
-        return to_route('seller.product.index')->with('success');
+        return redirect()->route('seller.product.index')->with('success');
     }
 
     /**
