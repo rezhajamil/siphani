@@ -69,11 +69,9 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
 
         $request->validate([
             'name' => ['required', 'string'],
-            'shop' => ['required'],
             'category' => ['required'],
             'unit' => ['required'],
             'description' => ['string', 'nullable'],
@@ -82,18 +80,15 @@ class ProductController extends Controller
             'image' => ['required', 'max:4096'],
         ]);
 
-
         $product = Product::create([
             'name' => ucfirst($request->name),
-            'shop_id' => $request->user()->shop->id,
+            'shop_id' => Auth::user()->shop->id,
             'category_id' => $request->category,
             'unit_id' => $request->unit,
             'description' => $request->description,
             'price' => $request->price,
             'stock' => $request->stock,
         ]);
-
-        return $product;
 
         if ($product) {
             if ($request->tag) {
@@ -105,7 +100,9 @@ class ProductController extends Controller
                 }
             }
 
-            if ($request->image) {
+
+            if ($request->hasFile('image')) {
+                // dd($request->file('image'));
                 foreach ($request->file('image') as $key => $image) {
                     $url = $image->store("product_images/$product->id");
                     ProductImage::create([

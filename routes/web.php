@@ -32,8 +32,9 @@ Route::get('/produk', [HomeController::class, 'product'])->name('produk');
 Route::get('/tentang-kami', [HomeController::class, 'about'])->name('tentang-kami');
 
 
-Route::get('user/change-role', [UserController::class, 'changeRole']);
-Route::get('user/change-role?role=seller', [UserController::class, 'changeRole'])->name('change-seller');
+Route::get('user/change-role', [UserController::class, 'changeRole'])->name('change-role');
+// Route::get('user/change-role?role=seller', [UserController::class, 'changeRole'])->name('change-seller');
+
 Route::middleware('auth')->group(function () {
     Route::put('/order-status/update/{order}', [OrderStatusController::class, 'update'])->name('order-status.update');
     Route::resource('notification', NotificationController::class);
