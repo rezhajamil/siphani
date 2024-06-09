@@ -16,19 +16,19 @@ export default function Produk({ auth }) {
                 </div>
                     <ul className='flex flex-col md:flex-row gap-5 justify-center items-center m-10'>
                     <li className='border-2 border-dashed border-amber-300 p-2 rounded-lg flex flex-col justify-center gap-3 shadow-xl'>
-                        <img src="storage/images/beras.jpg" alt="step1" className="w-[200px] h-[200px] object-cover" />
+                        <img src="/images/beras.jpg" alt="step1" className="w-[200px] h-[200px] object-cover" />
                         <p className='text-center font-semibold'>Beras</p>
                     </li>
                     <li className='border-2 border-dashed border-amber-300 p-2 rounded-lg flex flex-col justify-center gap-3 shadow-xl'>
-                        <img src="storage/images/jagung.jpg" alt="step2" className="w-[200px] h-[200px] object-cover" />
+                        <img src="/images/jagung.jpg" alt="step2" className="w-[200px] h-[200px] object-cover" />
                         <p className='text-center font-semibold'>Jagung</p>
                     </li>
                     <li className='border-2 border-dashed border-amber-300 p-2 rounded-lg flex flex-col justify-center gap-3 shadow-xl'>
-                        <img src="storage/images/sayur.jpg" alt="step3" className="w-[200px] h-[200px] object-cover" />
+                        <img src="/images/sayur.jpg" alt="step3" className="w-[200px] h-[200px] object-cover" />
                         <p className='text-center font-semibold'>Sayuran</p>
                     </li>
                     <li className='border-2 border-dashed border-amber-300 p-2 rounded-lg flex flex-col justify-center gap-3 shadow-xl'>
-                        <img src="storage/images/buah.jpg" alt="step4" className="w-[200px] h-[200px] object-cover" />
+                        <img src="/images/buah.jpg" alt="step4" className="w-[200px] h-[200px] object-cover" />
                         <p className='text-center font-semibold'>Buah</p>
                     </li>
                     </ul>       

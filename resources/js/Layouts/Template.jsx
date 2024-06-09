@@ -21,8 +21,8 @@ export default function Template({ auth, children }) {
         {children}
         <footer class="w-full bg-white">
             <hr />
-            <div class="h-[69px] grid place-items-center">
-            <p class="text-center text-black">&copy; 2024 Kelompok Tani - All Right Reserved</p>
+            <div className="h-[69px] grid place-items-center">
+            <p className="text-center text-black">&copy; 2024 Kelompok Tani - All Right Reserved</p>
             </div>
         </footer>
         </>

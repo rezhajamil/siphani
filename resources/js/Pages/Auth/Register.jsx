@@ -13,6 +13,7 @@ export default function Register() {
         email: '',
         phone: '',
         whatsapp: '',
+        address: '',
         gender:'',
         addres: '',
         avatar: null,

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductTag;
+use App\Models\Shop;
 use App\Models\Tag;
 use App\Models\Unit;
 use App\Models\User;
@@ -68,6 +69,8 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
+
         $request->validate([
             'name' => ['required', 'string'],
             'shop' => ['required'],
@@ -79,9 +82,10 @@ class ProductController extends Controller
             'image' => ['required', 'max:4096'],
         ]);
 
+
         $product = Product::create([
             'name' => ucfirst($request->name),
-            'shop_id' => $request->shop,
+            'shop_id' => $request->user()->shop->id,
             'category_id' => $request->category,
             'unit_id' => $request->unit,
             'description' => $request->description,
@@ -110,7 +114,7 @@ class ProductController extends Controller
             }
         }
 
-        return to_route('dashboard.seller.product.index')->with('success');
+        return to_route('seller.product.index')->with('success');
     }
 
     /**
@@ -151,12 +155,14 @@ class ProductController extends Controller
         ]);
 
         $product = Product::create([
+            'shop' => $request->user()->shop->id,
             'name' => ucfirst($request->name),
             'category_id' => $request->category,
             'unit_id' => $request->unit,
             'description' => $request->description,
             'price' => $request->price,
             'stock' => $request->stock,
+
         ]);
 
         $product->name = ucfirst($request->name);

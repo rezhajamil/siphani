@@ -25,10 +25,12 @@ export default forwardRef(function Select({  type='select',name ='', value= '', 
           }} 
           ref={select}
         >
-          <option value="">{placeholder}</option>
-          {options.map(option => (
-            <option key={option} value={option}>{option}</option>
-          ))}
+            <option value="" disabled>{placeholder}</option>
+            {options.map(option => (
+                <option key={option.value} value={option.value}>
+                    {option.label}
+                </option>
+            ))}
         </select>
     );
 });

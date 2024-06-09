@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('seller')->name('seller.')->middleware(['checkUserRole:seller'])->group(function () {
             Route::resource('product', SellerProductController::class);
+            Route::get('/product/create', [SellerProductController::class, 'create'])->name('product.create');
             Route::resource('order', SellerOrderController::class);
             Route::resource('shop', SellerShopController::class);
             Route::get('/shop/create', [SellerShopController::class, 'create'])->name('shop.create');

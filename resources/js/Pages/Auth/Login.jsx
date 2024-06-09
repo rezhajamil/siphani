@@ -24,7 +24,11 @@ export default function Login({ status, canResetPassword }) {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('login'));
+        post(route('login'), {
+            onSuccess: () => {
+                window.location.href = "/dashboard";
+            }
+        });
     };
 
     return (
