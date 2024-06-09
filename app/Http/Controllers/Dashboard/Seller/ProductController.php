@@ -153,17 +153,6 @@ class ProductController extends Controller
             'image' => ['required', 'max:4096'],
         ]);
 
-        $product = Product::create([
-            'shop' => $request->user()->shop->id,
-            'name' => ucfirst($request->name),
-            'category_id' => $request->category,
-            'unit_id' => $request->unit,
-            'description' => $request->description,
-            'price' => $request->price,
-            'stock' => $request->stock,
-
-        ]);
-
         $product->name = ucfirst($request->name);
         $product->category_id = $request->category;
         $product->unit_id = $request->unit;
