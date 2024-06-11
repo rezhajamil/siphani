@@ -122,7 +122,6 @@ export default function Create() {
                             autoComplete="description"
                             isFocused={true}
                             onChange={(e) => setData('description', e.target.value)}
-                            required
                         />
                         <InputError message={errors.description} className="mt-2" />
                     </div>

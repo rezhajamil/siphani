@@ -9,9 +9,8 @@ import Navbar from '@/Components/atom/Navbar';
   ];
 
   const authItems = [
-    { route: 'change-seller', label: 'Toko', className: 'bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium' },
+    { route: 'user/change-role?role=Seller', label: 'Toko', className: 'bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium' },
     { route: 'logout', label: 'Logout', className: 'bg-transparent px-4 py-3 rounded-lg text-amber-500 text-base font-medium'},
-    // Item lainnya
   ];
 
 export default function BuyerLayout({ auth, children }) {

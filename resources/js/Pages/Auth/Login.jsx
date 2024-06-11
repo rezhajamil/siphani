@@ -26,8 +26,8 @@ export default function Login({ status, canResetPassword }) {
 
         post(route('login'), {
             onSuccess: () => {
-                window.location.href = "/dashboard";
-            }
+                route('/');
+            },
         });
     };
 

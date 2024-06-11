@@ -2,7 +2,7 @@ import Navbar from '@/Components/atom/Navbar';
 
 
 const menuItems = [
-  { route: 'dashboard.', text: 'Dashboard' },
+  { route: '.dashboard.', text: 'Dashboard' },
   { route: 'seller.shop.index', text: 'Profile Toko' },
   { route: 'seller.product.index', text: 'Produk' },
   { route: null, text: 'Order' }

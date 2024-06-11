@@ -122,7 +122,6 @@ export default function Create () {
                         autoComplete="maps"
                         isFocused={true}
                         onChange={(e) => setData('maps', e.target.value)}
-                        required
                     />
 
                     <InputError message={errors.maps} className="mt-2" />
