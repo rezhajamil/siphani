@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Dashboard\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Unit;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class UnitController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $units = Unit::all();
+        $tags = Tag::all();
 
-        return Inertia::render('Dashboard/Admin/Unit/Index', compact('units'));
+        return Inertia::render('Dashboard/Admin/Tag/Index', compact('tags'));
     }
 
     /**
@@ -24,7 +24,7 @@ class UnitController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Dashboard/Admin/Unit/Create');
+        return Inertia::render('Dashboard/Admin/Tag/Create');
     }
 
     /**
@@ -36,12 +36,12 @@ class UnitController extends Controller
             'name' => 'required'
         ]);
 
-        $unit = Unit::create([
+        $tag = Tag::create([
             'name' => ucwords($request->name),
             'description' => $request->description
         ]);
 
-        return redirect()->route('admin.unit.index')->with('success');
+        return redirect()->route('admin.tag.index')->with('success');
     }
 
     /**
@@ -57,9 +57,9 @@ class UnitController extends Controller
      */
     public function edit(string $id)
     {
-        $unit = Unit::find($id);
+        $tag = Tag::find($id);
 
-        return Inertia::render('Dashboard/Admin/Unit/Create', compact('unit'));
+        return Inertia::render('Dashboard/Admin/Tag/Create', compact('tag'));
     }
 
     /**
@@ -71,12 +71,12 @@ class UnitController extends Controller
             'name' => 'required'
         ]);
 
-        $unit = Unit::find($id);
-        $unit->name = ucwords($request->name);
-        $unit->description = $request->description;
-        $unit->save();
+        $tag = Tag::find($id);
+        $tag->name = ucwords($request->name);
+        $tag->description = $request->description;
+        $tag->save();
 
-        return redirect()->route('admin.unit.index')->with('success');
+        return redirect()->route('admin.tag.index')->with('success');
     }
 
     /**
@@ -84,14 +84,15 @@ class UnitController extends Controller
      */
     public function destroy(string $id)
     {
+        //
     }
 
     public function toggleStatus($id)
     {
-        $unit = Unit::find($id);
+        $tag = Tag::find($id);
 
-        $unit->status = !$unit->status;
-        $unit->save();
+        $tag->status = !$tag->status;
+        $tag->save();
 
         return back();
     }

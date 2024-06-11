@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Dashboard\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Unit;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class UnitController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $units = Unit::all();
+        $categories = Category::all();
 
-        return Inertia::render('Dashboard/Admin/Unit/Index', compact('units'));
+        return Inertia::render('Dashboard/Admin/Category/Index', compact('categories'));
     }
 
     /**
@@ -24,7 +24,7 @@ class UnitController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Dashboard/Admin/Unit/Create');
+        return Inertia::render('Dashboard/Admin/Category/Create');
     }
 
     /**
@@ -36,12 +36,12 @@ class UnitController extends Controller
             'name' => 'required'
         ]);
 
-        $unit = Unit::create([
+        $category = Category::create([
             'name' => ucwords($request->name),
             'description' => $request->description
         ]);
 
-        return redirect()->route('admin.unit.index')->with('success');
+        return redirect()->route('admin.category.index')->with('success');
     }
 
     /**
@@ -57,9 +57,9 @@ class UnitController extends Controller
      */
     public function edit(string $id)
     {
-        $unit = Unit::find($id);
+        $category = Category::find($id);
 
-        return Inertia::render('Dashboard/Admin/Unit/Create', compact('unit'));
+        return Inertia::render('Dashboard/Admin/Category/Create', compact('category'));
     }
 
     /**
@@ -71,12 +71,12 @@ class UnitController extends Controller
             'name' => 'required'
         ]);
 
-        $unit = Unit::find($id);
-        $unit->name = ucwords($request->name);
-        $unit->description = $request->description;
-        $unit->save();
+        $category = Category::find($id);
+        $category->name = ucwords($request->name);
+        $category->description = $request->description;
+        $category->save();
 
-        return redirect()->route('admin.unit.index')->with('success');
+        return redirect()->route('admin.category.index')->with('success');
     }
 
     /**
@@ -84,14 +84,15 @@ class UnitController extends Controller
      */
     public function destroy(string $id)
     {
+        //
     }
 
     public function toggleStatus($id)
     {
-        $unit = Unit::find($id);
+        $category = Category::find($id);
 
-        $unit->status = !$unit->status;
-        $unit->save();
+        $category->status = !$category->status;
+        $category->save();
 
         return back();
     }

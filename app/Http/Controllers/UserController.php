@@ -56,6 +56,9 @@ class UserController extends Controller
         $user->role = $request->role;
         $user->save();
 
+        if ($request->route) {
+            return redirect()->route($request->route)->with('success');
+        }
         return redirect()->back()->with('success');
     }
 }

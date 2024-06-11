@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Dashboard\Admin\UnitController as AdminUnitController;
 use App\Http\Controllers\Dashboard\HomeController as DashboardHomeController;
 use App\Http\Controllers\Dashboard\Seller\ProductController as SellerProductController;
 use App\Http\Controllers\Dashboard\Seller\OrderController as SellerOrderController;
@@ -32,7 +33,9 @@ Route::get('/produk', [HomeController::class, 'product'])->name('produk');
 Route::get('/tentang-kami', [HomeController::class, 'about'])->name('tentang-kami');
 
 
-Route::get('user/change-role', [UserController::class, 'changeRole']);
+Route::get('user/change-role', [UserController::class, 'changeRole'])->name('change-role');
+// Route::get('user/change-role?role=seller', [UserController::class, 'changeRole'])->name('change-seller');
+
 Route::middleware('auth')->group(function () {
     Route::put('/order-status/update/{order}', [OrderStatusController::class, 'update'])->name('order-status.update');
     Route::resource('notification', NotificationController::class);
@@ -42,6 +45,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('admin')->name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
         Route::resource('user', AdminUserController::class);
+        Route::resource('unit', AdminUnitController::class);
         Route::get('toggle-status/{user}', [AdminUserController::class, 'toggleStatus'])->name('toggle-status');
     });
 

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -14,7 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with(['user', 'product.shop', 'product.category', 'product.images', 'product.tags', 'status', 'discuss'])->where('user_id', Auth::user()->id)->get();
+        $orders = Order::where('user_id', Auth::user()->id)->get();
 
         return Inertia::render('Order/Index', compact('orders'));
     }
@@ -52,15 +54,27 @@ class OrderController extends Controller
             'proof_of_payment_url' => $proof ?? '',
         ]);
 
+        $product = Product::find($request->product);
+
+        $notif = Notification::create([
+            'user_id' => Auth::user()->id,
+            'order_id' => $order->id,
+            'target_id' => $product->shop->user->id,
+            'message' => "Ada pesanan baru dari " . Auth::user()->name,
+            'is_read' => 0,
+        ]);
+
         return to_route('order.index')->with('success');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Order $order)
+    public function show($id)
     {
-        //
+        $order = Order::find($id);
+
+        return Inertia::render('Order/Show', compact('order'));
     }
 
     /**

@@ -11,6 +11,8 @@ class Product extends Model
 
     protected $guarded = [];
 
+    protected $with = ['shop.user', 'category', 'images', 'tags'];
+
     public function shop()
     {
         return $this->belongsTo(Shop::class, 'shop_id');
