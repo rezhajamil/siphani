@@ -17,7 +17,7 @@ export default function Product() {
                 <ul className='flex flex-col md:flex-row flex-wrap gap-5 justify-center items-center m-10 overflow-hidden'>
                     {products.map(product => (
                         <li key={product.id} className='border-2 border-dashed border-amber-300 p-3 rounded-lg flex flex-col justify-center shadow-xl w-[250px] h-[300px] overflow-hidden'>
-                            <img src={product.image_url || "../../images/beras.jpg"} alt={product.name} className="w-[250px] h-[120px] object-cover" />
+                            <img src={product.image_url || "/images/empty.jpg"} alt={product.name} className="w-[250px] h-[120px] object-cover" />
                             <div className="flex flex-col justify-between my-2">
                                 <p className='font-semibold'>{product.name}</p>
                                 <p className="font-medium text-amber-500">{product.tags.map(tag => tag.name).join(', ')}</p>

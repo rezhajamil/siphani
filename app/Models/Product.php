@@ -11,7 +11,7 @@ class Product extends Model
 
     protected $guarded = [];
 
-    protected $with = ['shop.user', 'category', 'images', 'tags'];
+    // protected $with = ['shop.user', 'category', 'images', 'tags'];
 
     public function shop()
     {

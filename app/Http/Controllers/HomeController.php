@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -43,8 +44,9 @@ class HomeController extends Controller
         }
 
         $products = $query->with(['shop.user', 'images', 'tags'])->get();
+        $categories = Category::all();
 
-        return Inertia::render('Produk', compact('products'));
+        return Inertia::render('Produk', compact('products', 'categories'));
     }
 
     public function about()
