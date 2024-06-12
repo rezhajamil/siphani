@@ -63,8 +63,9 @@ class ProductController extends Controller
     {
         $categories = Category::orderBy('name')->get();
         $units = Unit::orderBy('name')->get();
+        $tags = Tag::orderBy('name')->get();
 
-        return Inertia::render('Dashboard/Seller/Product/Create', compact('categories', 'units'));
+        return Inertia::render('Dashboard/Seller/Product/Create', compact('categories', 'units', 'tags'));
     }
 
     public function store(Request $request)
@@ -121,7 +122,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product = Product::with(['shop.user', 'images', 'tags'])->find($product->id);
+        $product = Product::with(['shop.user', 'images', 'category', 'tags'])->find($product->id);
 
         return Inertia::render('Dashboard/Seller/Product/Show', compact('product'));
     }
@@ -133,9 +134,10 @@ class ProductController extends Controller
     {
         $categories = Category::orderBy('name')->get();
         $units = Unit::orderBy('name')->get();
-        $product = Product::with(['shop.user', 'images', 'tags'])->find($product->id);
+        $tags = Tag::orderBy('name')->get();
+        $product = Product::with(['shop.user', 'images', 'category', 'tags'])->find($product->id);
 
-        return Inertia::render('Dashboard/Seller/Product/Edit', compact('categories', 'units', 'product'));
+        return Inertia::render('Dashboard/Seller/Product/Edit', compact('categories', 'units', 'tags', 'product'));
     }
 
     /**
