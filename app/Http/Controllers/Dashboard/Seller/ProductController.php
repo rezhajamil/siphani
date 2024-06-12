@@ -51,7 +51,7 @@ class ProductController extends Controller
             $query->orderBy($order, $sort);
         }
 
-        $products = $query->where('shop_id', $shop)->with(['shop.user', 'images', 'tags'])->get();
+        $products = $query->where('shop_id', $shop)->with(['shop.user', 'category', 'images', 'tags'])->get();
 
         return Inertia::render('Dashboard/Seller/Product/Index', compact('products'));
     }
@@ -135,7 +135,7 @@ class ProductController extends Controller
         $categories = Category::orderBy('name')->get();
         $units = Unit::orderBy('name')->get();
         $tags = Tag::orderBy('name')->get();
-        $product = Product::with(['shop.user', 'images', 'category', 'tags'])->find($product->id);
+        $product = Product::with(['shop.user', 'category', 'images', 'tags'])->find($product->id);
 
         return Inertia::render('Dashboard/Seller/Product/Edit', compact('categories', 'units', 'tags', 'product'));
     }

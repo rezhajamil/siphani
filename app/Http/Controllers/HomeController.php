@@ -42,7 +42,7 @@ class HomeController extends Controller
             $query->orderBy($order, $sort);
         }
 
-        $products = $query->with(['shop.user', 'images', 'tags'])->get();
+        $products = $query->with(['shop.user', 'category', 'images', 'tags'])->get();
 
         return Inertia::render('Produk', compact('products'));
     }
