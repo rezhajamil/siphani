@@ -5,7 +5,7 @@ import TextInput from '@/Components/atom/TextInput';
 import Select from '@/Components/atom/Select';
 import PrimaryButton from '@/Components/atom/PrimaryButton';
 
-export default function Produk({ products = [], categories = [] }) {
+export default function Produk({ products = [], categories = [], units = [], tags = [] }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
     const [filteredProducts, setFilteredProducts] = useState(products);

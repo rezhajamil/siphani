@@ -25,7 +25,7 @@ export default function Product() {
                         </div>
                         <p className="font-medium text-gray-500 mb-1">{product.stock} {product.unit}</p>
                         <p className="font-bold text-lime-600">Rp. {product.price}</p>
-                        <Link href={`dashboard/seller/product/edit/${product.id}`} className="bg-amber-500 px-4 py-2 rounded-lg text-white text-base font-medium text-center w-fit mt-3 hover:bg-amber-400">Edit</Link>
+                        <a href={`product/edit/${product.id}`} className="bg-amber-500 px-4 py-2 rounded-lg text-white text-base font-medium text-center w-fit mt-3 hover:bg-amber-400">Edit</a>
                     </li>
                     ))}
                 </ul>

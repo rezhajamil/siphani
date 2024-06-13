@@ -55,6 +55,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/shop/create', [SellerShopController::class, 'create'])->name('shop.create');
         Route::resource('product', SellerProductController::class);
         Route::get('/product/create', [SellerProductController::class, 'create'])->name('product.create');
+        Route::get('/product/edit/{id}', [SellerProductController::class, 'edit'])->name('product.edit');
     });
 });
 

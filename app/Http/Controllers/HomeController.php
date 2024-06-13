@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Tag;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -43,10 +45,12 @@ class HomeController extends Controller
             $query->orderBy($order, $sort);
         }
 
-        $products = $query->with(['shop.user', 'images', 'tags'])->get();
+        $products = $query->with(['shop.user', 'category', 'images', 'tags'])->get();
         $categories = Category::all();
+        $tags = Tag::all();
+        $units = Unit::all();
 
-        return Inertia::render('Produk', compact('products', 'categories'));
+        return Inertia::render('Produk', compact('products', 'categories', 'tags', 'units'));
     }
 
     public function about()
