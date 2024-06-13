@@ -51,7 +51,7 @@ class ProductController extends Controller
             $query->orderBy($order, $sort);
         }
 
-        $products = $query->where('shop_id', $shop)->with(['shop.user', 'category', 'images', 'tags'])->get();
+        $products = $query->where('shop_id', $shop)->with(['shop.user', 'category', 'images', 'tags.tag'])->get();
 
         return Inertia::render('Dashboard/Seller/Product/Index', compact('products'));
     }

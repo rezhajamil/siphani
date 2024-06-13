@@ -24,18 +24,19 @@ class OrderController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $product = Product::with(['shop.user', 'category', 'images', 'tags.tag'])->find($id);
+
+        return Inertia::render('Order/Create', compact('product'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $request->validate([
-            'product' => ['required'],
             'quantity' => ['required', 'numeric'],
             'total_amount' => ['required', 'numeric'],
             'proof' => ['file', 'nullable']
@@ -47,7 +48,7 @@ class OrderController extends Controller
 
         $order = Order::create([
             'user_id' => Auth::user()->id,
-            'product_id' => $request->product,
+            'product_id' => $id,
             'quantity' => $request->quantity,
             'total_amount' => $request->total_amount,
             'status_id' => 1,
