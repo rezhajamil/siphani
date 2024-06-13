@@ -57,7 +57,8 @@ export default function Create() {
     };
 
     const handleFileChange = (e) => {
-        setData('image', e.target.files[0]);
+        const files = e.target.files;
+        setData('image', files);
     };
 
     const handleCheckboxChange = (e) => {
@@ -179,6 +180,7 @@ export default function Create() {
                             className="mt-1 w-full p-2.5 focus:outline file:rounded-lg file:border-0 file:bg-amber-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-amber-400"
                             autoComplete="image"
                             onChange={handleFileChange}
+                            multiple
                         />
                         <InputError message={errors.image} className="mt-2" />
                     </div>

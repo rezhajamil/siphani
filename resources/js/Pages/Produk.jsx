@@ -83,16 +83,16 @@ export default function Produk({ products = [], categories = [], units = [], tag
                     <ul className='flex flex-col md:flex-row flex-wrap gap-5 justify-center items-center overflow-hidden m-10'>
                         {filteredProducts.length > 0 ? (
                             filteredProducts.map((product, index) => (
-                                <li key={product.id || index} className='border-2 border-dashed border-amber-300 p-2 rounded-lg flex flex-col overflow-hidden justify-start gap-3 shadow-xl shadow-xl p-3 w-[320px] h-[420px]'>
-                                    <img src={product.images[0]?.url || '/images/empty.png'} alt={product.name || 'Unknown'} className="w-[320px] h-[200px] object-cover" />
+                                <li key={product.id || index} className='border-2 border-dashed border-amber-300 p-2 rounded-lg flex flex-col overflow-hidden justify-start gap-3 shadow-xl shadow-xl p-3 w-[310px] h-[420px]'>
+                                    <img src={product.images[0]?.url || '/images/empty.png'} alt={product.name || 'Unknown'} className="w-[310px] h-[200px] object-cover" />
                                     <div className="flex flex-row justify-between my-1">
                                         <p className='font-semibold'>{product.name}</p>
-                                        <p className="font-medium text-amber-500">{product.tags.map(tag => tag.name).join(', ')}</p>
-                                        <p className='font-medium text-amber-500'>{product.category_id ? categories.find(cat => parseInt(cat.id) === parseInt(product.category_id))?.name : 'Tidak Berkategori'}</p>  
+                                        <p className="font-medium text-sm text-amber-500">{tags.find( tag => tag.product_id?.includes(tag.id?.name))}</p>
+                                        <p className='font-medium text-sm text-amber-500'>{product.category_id ? categories.find(cat => parseInt(cat.id) === parseInt(product.category_id))?.name : 'Tidak Berkategori'}</p>  
                                     </div>
-                                    <p className='font-semibold'>{product.description.slice(0, 50)}</p>
-                                    <p className="font-bold text-lime-600">Rp. {product.price}</p>
-                                    <Link href={`dashboard/product/order/${product.id}`} className="bg-amber-500 px-4 py-2 rounded-lg text-white text-base font-medium text-center w-fit hover:bg-amber-400">Beli</Link>
+                                    <p className='font-normal text-sm'>{product.description.slice(0, 50)}</p>
+                                    <p className="font-semibold text-md text-lime-600">Rp. {product.price}</p>
+                                    <Link href={`dashboard/product/order/${product.id}`} className="bg-amber-500 px-4 py-2 rounded-lg text-white text-base font-medium text-center w-fit hover:bg-amber-400 justify-end">Beli</Link>
                                 </li>
                             ))
                         ) : (
