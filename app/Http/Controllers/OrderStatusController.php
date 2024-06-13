@@ -22,7 +22,7 @@ class OrderStatusController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

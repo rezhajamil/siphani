@@ -26,7 +26,14 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $orders = Order::where('user_id', Auth::user()->id)->get();
+
+        if ($$orders) {
+            return redirect()->route('buyer.order.create');
+        } else {
+            // If the shop does not exist, show the create form
+            return Inertia::render('Buyer/Order/Create');
+        }
     }
 
     /**
