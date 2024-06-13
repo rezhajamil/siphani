@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\Seller\OrderController as SellerOrderControll
 use App\Http\Controllers\ShopController as SellerShopController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDiscussionController;
 use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\OrderController as UserOrderController;
@@ -43,6 +44,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('notification', NotificationController::class);
     Route::resource('order-discussion', OrderDiscussionController::class);
 
+    Route::get('order', [OrderController::class, 'index'])->name('order.index');
+    Route::get('order/{product}/create', [OrderController::class, 'create'])->name('order.create');
+    Route::post('order/{product}/store', [OrderController::class, 'store'])->name('order.store');
+    Route::post('order/{order}', [OrderController::class, 'show'])->name('order.show');
 
     Route::get('/dashboard', [DashboardHomeController::class, 'index'])->name('dashboard');
 
@@ -50,11 +55,6 @@ Route::middleware('auth')->group(function () {
         Route::resource('user', AdminUserController::class);
         Route::resource('unit', AdminUnitController::class);
         Route::get('toggle-status/{user}', [AdminUserController::class, 'toggleStatus'])->name('toggle-status');
-    });
-
-    Route::prefix('buyer')->name('buyer.')->middleware(['checkUserRole:buyer'])->group(function () {
-        Route::resource('order', UserOrderController::class);
-        Route::get('/order/create', [UserOrderController::class, 'create'])->name('order.create');
     });
 
     Route::prefix('seller')->name('seller.')->middleware(['checkUserRole:seller'])->group(function () {
