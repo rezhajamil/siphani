@@ -16,17 +16,17 @@ export default function Product() {
                 </div>
                 <ul className='flex flex-col md:flex-row flex-wrap gap-5 justify-center items-center m-10 overflow-hidden'>
                     {products.map(product => (
-                        <li key={product.id} className='border-2 border-dashed border-amber-300 p-3 rounded-lg flex flex-col justify-center shadow-xl w-[250px] h-[300px] overflow-hidden'>
-                            <img src={product.image_url || "../../images/beras.jpg"} alt={product.name} className="w-[250px] h-[120px] object-cover" />
-                            <div className="flex flex-col justify-between my-2">
-                                <p className='font-semibold'>{product.name}</p>
-                                <p className="font-medium text-amber-500">{product.tags.map(tag => tag.name).join(', ')}</p>
-                                <p className="font-medium text-amber-500">{product.category?.name}</p>
-                            </div>
-                            <p className="font-medium text-gray-500 mb-1">{product.stock} {product.unit}</p>
-                            <p className="font-bold text-lime-600">Rp. {product.price}</p>
-                            <Link href={`dashboard/seller/product/edit/${product.id}`} className="bg-amber-500 px-4 py-2 rounded-lg text-white text-base font-medium text-center w-fit mt-3 hover:bg-amber-400">Edit</Link>
-                        </li>
+                    <li key={product.id} className='border-2 border-dashed border-amber-300 p-3 rounded-lg flex flex-col justify-between shadow-xl w-[250px] h-[300px] overflow-hidden'>
+                    <img src={product.image_url || "/images/empty.png"} alt={product.name} className="w-full h-[120px] object-cover" />
+                        <div className="flex flex-col justify-between my-2">
+                            <p className='font-semibold'>{product.name}</p>
+                            <p className="font-medium text-amber-500">{product.tags.map(tag => tag.name).join(', ')}</p>
+                            <p className='font-medium text-amber-500'>{product.category_id ? parseInt(product.category_id).name : 'Tidak Berkategori'}</p>  
+                        </div>
+                        <p className="font-medium text-gray-500 mb-1">{product.stock} {product.unit}</p>
+                        <p className="font-bold text-lime-600">Rp. {product.price}</p>
+                        <Link href={`dashboard/seller/product/edit/${product.id}`} className="bg-amber-500 px-4 py-2 rounded-lg text-white text-base font-medium text-center w-fit mt-3 hover:bg-amber-400">Edit</Link>
+                    </li>
                     ))}
                 </ul>
             </div>

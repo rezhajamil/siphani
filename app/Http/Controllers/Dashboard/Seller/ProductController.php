@@ -56,9 +56,6 @@ class ProductController extends Controller
         return Inertia::render('Dashboard/Seller/Product/Index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $categories = Category::orderBy('name')->get();
@@ -124,7 +121,7 @@ class ProductController extends Controller
     {
         $product = Product::with(['shop.user', 'images', 'category', 'tags'])->find($product->id);
 
-        return Inertia::render('Dashboard/Seller/Product/Show', compact('product'));
+        return Inertia::render('Dashboard/Seller/Product/Index', compact('product'));
     }
 
     /**
