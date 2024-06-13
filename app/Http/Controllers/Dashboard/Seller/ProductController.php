@@ -90,8 +90,10 @@ class ProductController extends Controller
 
         if ($product) {
             if ($request->tag) {
+                ProductTag::where('product_id', $product->id)->delete();
+
                 foreach ($request->tag as $key => $tag) {
-                    ProductTag::firstOrCreate([
+                    ProductTag::create([
                         'product_id' => $product->id,
                         'tag_id' => $tag,
                     ]);
@@ -100,7 +102,8 @@ class ProductController extends Controller
 
 
             if ($request->hasFile('image')) {
-                // dd($request->file('image'));
+                ProductImage::where('product_id', $product->id)->delete();
+
                 foreach ($request->file('image') as $key => $image) {
                     $url = $image->store("product_images/$product->id");
                     ProductImage::create([
@@ -161,18 +164,20 @@ class ProductController extends Controller
         $product->save();
 
         if ($product) {
-            foreach ($request->tag as $key => $tag) {
-                if ($request->tag) {
-                    foreach ($request->tag as $key => $tag) {
-                        ProductTag::firstOrCreate([
-                            'product_id' => $product->id,
-                            'tag_id' => $tag,
-                        ]);
-                    }
+            if ($request->tag) {
+                ProductTag::where('product_id', $product->id)->delete();
+
+                foreach ($request->tag as $key => $tag) {
+                    ProductTag::create([
+                        'product_id' => $product->id,
+                        'tag_id' => $tag,
+                    ]);
                 }
             }
 
-            if ($request->image) {
+            if ($request->hasFile('image')) {
+                ProductImage::where('product_id', $product->id)->delete();
+
                 foreach ($request->file('image') as $key => $image) {
                     $url = $image->store("product_images/$product->id");
                     ProductImage::create([
