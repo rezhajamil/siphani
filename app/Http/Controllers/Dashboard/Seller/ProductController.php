@@ -130,12 +130,12 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
         $categories = Category::orderBy('name')->get();
         $units = Unit::orderBy('name')->get();
         $tags = Tag::orderBy('name')->get();
-        $product = Product::with(['shop.user', 'category', 'images', 'tags'])->find($product->id);
+        $product = Product::with(['shop.user', 'category', 'images', 'tags.tag'])->find($id);
 
         return Inertia::render('Dashboard/Seller/Product/Edit', compact('categories', 'units', 'tags', 'product'));
     }
