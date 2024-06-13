@@ -17,11 +17,11 @@ export default function Produk({ products = [], categories = [] }) {
         const filtered = products.filter(p => {
             console.log("Product Name:", p.name);
             console.log("Product Category ID:", p.category_id);
-            console.log("Product Category Name:", p.category ? p.category.name : "Category Not Available");
-            
-            const productNameMatch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
-            const categoryMatch = selectedCategory === '' || (p.category && p.category_id.toString() === selectedCategory);
 
+            const productNameMatch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
+            const categoryMatch = selectedCategory === '' || (p.category_id && p.category_id.toString() === selectedCategory);
+
+            console.log ("Product Category Match: ", categoryMatch);
             return productNameMatch && categoryMatch;
         });
         setFilteredProducts(filtered);
@@ -54,7 +54,7 @@ export default function Produk({ products = [], categories = [] }) {
                         </ul>
                     </div>
                     {/* Pencarian produk */}
-                    <div className='flex flex-row gap-3 w-full md:w-1/2 justify-center mt-5'>
+                    <div className='flex flex-row gap-3 w-1/2 justify-center mt-5'>
                         <TextInput
                             type='text'
                             className='w-full p-2 border-2 border-amber-300 rounded-lg'
