@@ -40,7 +40,7 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        $order = Order::with(['user', 'product', 'status'])->find($id);
+        $order = Order::with(['user', 'product', 'status', 'discuss.user'])->find($id);
 
         return Inertia::render('Dashboard/Seller/Order/Show', compact('order'));
     }
