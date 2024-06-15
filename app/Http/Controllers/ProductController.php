@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Tag;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -12,13 +15,12 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $shop = Auth::user()->shop->id;
-
         $name = $request->name;
         $tags = $request->tags;
         $category = $request->category;
         $order = $request->order;
         $sort = $request->sort ?? 'asc';
+
 
         $query = Product::query();
 
@@ -40,9 +42,16 @@ class ProductController extends Controller
             $query->orderBy($order, $sort);
         }
 
-        $products = $query->where('shop_id', $shop)->with(['shop.user', 'category', 'images', 'tags'])->get();
+        $products = $query->with(['shop.user', 'category', 'images', 'tags.tag'])->get();
+        $categories = Category::all();
+        $tags = Tag::all();
+        $units = Unit::all();
 
-        return Inertia::render('Dashboard/Seller/Product/Index', compact('products'));
+        return Inertia::render('Dashboard/Buyer/Product/Index', [
+            'user' => Auth::user(), // Kirim data pengguna ke halaman
+        ]);
+
+        return Inertia::render('Dashboard/Buyer/Product/Index', compact('products', 'categories', 'tags', 'units'));
     }
 
     /**

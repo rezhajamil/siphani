@@ -3,7 +3,7 @@
 use App\Http\Controllers\Dashboard\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Dashboard\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Dashboard\Admin\UnitController as AdminUnitController;
-use App\Http\Controllers\Dashboard\HomeController as DashboardHomeController;
+use App\Http\Controllers\HomeController as DashboardHomeController;
 use App\Http\Controllers\Dashboard\Seller\ProductController as SellerProductController;
 use App\Http\Controllers\Dashboard\Seller\OrderController as SellerOrderController;
 use App\Http\Controllers\ShopController as SellerShopController;
@@ -12,6 +12,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDiscussionController;
 use App\Http\Controllers\OrderStatusController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ShopController;
@@ -35,8 +36,8 @@ Route::get('/produk', [HomeController::class, 'product'])->name('produk');
 Route::get('/tentang-kami', [HomeController::class, 'about'])->name('tentang-kami');
 
 
-Route::get('user/change-role', [UserController::class, 'changeRole'])->name('change-role');
-// Route::get('user/change-role?role=seller', [UserController::class, 'changeRole'])->name('change-seller');
+Route::post('user/change-role', [UserController::class, 'changeRole'])->name('change-role');
+
 
 Route::middleware('auth')->group(function () {
     Route::put('/order-status/update/{order}', [OrderStatusController::class, 'update'])->name('order-status.update');

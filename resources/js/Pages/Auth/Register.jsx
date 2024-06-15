@@ -49,7 +49,7 @@ export default function Register() {
         post(route('register'), {
             data: formData, // Kirim data sebagai FormData
             onSuccess: () => {
-                window.location.href= "/login"
+                window.location.href= "/dashboard"
             },
         });
     };

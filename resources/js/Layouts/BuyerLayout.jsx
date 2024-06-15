@@ -1,45 +1,49 @@
-import Navbar from "@/Components/atom/Navbar";
-import { HiBellAlert } from "react-icons/hi2";
-
-// You can also use <link> for styles
+import React from 'react';
+import Navbar from '@/Components/atom/Navbar';
+import ChangeRoleButton from '@/Components/atom/ChangeRoleBtn';
+import { HiBellAlert, HiUser } from 'react-icons/hi2';
 
 const menuItems = [
-    { route: "dashboard.", text: "Akun" },
-    { route: "produk", text: "Produk" },
+    { route: '/', text: 'Home' },
+    { route: 'produk', text: 'Produk' },
+    { route: 'tentang-kami', text: 'Tentang Kami' },
     { route: "order.index", text: "Order" },
     { route: "notification.index", icon: HiBellAlert },
-
 ];
 
-const authItems = [
-    {
-        route: "change-role",
-        label: "Buka Toko",
-        className:
-            "bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium",
-    },
-    {
-        route: "logout",
-        label: "Logout",
-        className:
-            "bg-transparent px-4 py-3 rounded-lg text-amber-500 text-base font-medium",
-    }
-    // Item lainnya
-];
+const BuyerLayout = ({ auth, children }) => {
 
-export default function BuyerLayout({ auth, children }) {
+
+    const authItems = [
+        {
+            route: "#",
+            icon: HiUser,
+        },
+        {
+            label: <ChangeRoleButton />,
+            className: "bg-transparent"
+        },
+        {
+            route: "logout",
+            label: "Logout",
+            className: "bg-transparent px-4 py-3 rounded-lg text-amber-500 text-base font-medium",
+        }
+    ];
+
     return (
         <>
             <Navbar menuItems={menuItems} authItems={authItems} />
             {children}
-            <footer class="w-full bg-white">
+            <footer className="w-full bg-white">
                 <hr />
-                <div class="h-[69px] grid place-items-center">
-                    <p class="text-center text-black">
+                <div className="h-[69px] grid place-items-center">
+                    <p className="text-center text-black">
                         &copy; 2024 Kelompok Tani - All Right Reserved
                     </p>
                 </div>
             </footer>
         </>
     );
-}
+};
+
+export default BuyerLayout;

@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Unit;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,7 +14,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Welcome');
+        $user = Auth::check() ? Auth::user() : null;
+        return Inertia::render('Welcome', compact('user'));
     }
 
     public function product(Request $request)
@@ -50,11 +52,13 @@ class HomeController extends Controller
         $tags = Tag::all();
         $units = Unit::all();
 
-        return Inertia::render('Produk', compact('products', 'categories', 'tags', 'units'));
+        $user = Auth::check() ? Auth::user() : null;
+        return Inertia::render('Produk', compact('products', 'categories', 'tags', 'units', 'user'), []);
     }
 
     public function about()
     {
-        return Inertia::render('About');
+        $user = Auth::check() ? Auth::user() : null;
+        return Inertia::render('About', compact('user'));
     }
 }
