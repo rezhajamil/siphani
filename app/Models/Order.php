@@ -11,7 +11,7 @@ class Order extends Model
 
     protected $guarded = [];
 
-    protected $with = ['user', 'product.shop', 'product.category', 'product.images', 'product.tags', 'status', 'discuss'];
+    // protected $with = ['user', 'product.shop', 'product.category', 'product.images', 'product.tags', 'status', 'discuss'];
 
     public function user()
     {

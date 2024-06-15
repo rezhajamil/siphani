@@ -21,6 +21,11 @@ export default function Register() {
         password_confirmation: '',
     });
 
+    const genderOption = [
+        { value: "Pria", label: "Pria" },
+        { value: "Wanita", label: "Wanita" }
+    ];
+
     useEffect(() => {
         return () => {
             reset('password', 'password_confirmation');
@@ -138,10 +143,7 @@ export default function Register() {
                         name="gender"
                         value={data.gender}
                         className="mt-1 block w-full"
-                        options={[
-                            "Pria",
-                            "Wanita"
-                          ]}
+                        options={genderOption}
                         placeholder = "Pilih Jenis Kelamin"
                         autoComplete="gender"
                         onChange={(e) => setData('gender', e.target.value)}

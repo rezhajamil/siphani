@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Dashboard\Admin\OrderController;
+use App\Http\Controllers\Dashboard\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Dashboard\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Dashboard\Admin\UnitController as AdminUnitController;
 use App\Http\Controllers\Dashboard\HomeController as DashboardHomeController;
@@ -12,7 +12,6 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDiscussionController;
 use App\Http\Controllers\OrderStatusController;
-use App\Http\Controllers\OrderController as UserOrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ShopController;
@@ -43,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/order-status/update/{order}', [OrderStatusController::class, 'update'])->name('order-status.update');
     Route::resource('notification', NotificationController::class);
     Route::resource('order-discussion', OrderDiscussionController::class);
+    Route::post('order/{order_id}/store', [OrderDiscussionController::class, 'store'])->name('order.discussion.store');
 
     Route::get('order', [OrderController::class, 'index'])->name('order.index');
     Route::get('order/{product}/create', [OrderController::class, 'create'])->name('order.create');

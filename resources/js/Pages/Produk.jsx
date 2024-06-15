@@ -92,7 +92,7 @@ export default function Produk({ products = [], categories = [], units = [], tag
                                     </div>
                                     <p className='font-normal text-sm'>{product.description.slice(0, 50)}</p>
                                     <p className="font-semibold text-md text-lime-600">Rp. {product.price}</p>
-                                    <Link href={`dashboard/product/order/${product.id}`} className="bg-amber-500 px-4 py-2 rounded-lg text-white text-base font-medium text-center w-fit hover:bg-amber-400 justify-end">Beli</Link>
+                                    <Link href={`/order/${product.id}/create`} className="bg-amber-500 px-4 py-2 rounded-lg text-white text-base font-medium text-center w-fit hover:bg-amber-400 justify-end">Beli</Link>
                                 </li>
                             ))
                         ) : (

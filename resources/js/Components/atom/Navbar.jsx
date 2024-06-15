@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HiBars3, HiOutlineXMark } from 'react-icons/hi2';
+import { HiBars3, HiOutlineXMark, HiBellAlert } from 'react-icons/hi2';
 
 const Navbar = ({ menuItems, authItems}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -52,6 +52,7 @@ const Navbar = ({ menuItems, authItems}) => {
                 className={`text-black text-base font-medium ${activeMenuItem === index ? 'text-amber-400' : 'hover:text-amber-300'}`}
                 onClick={() => handleMenuItemClick(index)}
               >
+                {item.icon && React.createElement(item.icon, { className: 'w-6 h-6 mr-2' })}
                 {item.text}
               </a>
             </li>

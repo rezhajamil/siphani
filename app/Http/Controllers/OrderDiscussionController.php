@@ -29,12 +29,12 @@ class OrderDiscussionController extends Controller
     {
         $request->validate([
             'message' => ['required'],
-            'order' => ['required']
+            'order_id' => ['required']
         ]);
 
         $discuss = OrderDiscussion::create([
             'user_id' => Auth::user()->id,
-            'order_id' => $request->order,
+            'order_id' => $request->order_id,
             'message' => ucfirst($request->message)
         ]);
 

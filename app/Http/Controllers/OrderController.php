@@ -16,9 +16,15 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('user_id', Auth::user()->id)->get();
+        $orders = Order::where('user_id', Auth::user()->id)
+            ->with('product.images', 'product.category', 'product.tags')
+            ->get();
 
-        return Inertia::render('Order/Index', compact('orders'));
+        return Inertia::render('Dashboard/Buyer/Order/Index', [
+            'orders' => $orders,
+        ]);
+
+        return Inertia::render('Dashboard/Buyer/Order/Index', compact('orders'));
     }
 
     /**
@@ -28,12 +34,10 @@ class OrderController extends Controller
     {
         $product = Product::with(['shop.user', 'category', 'images', 'tags.tag'])->find($id);
 
-        return Inertia::render('Order/Create', compact('product'));
+        return Inertia::render('Dashboard/Buyer/Order/Create', compact('product'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request, $id)
     {
         $request->validate([
@@ -75,20 +79,15 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
 
-        return Inertia::render('Order/Show', compact('order'));
+        return Inertia::render('Dashboard/Buyer/Order/Index', compact('order'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Order $order)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, Order $order)
     {
         //
