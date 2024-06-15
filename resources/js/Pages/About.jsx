@@ -2,6 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, usePage } from '@inertiajs/react';
 import Template from '@/Layouts/Template';
 import BuyerLayout from '@/Layouts/BuyerLayout';
+import SellerLayout from '@/Layouts/SellerLayout';
 
 export default function Produk({ auth }) {
     const { user } = usePage().props; // Retrieve the user from props
@@ -13,6 +14,12 @@ export default function Produk({ auth }) {
                     {renderContent()}
                 </BuyerLayout>
             );
+        } else if (user && user.role === 'Seller') {
+            return (
+                <SellerLayout>
+                    {renderContent()}
+                </SellerLayout>
+            )
         } else {
             return (
                 <Template>

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Head, Link, usePage } from "@inertiajs/react";
 import Template from "@/Layouts/Template";
-import BuyerLayout from "@/Layouts/BuyerLayout"; // Ensure this is the correct import for BuyerLayout
+import BuyerLayout from "@/Layouts/BuyerLayout";
+import SellerLayout from "@/Layouts/SellerLayout";
 import TextInput from "@/Components/atom/TextInput";
 import Select from "@/Components/atom/Select";
 import PrimaryButton from "@/Components/atom/PrimaryButton";
@@ -34,14 +35,18 @@ export default function Produk({ products = [], categories = [], units = [], tag
         if (user && user.role === 'Buyer') {
             return (
                 <BuyerLayout>
-                    <Head title="Produk" />
                     {renderContent()}
                 </BuyerLayout>
             );
+        } else if (user && user.role === 'Seller') {
+            return (
+                <SellerLayout>
+                    {renderContent()}
+                </SellerLayout>
+            )
         } else {
             return (
                 <Template>
-                    <Head title="Produk" />
                     {renderContent()}
                 </Template>
             );

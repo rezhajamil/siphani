@@ -23,7 +23,15 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $shop = Auth::user()->shop->id;
+        $user = Auth::user();
+
+        // Check if user has a shop
+        if (!$user->shop) {
+            // Redirect to the shop creation page if the user does not have a shop
+            return redirect()->route('seller.shop.create');
+        }
+
+        $shop = $user->shop->id;
 
         $name = $request->name;
         $tags = $request->tags;

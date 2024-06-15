@@ -1,9 +1,10 @@
 import { Link, Head, usePage } from '@inertiajs/react';
 import Template from '@/Layouts/Template';
-import BuyerLayout from '@/Layouts/BuyerLayout'; // Assuming you have a BuyerLayout component
+import BuyerLayout from '@/Layouts/BuyerLayout'; 
+import SellerLayout from '@/Layouts/SellerLayout';
 import { useCallback, useEffect } from 'react';
 import Aos from 'aos';
-import 'aos/dist/aos.css'; // You can also use <link> for styles
+import 'aos/dist/aos.css'; 
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const { user } = usePage().props; // Retrieve the user from props
@@ -19,6 +20,12 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     {renderContent()}
                 </BuyerLayout>
             );
+        } else if (user && user.role === 'Seller') {
+            return (
+                <SellerLayout>
+                    {renderContent()}
+                </SellerLayout>
+            )
         } else {
             return (
                 <Template>
@@ -47,14 +54,14 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 <img src="images/padi.png" alt="step3" className="w-[80px] h-[80px] object-cover rounded-lg" />
                                 <div className='flex flex-col'>
                                     <h1 className='text-md md:text-xl font-bold'>Produk Segar Berkualitas</h1>
-                                    <p className='text-md md:text-xl font-medium text-xs w-fit'> Anda bisa mendapatkan hasil pertanian segar dan berkualitas tinggi setiap kali berbelanja di website ini</p>
+                                    <p className='text-sm md:text-md font-medium w-fit'> Anda bisa mendapatkan hasil pertanian segar dan berkualitas tinggi setiap kali berbelanja di website ini</p>
                                 </div>
                             </li>
                             <li className='bg-amber-200 p-3 rounded-lg flex md:flex-row items-center justify-center gap-3 md:w-1/3 cursor-pointer'>
                                 <img src="images/petani.png" alt="step3" className="w-[80px] h-[80px] object-cover rounded-lg" />
                                 <div className='flex flex-col'>
                                     <h1 className='text-md md:text-xl font-bold'>Dukung Petani Lokal</h1>
-                                    <p className='font-medium text-xs w-fit'> Dengan berbelanja melalui website ini, Anda secara langsung mendukung petani lokal dan ekonomi lokal</p>
+                                    <p className='text-sm md:text-md font-medium w-fit'> Dengan berbelanja melalui website ini, Anda secara langsung mendukung petani lokal dan ekonomi lokal</p>
                                 </div>
                             </li>
                         </ul>
