@@ -111,9 +111,13 @@ export default function Produk({ products = [], categories = [], units = [], tag
                             <img src={product.images[0]?.url || "/images/empty.png"} alt={product.name || "Unknown"} className="w-[310px] h-[200px] object-cover" />
                             <div className="flex flex-row justify-between my-1">
                                 <p className="font-semibold">{product.name}</p>
+                                    {product.tags && product.tags.length > 0 ? (
                                 <p className="p-1 rounded-lg text-sm font-medium bg-amber-400 text-black">
-                                    {product.tags?.map(tag => tag.name).join(', ') || 'No tags available'}
+                                    {product.tags.map(tag => tag.name).join(', ')}
                                 </p>
+                                ) : (
+                                <p className="p-1 rounded-lg text-sm font-medium bg-transparent"></p>
+                                )}
                                 <p className="text-sm font-medium text-amber-500">
                                     {product.category_id ? categories.find((cat) => parseInt(cat.id) === parseInt(product.category_id))?.name : "Tidak Berkategori"}
                                 </p>

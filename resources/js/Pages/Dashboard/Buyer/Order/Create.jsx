@@ -70,9 +70,13 @@ export default function Create() {
                     <div className="flex flex-col gap-2">
                         <p className='font-semibold text-md'>{product.name}</p>
                         <p className='font-medium text-sm'>{product.category.name}</p>
-                        <p className="p-1 rounded-lg text-sm font-medium bg-amber-400 text-black">
-                            {product.tags?.map(tag => tag.name).join(', ') || 'No tags available'}
-                        </p>
+                        {product.tags && product.tags.length > 0 ? (
+                                <p className="p-1 rounded-lg text-sm font-medium bg-amber-400 text-black">
+                                    {product.tags.map(tag => tag.name).join(', ')}
+                                </p>
+                                ) : (
+                                <p className="p-1 rounded-lg text-sm font-medium bg-transparent"></p>
+                        )}
                     </div>
                 </div>
                 <form onSubmit={submit} className="flex flex-col items-center w-full mt-2">

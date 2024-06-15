@@ -20,8 +20,9 @@ const BuyerLayout = ({ auth, children }) => {
             icon: HiUser,
         },
         {
-            label: <ChangeRoleButton />,
-            className: "bg-transparent"
+            route: "change-role?role=Seller",
+            label: "Buka Toko",
+            className: "bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium",
         },
         {
             route: "logout",

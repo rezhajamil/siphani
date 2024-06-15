@@ -72,7 +72,7 @@ const Navbar = ({ menuItems, authItems }) => {
                             ) : (
                                 <a
                                     href={getHref(item.route, item)}
-                                    className={`${item.className} ${activeMenuItem === index + menuItems.length ? 'text-black' : 'hover:bg-amber-500  hover:text-amber-300 cursor-pointer'}`}
+                                    className={`${item.className} ${activeMenuItem === index + menuItems.length ? 'text-black' : 'hover:bg-amber-500  hover:text-amber-200 cursor-pointer'}`}
                                     onClick={() => handleMenuItemClick(index + menuItems.length)}
                                 >
                                     {item.icon && React.createElement(item.icon, { className: 'w-6 h-6 mr-2' })}

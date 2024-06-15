@@ -36,7 +36,7 @@ Route::get('/produk', [HomeController::class, 'product'])->name('produk');
 Route::get('/tentang-kami', [HomeController::class, 'about'])->name('tentang-kami');
 
 
-Route::post('user/change-role', [UserController::class, 'changeRole'])->name('change-role');
+Route::get('user/change-role', [UserController::class, 'changeRole'])->name('change-role');
 
 
 Route::middleware('auth')->group(function () {
