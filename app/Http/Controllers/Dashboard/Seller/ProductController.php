@@ -74,7 +74,7 @@ class ProductController extends Controller
             'unit' => ['required'],
             'description' => ['string', 'nullable'],
             'price' => ['string', 'numeric'],
-            'stock' => ['numeric'],
+            'stock' => ['numeric', 'min:1'],
             'image' => ['required', 'max:4096'],
         ]);
 

@@ -46,17 +46,12 @@ class OrderController extends Controller
             'proof' => ['file', 'nullable']
         ]);
 
-        if ($request->hasFile('proof')) {
-            $proof = $request->proof->store('proof');
-        }
-
         $order = Order::create([
             'user_id' => Auth::user()->id,
             'product_id' => $id,
             'quantity' => $request->quantity,
             'total_amount' => $request->total_amount,
             'status_id' => 1,
-            'proof_of_payment_url' => $proof ?? '',
         ]);
 
         $product = Product::find($request->product);
@@ -77,7 +72,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = Order::find($id);
+        $order = Order::with(['discuss.user'])->find($id);
 
         return Inertia::render('Dashboard/Buyer/Order/Index', compact('order'));
     }
@@ -98,5 +93,29 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
+    }
+
+    public function uploadProof(Request $request, $id)
+    {
+        $order = Order::with(['product.shop.user'])->find($id);
+
+        $request->validate([
+            'proof' => 'required'
+        ]);
+
+        $url = $request->proof->store('proof/' . $order->id);
+
+        $order->proof_of_payment_url = $url;
+        $order->save();
+
+        $notif = Notification::create([
+            'user_id' => Auth::user()->id,
+            'order_id' => $order->id,
+            'target_id' => $order->product->shop->user->id,
+            'message' => Auth::user()->name . " telah mengupload bukti pembayaran pesanan",
+            'is_read' => 0,
+        ]);
+
+        return redirect()->back()->with('success');
     }
 }
