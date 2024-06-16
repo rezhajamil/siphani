@@ -54,6 +54,8 @@ class OrderController extends Controller
         ]);
 
         $product = Product::with(['shop.user'])->find($request->product_id);
+        $product->stock -= $request->quantity;
+        $product->save();
 
         $notif = Notification::create([
             'user_id' => Auth::user()->id,

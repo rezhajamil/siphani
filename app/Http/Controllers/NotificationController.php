@@ -14,7 +14,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $notifications = Notification::with(['user', 'order'])->where('target_id', Auth::user()->id)->get();
+        $notifications = Notification::with(['user', 'order.status', 'target'])->where('target_id', Auth::user()->id)->get();
 
         return Inertia::render('Dashboard/Buyer/Notif/Index', compact('notifications'));
     }
@@ -79,5 +79,18 @@ class NotificationController extends Controller
     public function destroy(Notification $notification)
     {
         //
+    }
+
+    public function readNotif(Request $request)
+    {
+        $request->validate([
+            'user_id' => ['required']
+        ]);
+
+        Notification::where('target_id', $request->user_id)->update([
+            'is_read' => 1
+        ]);
+
+        return response()->json();
     }
 }
