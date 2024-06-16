@@ -32,7 +32,7 @@ export default function Create() {
         formData.append('proof', data.proof);
         formData.append('product_id', product.id);
 
-        post(route('order.store', product.id), {
+        post(route('order.store'), {
             data: formData,
             onSuccess: () => {
                 route('order.index');
