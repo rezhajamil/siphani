@@ -37,7 +37,7 @@ class OrderController extends Controller
     }
 
 
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $request->validate([
             'quantity' => ['required', 'numeric'],
@@ -47,7 +47,7 @@ class OrderController extends Controller
 
         $order = Order::create([
             'user_id' => Auth::user()->id,
-            'product_id' => $id,
+            'product_id' => $request->product_id,
             'quantity' => $request->quantity,
             'total_amount' => $request->total_amount,
             'status_id' => 1,
