@@ -19,7 +19,7 @@ export default function Template({ auth, children }) {
         <>
         <Navbar menuItems={menuItems} authItems={authItems} />
         {children}
-        <footer class="w-full bg-white">
+        <footer className="w-full bg-white">
             <hr />
             <div className="h-[69px] grid place-items-center">
             <p className="text-center text-black">&copy; 2024 Kelompok Tani - All Right Reserved</p>
