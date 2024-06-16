@@ -65,7 +65,7 @@ const Navbar = ({ menuItems, authItems}) => {
           {authItems.map((item, index) => (
             <li key={index}>
                 <a
-                  href={getHref(item.route, item)}
+                  href={item.route}
                   className={`${item.className} ${activeMenuItem === index + menuItems.length ? 'text-black' : 'hover:bg-amber-300 hover:text-white'}`}
                   onClick={() => handleMenuItemClick(index + menuItems.length)}
                 >

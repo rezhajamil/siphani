@@ -17,12 +17,12 @@ const authItems = [
         icon: HiUser,
     },
     {
-        route: "change-seller",
+        route: "/user/change-role?role=Seller&route=seller.shop.index",
         label: "Buka Toko",
         className: "bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium",
     },
     {
-        route: "logout",
+        route: "/logout",
         label: "Logout",
         className: "bg-transparent px-4 py-3 rounded-lg text-amber-500 text-base font-medium",
     }

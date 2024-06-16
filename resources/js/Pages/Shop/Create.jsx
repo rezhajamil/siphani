@@ -46,7 +46,7 @@ export default function Create () {
             <h1 className="text-center bg-amber-300 text-xl md:text-2xl font-semibold mb-6 w-fit mx-auto">Buat Profile Toko Anda</h1>
             <form onSubmit={submit} className="flex flex-col items-center w-full">
                 <div className='md:w-1/4 mt-4'>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="name" value="Nama Toko" />
 
                     <TextInput
                         id="name"

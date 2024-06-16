@@ -5,11 +5,11 @@ const menuItems = [
   { route: '.dashboard.', text: 'Dashboard' },
   { route: 'seller.shop.index', text: 'Profile Toko' },
   { route: 'seller.product.index', text: 'Produk' },
-  { route: null, text: 'Order' }
+  { route: 'seller.order.index', text: 'Order' }
 ];
 
 const authItems = [
-  { route: 'logout', label: 'Logout', className: 'bg-transparent px-4 py-3 rounded-lg text-amber-500 text-base font-medium' },
+  { route: '/logout', label: 'Logout', className: 'bg-transparent px-4 py-3 rounded-lg text-amber-500 text-base font-medium' },
 ];
 
 export default function SellerLayout({ auth, children }) {// Mendapatkan logoutRoute menggunakan Inertia.js

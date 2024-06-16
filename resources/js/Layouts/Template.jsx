@@ -10,7 +10,7 @@ import Navbar from '@/Components/atom/Navbar';
   ];
 
   const authItems = [
-    { route: 'login', label: 'Login', className: 'bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium' },
+    { route: '/login', label: 'Login', className: 'bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium' },
   ];
 
 

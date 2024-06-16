@@ -168,8 +168,8 @@ export default function Register() {
 
                     <InputError message={errors.avatar} className="mt-2" />
                 </div>
+                <div className="w-full">
 
-                <div className="">
                     <InputLabel htmlFor="address" value="Alamat" />
 
                     <TextInput

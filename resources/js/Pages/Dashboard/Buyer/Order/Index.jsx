@@ -74,7 +74,7 @@ const Index = () => {
                 </div>
             ))}
 
-            <div className="flex flex-row items-center justify-center gap-2 mt-10">
+            <div className="flex flex-row items-center justify-center gap-2 mt-20">
                 <textarea
                     className="w-[250px] md:w-1/4 p-2 focus:border-amber-400 focus:ring-amber-300  border-2 border-amber-300 rounded-lg"
                     placeholder="Chat Penjual"

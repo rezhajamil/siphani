@@ -36,8 +36,8 @@ Route::get('/produk', [HomeController::class, 'product'])->name('produk');
 Route::get('/tentang-kami', [HomeController::class, 'about'])->name('tentang-kami');
 
 
-// Route::get('user/change-role', [UserController::class, 'changeRole'])->name('change-role');
-Route::get('user/change-role?role=Seller&route=seller.shop.index', [UserController::class, 'changeRole'])->name('change-seller');
+Route::get('user/change-role', [UserController::class, 'changeRole'])->name('change-role');
+// Route::get('user/change-role?role=Seller&route=seller.shop.index', [UserController::class, 'changeRole'])->name('change-seller');
 
 
 Route::middleware('auth')->group(function () {
