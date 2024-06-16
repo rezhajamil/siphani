@@ -41,6 +41,7 @@ class OrderController extends Controller
     {
         $request->validate([
             'quantity' => ['required', 'numeric'],
+            'product_id' => ['required', 'numeric'],
             'total_amount' => ['required', 'numeric'],
             'proof' => ['file', 'nullable']
         ]);
