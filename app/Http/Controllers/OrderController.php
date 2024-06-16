@@ -16,7 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('user_id', Auth::user()->id)
+        $orders = Order::with(['user', 'product.shop', 'product.category', 'product.images', 'product.tags', 'status', 'discuss'])->where('user_id', Auth::user()->id)
             ->with('product.images', 'product.category', 'product.tags')
             ->get();
 
@@ -72,7 +72,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = Order::with(['discuss.user'])->find($id);
+        $order = Order::with(['user', 'product.shop', 'product.category', 'product.images', 'product.tags', 'status', 'discuss'])->find($id);
 
         return Inertia::render('Dashboard/Buyer/Order/Index', compact('order'));
     }
