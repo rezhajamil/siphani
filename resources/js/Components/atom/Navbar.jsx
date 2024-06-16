@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { HiBars3, HiOutlineXMark, HiBellAlert } from 'react-icons/hi2';
 
-const Navbar = ({ menuItems, authItems,  notificationCount }) => {
+const Navbar = ({ menuItems, authItems,  notificationCount, onOpenShopClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeMenuItem, setActiveMenuItem] = useState(null);
 
@@ -59,17 +59,16 @@ const Navbar = ({ menuItems, authItems,  notificationCount }) => {
             </span>
             <HiBellAlert className="h-5 w-5" />
           </div>
-        ) : (
-          <>
+          ) : (
+            <>
             {item.icon && <item.icon className="h-5 w-5" />}
             {!item.icon && item.text}
-          </>
-        )}
-      </a>
-    </li>
-  ))}
-</ul>
-
+            </>
+         )}
+        </a>
+        </li>
+       ))}
+      </ul>
       </div>
 
       <div className={`nav-auth flex flex-col md:flex-row justify-between md:items-center bg-white p-3 mx-5 md:m-0 ${isMenuOpen ? 'block' : 'hidden'} md:flex md:w-1/4`}>
@@ -79,7 +78,12 @@ const Navbar = ({ menuItems, authItems,  notificationCount }) => {
                 <a
                   href={item.route}
                   className={`${item.className} ${activeMenuItem === index + menuItems.length ? 'text-black' : 'hover:bg-amber-300 hover:text-white'}`}
-                  onClick={() => handleMenuItemClick(index + menuItems.length)}
+                  onClick={() => {
+                    handleMenuItemClick(index + menuItems.length);
+                    if (item.label === "Buka Toko") {
+                        onOpenShopClick(); // Panggil fungsi dari props saat "Buka Toko" diklik
+                    }
+                }}
                 >
                   {item.icon && React.createElement(item.icon, { className: 'w-6 h-6 mr-2' })}
                   {item.label}
