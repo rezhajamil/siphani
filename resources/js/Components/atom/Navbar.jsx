@@ -77,7 +77,7 @@ const Navbar = ({ menuItems, authItems,  notificationCount, onOpenShopClick }) =
             <li key={index}>
                 <a
                   href={item.route}
-                  className={`${item.className} ${activeMenuItem === index + menuItems.length ? 'text-black' : 'hover:bg-amber-300 hover:text-white'}`}
+                  className={`${item.className} ${activeMenuItem === index + menuItems.length ? 'text-black' : 'hover:text-amber-300'}`}
                   onClick={() => {
                     handleMenuItemClick(index + menuItems.length);
                     if (item.label === "Buka Toko") {
