@@ -140,15 +140,6 @@ export default function Produk({
                             />
                             <div className="flex flex-row justify-between my-1">
                                 <p className="font-semibold">{product.name}</p>
-                                {product.tags && product.tags.length > 0 ? (
-                                    <p className="p-1 text-sm font-medium text-black rounded-lg bg-amber-400">
-                                        {product.tags
-                                            .map((tag) => tag.name)
-                                            .join(", ")}
-                                    </p>
-                                ) : (
-                                    <p className="p-1 text-sm font-medium bg-transparent rounded-lg"></p>
-                                )}
                                 <p className="text-sm font-medium text-amber-500">
                                     {product.category_id
                                         ? categories.find(
@@ -158,6 +149,16 @@ export default function Produk({
                                           )?.name
                                         : "Tidak Berkategori"}
                                 </p>
+                            </div>
+                            <div className="flex flex-row gap-1">
+                                    {product.tags.map((tag) => (
+                                        <span
+                                            key={tag.tag.id}
+                                            className="p-1 text-sm font-medium text-black rounded-lg bg-amber-400"
+                                        >
+                                            {tag.tag.name}
+                                        </span>
+                                    ))}
                             </div>
                             <p className="text-sm font-normal">
                                 {product.description?.slice(0, 50)}

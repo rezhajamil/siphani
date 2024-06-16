@@ -16,7 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with(['user', 'product.shop', 'product.category', 'product.images', 'product.tags', 'status', 'discuss'])->where('user_id', Auth::user()->id)
+        $orders = Order::with(['user', 'product.shop', 'product.category', 'product.images', 'status', 'discuss'])->where('user_id', Auth::user()->id)
             ->get();
 
         return Inertia::render('Dashboard/Buyer/Order/Index', [
@@ -31,7 +31,7 @@ class OrderController extends Controller
      */
     public function create($id)
     {
-        $product = Product::with(['shop.user', 'category', 'images', 'tags.tag'])->find($id);
+        $product = Product::with(['shop.user', 'category', 'images', 'unit', 'tags.tag'])->find($id);
 
         return Inertia::render('Dashboard/Buyer/Order/Create', compact('product'));
     }
@@ -41,7 +41,6 @@ class OrderController extends Controller
     {
         $request->validate([
             'quantity' => ['required', 'numeric'],
-            'product_id' => ['required', 'numeric'],
             'total_amount' => ['required', 'numeric'],
             'proof' => ['file', 'nullable']
         ]);
@@ -54,7 +53,7 @@ class OrderController extends Controller
             'status_id' => 1,
         ]);
 
-        $product = Product::find($request->product);
+        $product = Product::with(['shop.user'])->find($request->product_id);
 
         $notif = Notification::create([
             'user_id' => Auth::user()->id,
@@ -72,9 +71,9 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = Order::with(['user', 'product.shop', 'product.category', 'product.images', 'product.tags', 'status', 'discuss'])->find($id);
+        $order = Order::with(['user', 'product.shop', 'product.category', 'product.images', 'product.unit', 'product.tags', 'status', 'discuss.user'])->find($id);
 
-        return Inertia::render('Dashboard/Buyer/Order/Index', compact('order'));
+        return Inertia::render('Dashboard/Buyer/Order/Detail', compact('order'));
     }
 
     public function edit(Order $order)

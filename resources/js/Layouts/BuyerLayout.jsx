@@ -21,7 +21,7 @@ const handleOpenShopClick = (event) => {
 
 const authItems = [
     {
-        route: "#",
+        route: "/notification.index",
         icon: HiUser,
     },
     {
@@ -39,18 +39,18 @@ const authItems = [
 const BuyerLayout = ({ auth, children }) => {
 
     return (
-        <>
-            <Navbar menuItems={menuItems} authItems={authItems} />
-            {children}
-            <footer className="w-full bg-white">
-                <hr />
-                <div className="h-[69px] grid place-items-center">
-                    <p className="text-center text-black">
-                        &copy; 2024 Kelompok Tani - All Right Reserved
-                    </p>
-                </div>
-            </footer>
-        </>
+        <div className="flex flex-col min-h-screen">
+        <Navbar menuItems={menuItems} authItems={authItems} />
+        <main className="flex-1">{children}</main>
+        <footer className="w-full bg-white">
+            <hr />
+            <div className="h-[69px] grid place-items-center">
+                <p className="text-center text-black">
+                    &copy; 2024 Kelompok Tani - All Right Reserved
+                </p>
+            </div>
+        </footer>
+    </div>
     );
 };
 

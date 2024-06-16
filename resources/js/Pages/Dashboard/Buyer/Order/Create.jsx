@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Head, useForm, usePage } from "@inertiajs/react";
 import InputLabel from "@/Components/atom/InputLabel";
 import TextInput from "@/Components/atom/TextInput";
@@ -8,6 +8,9 @@ import PrimaryButton from "@/Components/atom/PrimaryButton";
 import BuyerLayout from "@/Layouts/BuyerLayout";
 
 export default function Create() {
+    const { product } = usePage().props;
+    const [maxQuantity, setMaxQuantity] = useState(1);
+
     const { data, setData, post, processing, errors } = useForm({
         quantity: 1,
         total_amount: 0,
@@ -15,12 +18,11 @@ export default function Create() {
         product_id: product.id,
     });
 
-    const { product } = usePage().props;
-
     useEffect(() => {
         if (product) {
             setData("product_id", product.id);
-            setData("total_amount", product.price); // Initialize total_amount with product price
+            setData("total_amount", product.price);
+            setMaxQuantity(product.stock); 
         }
     }, [product]);
 
@@ -37,6 +39,7 @@ export default function Create() {
             console.log(key, value);
         }
 
+        console.log("id", product.id);
         post(route("order.store"), {
             data: formData,
             onSuccess: () => {
@@ -47,15 +50,14 @@ export default function Create() {
 
     const handleQuantityChange = (step) => {
         setData((prevData) => {
-            console.log("Current quantity:", data.quantity);
-            const newQuantity = Math.max(1, prevData.quantity + step); // Ensure quantity is at least 1
-            console.log("Step:", step);
-            console.log("New quantity:", newQuantity);
-            const newTotalAmount = newQuantity * product.price;
+
+            const newQuantity = data.quantity + step;
+            const Quantity = Math.max(1, Math.min(newQuantity, maxQuantity));
+            const newTotalAmount = Quantity * product.price;
             console.log("New total amount:", newTotalAmount); // Calculate new total amount
             return {
                 ...prevData,
-                quantity: newQuantity,
+                quantity: Quantity,
                 total_amount: newTotalAmount,
             };
         });
@@ -64,6 +66,9 @@ export default function Create() {
     if (!product) {
         return <div>Loading...</div>; // Handle the case where product is not yet loaded
     }
+
+    const tags = product.tags || [];
+    console.log(tags); 
 
     return (
         <BuyerLayout>
@@ -74,7 +79,12 @@ export default function Create() {
                 </h1>
                 <div className="flex flex-row gap-4">
                     <img
-                        src={product.images[0]?.url || "/images/empty.png"}
+                        src={
+                            product.images[0]?.image_url
+                                ? "/storage/" +
+                                  product.images[0]?.image_url
+                                : "/images/empty.png"
+                        } 
                         alt={product.name || "Unknown"}
                         className="w-[250px] h-[150px] object-cover"
                     />
@@ -83,12 +93,14 @@ export default function Create() {
                         <p className="text-sm font-medium">
                             {product.category.name}
                         </p>
-                        {product.tags && product.tags.length > 0 ? (
-                            <p className="p-1 text-sm font-medium text-black rounded-lg bg-amber-400">
-                                {product.tags.map((tag) => tag.name).join(", ")}
-                            </p>
+                        {tags.length > 0 ? (
+                    <div className="flex flex-row gap-1">
+                        {tags.map(tag => (
+                            <span key={tag.tag_id} className="p-1 text-sm font-medium text-black rounded-lg bg-amber-400">{tag.tag && tag.tag.name}</span>
+                            ))}
+                        </div>
                         ) : (
-                            <p className="p-1 text-sm font-medium bg-transparent rounded-lg"></p>
+                         <p className="p-1 text-sm font-medium bg-transparent rounded-lg"></p>
                         )}
                     </div>
                 </div>
@@ -109,7 +121,7 @@ export default function Create() {
                             <div className="flex items-center gap-0">
                                 <button
                                     type="button"
-                                    className="px-2 bg-white border border-black rounded-l-md"
+                                    className="px-2 h-8 w-8 bg-white border border-black rounded-l-md"
                                     onClick={() => handleQuantityChange(-1)}
                                 >
                                     -
@@ -122,7 +134,7 @@ export default function Create() {
                                 />
                                 <button
                                     type="button"
-                                    className="px-2 bg-white border border-black rounded-r-md"
+                                    className="px-2 h-8 w-8 bg-white border border-black rounded-r-md"
                                     onClick={() => handleQuantityChange(1)}
                                 >
                                     +

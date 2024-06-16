@@ -47,7 +47,7 @@ class HomeController extends Controller
             $query->orderBy($order, $sort);
         }
 
-        $products = $query->with(['shop.user', 'category', 'images', 'tags.tag'])->get();
+        $products = $query->with(['shop.user', 'category', 'images', 'tags.tag'])->where('status', 1)->get();
         $categories = Category::all();
         $tags = Tag::all();
         $units = Unit::all();
