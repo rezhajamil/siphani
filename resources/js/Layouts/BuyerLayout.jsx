@@ -1,6 +1,5 @@
 import React from 'react';
 import Navbar from '@/Components/atom/Navbar';
-import ChangeRoleButton from '@/Components/atom/ChangeRoleBtn';
 import { HiBellAlert, HiUser } from 'react-icons/hi2';
 
 const menuItems = [
@@ -21,7 +20,7 @@ const handleOpenShopClick = (event) => {
 
 const authItems = [
     {
-        route: "/notification.index",
+        route: "#",
         icon: HiUser,
     },
     {
@@ -36,21 +35,21 @@ const authItems = [
         className: "bg-transparent px-4 py-3 rounded-lg text-amber-500 text-base font-medium",
     }
 ];
-const BuyerLayout = ({ auth, children }) => {
 
+const BuyerLayout = ({ auth, children, notificationCount }) => {
     return (
         <div className="flex flex-col min-h-screen">
-        <Navbar menuItems={menuItems} authItems={authItems} />
-        <main className="flex-1">{children}</main>
-        <footer className="w-full bg-white">
-            <hr />
-            <div className="h-[69px] grid place-items-center">
-                <p className="text-center text-black">
-                    &copy; 2024 Kelompok Tani - All Right Reserved
-                </p>
-            </div>
-        </footer>
-    </div>
+            <Navbar menuItems={menuItems} authItems={authItems} notificationCount={notificationCount} />
+            <main className="flex-1">{children}</main>
+            <footer className="w-full bg-white">
+                <hr />
+                <div className="h-[69px] grid place-items-center">
+                    <p className="text-center text-black">
+                        &copy; 2024 Kelompok Tani - All Right Reserved
+                    </p>
+                </div>
+            </footer>
+        </div>
     );
 };
 

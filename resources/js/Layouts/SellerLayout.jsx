@@ -1,22 +1,24 @@
 import Navbar from '@/Components/atom/Navbar';
+import { HiBellAlert } from 'react-icons/hi2';
 
 
 const menuItems = [
   { route: '.dashboard.', text: 'Dashboard' },
   { route: 'seller.shop.index', text: 'Profile Toko' },
   { route: 'seller.product.index', text: 'Produk' },
-  { route: 'seller.order.index', text: 'Order' }
+  { route: 'seller.order.index', text: 'Order'},
+  { route: "notification.index", icon: HiBellAlert },
 ];
 
 const authItems = [
   { route: '/logout', label: 'Logout', className: 'bg-transparent px-4 py-3 rounded-lg text-amber-500 text-base font-medium' },
 ];
 
-export default function SellerLayout({ auth, children }) {// Mendapatkan logoutRoute menggunakan Inertia.js
+export default function SellerLayout({ auth, children , notificationCount}) {// Mendapatkan logoutRoute menggunakan Inertia.js
 
   return (
     <>
-      <Navbar menuItems={menuItems} authItems={authItems}/>
+      <Navbar menuItems={menuItems} authItems={authItems} notificationCount={notificationCount}/>
       {children}
       <footer className="w-full bg-white">
         <hr />

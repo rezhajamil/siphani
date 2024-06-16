@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { HiBars3, HiOutlineXMark, HiBellAlert } from 'react-icons/hi2';
 
-const Navbar = ({ menuItems, authItems}) => {
+const Navbar = ({ menuItems, authItems,  notificationCount }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeMenuItem, setActiveMenuItem] = useState(null);
 
@@ -44,20 +44,32 @@ const Navbar = ({ menuItems, authItems}) => {
       </div>
 
       <div className={`nav-links flex flex-col md:flex-row justify-between md:items-center mx-5 mt-5 md:m-0 bg-white px-5 py-3 ${isMenuOpen ? 'block' : 'hidden'} md:flex md:w-full`}>
-        <ul className="flex flex-col md:flex-row gap-6 md:gap-10 md:items-center md:mx-auto">
-          {menuItems.map((item, index) => (
-            <li key={index}>
-              <a
-                href={getHref(item.route, item)}
-                className={`text-black text-base font-medium ${activeMenuItem === index ? 'text-amber-400' : 'hover:text-amber-300'}`}
-                onClick={() => handleMenuItemClick(index)}
-              >
-                {item.icon && React.createElement(item.icon, { className: 'w-6 h-6 mr-2' })}
-                {item.text}
-              </a>
-            </li>
-          ))}
-        </ul>
+      <ul className="flex flex-col md:flex-row gap-6 md:gap-10 md:items-center md:mx-auto">
+        {menuItems.map((item, index) => (
+        <li key={index}>
+          <a
+            href={getHref(item.route, item)}
+            className={`text-black text-base font-medium ${activeMenuItem === index ? 'text-amber-400' : 'hover:text-amber-300'}`}
+            onClick={() => handleMenuItemClick(index)}
+        >
+        {item.icon === HiBellAlert && notificationCount > 0 ? (
+          <div className="relative">
+            <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
+              {notificationCount}
+            </span>
+            <HiBellAlert className="h-5 w-5" />
+          </div>
+        ) : (
+          <>
+            {item.icon && <item.icon className="h-5 w-5" />}
+            {!item.icon && item.text}
+          </>
+        )}
+      </a>
+    </li>
+  ))}
+</ul>
+
       </div>
 
       <div className={`nav-auth flex flex-col md:flex-row justify-between md:items-center bg-white p-3 mx-5 md:m-0 ${isMenuOpen ? 'block' : 'hidden'} md:flex md:w-1/4`}>
