@@ -95,7 +95,7 @@ export default function Create() {
                     <div className="flex flex-row justify-between w-full">
                         <div className="flex flex-col gap-1">
                             <p className="text-sm font-semibold">
-                                {product.price}/{product.unit}
+                                {product.price}/{product.unit.name}
                             </p>
                             <p className="text-black text-normal">
                                 Stok: {product.stock}

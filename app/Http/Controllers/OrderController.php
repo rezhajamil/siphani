@@ -31,7 +31,7 @@ class OrderController extends Controller
      */
     public function create($id)
     {
-        $product = Product::with(['shop.user', 'category', 'images', 'tags.tag'])->find($id);
+        $product = Product::with(['shop.user', 'category', 'images', 'unit', 'tags.tag'])->find($id);
 
         return Inertia::render('Dashboard/Buyer/Order/Create', compact('product'));
     }

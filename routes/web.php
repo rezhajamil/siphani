@@ -44,12 +44,12 @@ Route::middleware('auth')->group(function () {
     Route::put('/order-status/update/{order}', [OrderStatusController::class, 'update'])->name('order-status.update');
     Route::resource('notification', NotificationController::class);
     Route::resource('order-discussion', OrderDiscussionController::class);
-    Route::post('order/{order_id}/store', [OrderDiscussionController::class, 'store'])->name('order.discussion.store');
 
     Route::get('order', [OrderController::class, 'index'])->name('order.index');
     Route::get('order/{product}/create', [OrderController::class, 'create'])->name('order.create');
     Route::post('order/store', [OrderController::class, 'store'])->name('order.store');
     Route::post('order/{order}', [OrderController::class, 'show'])->name('order.show');
+    Route::put('order/upload-proof', [OrderController::class, 'uploadProof'])->name('order.uploadProof');
 
     Route::get('/dashboard', [DashboardHomeController::class, 'index'])->name('dashboard');
 
