@@ -8,13 +8,14 @@ import PrimaryButton from "@/Components/atom/PrimaryButton";
 import BuyerLayout from "@/Layouts/BuyerLayout";
 
 export default function Create() {
+    const { product } = usePage().props;
+
     const { data, setData, post, processing, errors } = useForm({
         quantity: 1,
         total_amount: 0,
         proof: null,
+        product_id: product.id,
     });
-
-    const { product } = usePage().props;
 
     useEffect(() => {
         if (product) {
@@ -31,7 +32,7 @@ export default function Create() {
         formData.append("total_amount", data.total_amount);
         formData.append("proof", data.proof);
         formData.append("product_id", product.id);
-
+        console.log("id", product.id);
         post(route("order.store"), {
             data: formData,
             onSuccess: () => {

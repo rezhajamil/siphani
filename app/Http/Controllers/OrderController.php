@@ -41,7 +41,6 @@ class OrderController extends Controller
     {
         $request->validate([
             'quantity' => ['required', 'numeric'],
-            'product_id' => ['required', 'numeric'],
             'total_amount' => ['required', 'numeric'],
             'proof' => ['file', 'nullable']
         ]);
@@ -54,7 +53,7 @@ class OrderController extends Controller
             'status_id' => 1,
         ]);
 
-        $product = Product::find($request->product);
+        $product = Product::with(['shop.user'])->find($request->product_id);
 
         $notif = Notification::create([
             'user_id' => Auth::user()->id,
