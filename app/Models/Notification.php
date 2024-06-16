@@ -13,11 +13,16 @@ class Notification extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function order()
     {
-        return $this->hasOne(Order::class);
+        return $this->belongsTo(Order::class);
+    }
+
+    public function target()
+    {
+        return $this->belongsTo(User::class, 'target_id');
     }
 }

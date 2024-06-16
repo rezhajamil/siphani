@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
+use App\Models\Order;
 use App\Models\OrderDiscussion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +38,15 @@ class OrderDiscussionController extends Controller
             'user_id' => Auth::user()->id,
             'order_id' => $request->order_id,
             'message' => ucfirst($request->message)
+        ]);
+
+        $seller = Order::with(['product.shop.user'])->find($request->order_id);
+
+        $notif = Notification::create([
+            'user_id' => Auth::user()->id,
+            'order_id' => $request->order_id,
+            'target_id' => $seller->product->shop->user->id,
+            'message' => "Ada mendapat pesan diskusi baru"
         ]);
 
         return back();

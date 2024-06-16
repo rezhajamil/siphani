@@ -14,7 +14,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $notifications = Notification::with(['user', 'order'])->where('target_id', Auth::user()->id)->get();
+        $notifications = Notification::with(['user', 'order.status', 'target'])->where('target_id', Auth::user()->id)->get();
 
         return Inertia::render('Dashboard/Buyer/Notif/Index', compact('notifications'));
     }
