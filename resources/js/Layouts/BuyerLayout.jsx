@@ -11,6 +11,14 @@ const menuItems = [
     { route: "notification.index", icon: HiBellAlert },
 ];
 
+const handleOpenShopClick = (event) => {
+    event.preventDefault();
+    const userConfirmed = confirm("Apakah Anda yakin ingin membuka toko?");
+    if (userConfirmed) {
+        window.location.href = "/user/change-role?role=Seller&route=seller.shop.index";
+    }
+};
+
 const authItems = [
     {
         route: "#",
@@ -20,6 +28,7 @@ const authItems = [
         route: "/user/change-role?role=Seller&route=seller.shop.index",
         label: "Buka Toko",
         className: "bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium",
+        onClick: handleOpenShopClick,
     },
     {
         route: "/logout",

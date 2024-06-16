@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('order', [OrderController::class, 'index'])->name('order.index');
     Route::get('order/{product}/create', [OrderController::class, 'create'])->name('order.create');
-    Route::post('order/{product}/store', [OrderController::class, 'store'])->name('order.store');
+    Route::post('order/store', [OrderController::class, 'store'])->name('order.store');
     Route::post('order/{order}', [OrderController::class, 'show'])->name('order.show');
 
     Route::get('/dashboard', [DashboardHomeController::class, 'index'])->name('dashboard');
