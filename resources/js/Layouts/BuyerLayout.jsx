@@ -10,9 +10,8 @@ const menuItems = [
     { route: "notification.index", icon: HiBellAlert },
 ];
 
-const handleOpenShopClick = (event) => {
-    event.preventDefault();
-    const userConfirmed = confirm("Apakah Anda yakin ingin membuka toko?");
+const handleOpenShopClick = () => {
+    const userConfirmed = window.confirm("Apakah Anda yakin ingin membuka toko?");
     if (userConfirmed) {
         window.location.href = "/user/change-role?role=Seller&route=seller.shop.index";
     }
@@ -24,10 +23,9 @@ const authItems = [
         icon: HiUser,
     },
     {
-        route: "/user/change-role?role=Seller&route=seller.shop.index",
+        route: "#",
         label: "Buka Toko",
-        className: "bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium",
-        onClick: handleOpenShopClick,
+        className: "bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium cursor-pointer",
     },
     {
         route: "/logout",
@@ -39,7 +37,7 @@ const authItems = [
 const BuyerLayout = ({ auth, children, notificationCount }) => {
     return (
         <div className="flex flex-col min-h-screen">
-            <Navbar menuItems={menuItems} authItems={authItems} notificationCount={notificationCount} />
+            <Navbar menuItems={menuItems} authItems={authItems} notificationCount={notificationCount} onOpenShopClick={handleOpenShopClick}  />
             <main className="flex-1">{children}</main>
             <footer className="w-full bg-white">
                 <hr />
