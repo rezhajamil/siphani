@@ -25,7 +25,7 @@ const authItems = [
     {
         route: "#",
         label: "Buka Toko",
-        className: "bg-amber-500 px-4 py-3 rounded-lg text-white text-base font-medium cursor-pointer",
+        className: "bg-amber-500 w-fit px-4 py-3 rounded-lg text-white text-base font-medium cursor-pointer",
     },
     {
         route: "/logout",

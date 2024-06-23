@@ -21,6 +21,10 @@ class OrderController extends Controller
         return Inertia::render('Dashboard/Seller/Order/Index', compact('orders'));
     }
 
+
+
+    
+
     /**
      * Show the form for creating a new resource.
      */
@@ -39,13 +43,13 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+
+    public function show($id)
     {
-        $order = Order::with(['user', 'product.shop', 'product.category', 'product.images', 'product.tags', 'product.unit', 'status', 'discuss.user'])->find($id);
+        $order = Order::with(['user', 'product.shop', 'product.category', 'product.images', 'product.unit', 'product.tags', 'status', 'discuss.user'])->find($id);
 
-        return Inertia::render('Dashboard/Seller/Order/Show', compact('order'));
+        return Inertia::render('Dashboard/Seller/Order/Detail', compact('order'));
     }
-
     /**
      * Show the form for editing the specified resource.
      */

@@ -17,15 +17,17 @@ const authItems = [
 export default function SellerLayout({ auth, children , notificationCount}) {// Mendapatkan logoutRoute menggunakan Inertia.js
 
   return (
-    <>
-      <Navbar menuItems={menuItems} authItems={authItems} notificationCount={notificationCount}/>
-      {children}
-      <footer className="w-full bg-white">
+    <div className="flex flex-col min-h-screen">
+    <Navbar menuItems={menuItems} authItems={authItems} notificationCount={notificationCount}/>
+    <main className="flex-1">{children}</main>
+    <footer className="w-full bg-white">
         <hr />
         <div className="h-[69px] grid place-items-center">
-          <p className="text-center text-black">&copy; 2024 Kelompok Tani - All Right Reserved</p>
+            <p className="text-center text-black">
+                &copy; 2024 Kelompok Tani - All Right Reserved
+            </p>
         </div>
-      </footer>
-    </>
+    </footer>
+</div>
   );
 }

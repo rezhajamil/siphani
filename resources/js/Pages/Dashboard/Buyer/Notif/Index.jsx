@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { usePage } from "@inertiajs/react";
 import BuyerLayout from "@/Layouts/BuyerLayout";
+import axios from 'axios';
 
 const NotificationList = () => {
-    const { notifications } = usePage().props;
-    console.log("notifications", notifications);
+    const { notifications, user } = usePage().props;
+
+    useEffect(() => {
+        // Mark all notifications as read when component mounts
+        const markNotificationsAsRead = async () => {
+            try {
+                await axios.post('/notifications/read', { user_id: user.id });
+            } catch (error) {
+                console.error('Error marking notifications as read:', error);
+            }
+        };
+
+        markNotificationsAsRead();
+    }, [user.id]);
 
     const formatDate = (createdAt) => {
         const formattedDate = new Date(createdAt).toLocaleDateString("id-ID", {
@@ -30,7 +43,7 @@ const NotificationList = () => {
                         {notifications.map((notification) => (
                             <li
                                 key={notification.id}
-                                className="p-4 border rounded-lg shadow-md"
+                                className={`p-4 border rounded-lg shadow-md ${notification.is_read ? 'bg-gray-100' : 'bg-white'}`}
                             >
                                 <div className="flex justify-between">
                                     <p className="text-sm font-medium">
