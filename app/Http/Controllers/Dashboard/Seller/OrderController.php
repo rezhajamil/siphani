@@ -16,7 +16,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with(['user', 'product.shop', 'product.category', 'product.images', 'status', 'discuss'])->join('products', 'orders.product_id', '=', 'products.id')->where('products.shop_id', Auth::user()->shop->id)->get();
+        $orders = Order::select('orders.*')->with(['user', 'product.shop', 'product.category', 'product.images', 'status', 'discuss'])->join('products', 'orders.product_id', '=', 'products.id')->where('products.shop_id', Auth::user()->shop->id)->get();
+        dd($orders);
 
         return Inertia::render('Dashboard/Seller/Order/Index', compact('orders'));
     }
