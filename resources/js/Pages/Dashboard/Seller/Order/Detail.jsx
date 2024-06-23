@@ -1,8 +1,7 @@
-// DetailOrder.js
-
 import React, { useEffect } from "react";
 import { usePage, useForm, Link } from "@inertiajs/react";
 import TextInput from "@/Components/atom/TextInput";
+import Select from "@/Components/atom/Select";
 import InputError from "@/Components/atom/InputError";
 import InputLabel from "@/Components/atom/InputLabel";
 import PrimaryButton from "@/Components/atom/PrimaryButton";
@@ -17,10 +16,11 @@ const Detail = () => {
         }
     }, [order]);
 
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, post, patch, processing, errors } = useForm({
         message: "",
         order_id: order ? order.id : null,
         proof: null,
+        status: order ? order.status_id : ""
     });
 
     if (!order) {
@@ -65,7 +65,7 @@ const Detail = () => {
 
         const formData = new FormData();
         formData.append("message", data.message);
-        formData.append("order_id", data.order_id); // Pastikan order_id dimasukkan ke FormData
+        formData.append("order_id", data.order_id);
 
         post(route("order-discussion.store"), {
             data: formData,
@@ -79,32 +79,39 @@ const Detail = () => {
         });
     };
 
-    const submitProof = (e) => {
+    const statusOption = [
+        { value: "1", label: "Menunggu Konfirmasi" },
+        { value: "2", label: "Menunggu Pembayaran" },
+        { value: "3", label: "Pembayaran Ditolak" },
+        { value: "4", label: "Pesanan Diproses" },
+        { value: "5", label: "Pesanan Dibatalkan" },
+    ];
+
+    const submitStatus = (e) => {
         e.preventDefault();
 
-        if (!data.proof) {
-            console.error("Proof is required.");
+        if (!data.status) {
+            console.error("Status is required.");
             return;
         }
 
         const formData = new FormData();
-        formData.append("proof", data.proof);
-   
-        put(route("order.uploadProof"), {
+        formData.append("status", data.status);
+
+        patch(route("order-status.update", { order: order.id }), {
             data: formData,
             onSuccess: () => {
-                setData("proof", null);
-                console.log("Proof uploaded successfully");
+                setData("status", null);
+                console.log("Status Updated successfully");
             },
             onError: (errors) => {
-                console.error("Error uploading proof:", errors);
+                console.error("Error updating status:", errors);
             },
         });
     };
 
-
     return (
-    <SellerLayout>
+        <SellerLayout>
             <div className="flex flex-col items-center justify-center w-full min-h-screen px-16 bg-white py-15 md:py-10">
                 <div className="flex flex-col w-1/2 justify-center mt-20">
                     <h1 className="mx-auto mb-6 text-lg font-semibold text-center bg-amber-300 md:text-2xl w-fit">
@@ -115,8 +122,7 @@ const Detail = () => {
                             <img
                                 src={
                                     order.product.images[0]?.image_url
-                                        ? "/storage/" +
-                                          order.product.images[0]?.image_url
+                                        ? "/storage/" + order.product.images[0]?.image_url
                                         : "/images/empty.png"
                                 }
                                 alt={order.product.name || "Unknown"}
@@ -134,8 +140,7 @@ const Detail = () => {
                                 </p>
                                 <p className="text-sm font-medium text-gray-600">
                                     Status: 
-                                    <span className="mx-1 text-sm font-medium bg-amber-400 p-1 text-black rounded-lg">{order.status.name}
-                                    </span>
+                                    <span className="mx-1 text-sm font-medium bg-amber-400 p-1 text-black rounded-lg">{order.status.name}</span>
                                 </p>
                                 <p className="text-md font-semibold text-lime-600">
                                     Total Harga: {formatCurrency(order.total_amount)}
@@ -144,19 +149,20 @@ const Detail = () => {
                         </div>
                     )}
 
-                    <div className="w-full mt-4 gap-5">
-                        <InputLabel htmlFor="proof" value="Status Orderan" />
-                        <TextInput
-                                id="proof"
-                                type="file"
-                                name="proof"
-                                accept="image/*"
-                                className="mt-2 block w-full p-2.5 focus:outline file:rounded-lg file:border-0 file:bg-amber-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-amber-400"
-                                autoComplete="proof"
-                                onChange={handleFileChange}
-                            />
-                        <InputError message={errors.proof} className="mt-2" />
-                        <PrimaryButton disabled={processing} onClick={submitProof} className="mt-3">Upload</PrimaryButton>
+                    <div className="w-full flex flex-row mt-10 items-center gap-5">
+                        <InputLabel htmlFor="status" value="Status Orderan" />
+                        <Select
+                            id="status"
+                            name="status"
+                            value={data.status}
+                            className="mt-1 block w-full"
+                            options={statusOption}
+                            autoComplete="status"
+                            onChange={(e) => setData('status', e.target.value)}
+                            required
+                        />
+                        <InputError message={errors.status} className="mt-2" />
+                        <PrimaryButton disabled={processing} onClick={submitStatus}>Update</PrimaryButton>
                     </div>
                     <div className="mt-10 p-3 shadow-md rounded-lg">
                         <h2 className="text-lg font-semibold">
@@ -180,19 +186,19 @@ const Detail = () => {
                                 </li>
                             ))}
                         </ul>
-                    <div className="flex flex-row items-center justify-center gap-2 mt-20">
-                        <textarea
-                        className="w-full p-2 focus:border-amber-400 focus:ring-amber-300  border-2 border-amber-300 rounded-lg"
-                        placeholder="Chat Penjual"
-                        value={data.message}
-                        onChange={(e) => setData("message", e.target.value)}
-                        />
-                        <PrimaryButton disabled={processing} onClick={submit}>Kirim</PrimaryButton>
-                    </div>
+                        <div className="flex flex-row items-center justify-center gap-2 mt-20">
+                            <textarea
+                                className="w-full p-2 focus:border-amber-400 focus:ring-amber-300  border-2 border-amber-300 rounded-lg"
+                                placeholder="Chat Penjual"
+                                value={data.message}
+                                onChange={(e) => setData("message", e.target.value)}
+                            />
+                            <PrimaryButton disabled={processing} onClick={submit}>Kirim</PrimaryButton>
+                        </div>
                     </div>
                 </div>
             </div>
-    </SellerLayout>
+        </SellerLayout>
     );
 };
 

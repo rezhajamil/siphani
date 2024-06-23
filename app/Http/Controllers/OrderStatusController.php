@@ -22,7 +22,6 @@ class OrderStatusController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -73,6 +72,8 @@ class OrderStatusController extends Controller
 
         return back();
     }
+
+
 
     /**
      * Remove the specified resource from storage.

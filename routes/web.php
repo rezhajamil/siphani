@@ -41,7 +41,7 @@ Route::get('user/change-role', [UserController::class, 'changeRole'])->name('cha
 
 
 Route::middleware('auth')->group(function () {
-    Route::put('/order-status/update/{order}', [OrderStatusController::class, 'update'])->name('order-status.update');
+    Route::patch('/order-status/update/{order}', [OrderStatusController::class, 'update'])->name('order-status.update');
     Route::resource('notification', NotificationController::class);
     Route::get('/notification/read-notif', [NotificationController::class, 'readNotif'])->name('notification.read-notif');
     Route::resource('order-discussion', OrderDiscussionController::class);
