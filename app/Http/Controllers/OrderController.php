@@ -16,7 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with(['user', 'product.shop', 'product.category', 'product.images', 'status', 'discuss'])->where('user_id', Auth::user()->id)
+        $orders = Order::with(['user', 'product.shop', 'product.category', 'product.images', 'product.unit', 'product.tags', 'status', 'discuss.user'])->where('user_id', Auth::user()->id)
             ->get();
 
         return Inertia::render('Dashboard/Buyer/Order/Index', compact('orders'));
