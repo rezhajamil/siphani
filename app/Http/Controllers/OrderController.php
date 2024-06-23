@@ -64,9 +64,6 @@ class OrderController extends Controller
         return to_route('order.index')->with('success');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
         $order = Order::with(['user', 'product.shop', 'product.category', 'product.images', 'product.unit', 'product.tags', 'status', 'discuss.user'])->find($id);

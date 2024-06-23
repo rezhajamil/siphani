@@ -145,7 +145,7 @@ const Detail = () => {
                     )}
 
                     <div className="w-full mt-4 gap-5">
-                        <InputLabel htmlFor="proof" value="Upload Bukti Pembayaran" />
+                        <InputLabel htmlFor="proof" value="Status Orderan" />
                         <TextInput
                                 id="proof"
                                 type="file"
