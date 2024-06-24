@@ -54,7 +54,7 @@ class OrderStatusController extends Controller
     public function update(Request $request, $order_id)
     {
         $request->validate([
-            'status' => $request->status
+            'status' => ['required', 'numeric']
         ]);
 
         $order = Order::with(['status'])->find($order_id);
