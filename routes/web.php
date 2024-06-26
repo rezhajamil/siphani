@@ -3,6 +3,8 @@
 use App\Http\Controllers\Dashboard\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Dashboard\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Dashboard\Admin\UnitController as AdminUnitController;
+use App\Http\Controllers\Dashboard\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Dashboard\Admin\TagController as AdminTagController;
 use App\Http\Controllers\HomeController as DashboardHomeController;
 use App\Http\Controllers\Dashboard\Seller\ProductController as SellerProductController;
 use App\Http\Controllers\Dashboard\Seller\OrderController as SellerOrderController;
@@ -55,8 +57,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardHomeController::class, 'index'])->name('dashboard');
 
     Route::prefix('admin')->name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
+        Route::resource('categories', AdminCategoryController::class);
         Route::resource('user', AdminUserController::class);
-        Route::resource('unit', AdminUnitController::class);
+        Route::resource('units', AdminUnitController::class);
+        Route::resource('tags', AdminTagController::class);
         Route::get('toggle-status/{user}', [AdminUserController::class, 'toggleStatus'])->name('toggle-status');
     });
 

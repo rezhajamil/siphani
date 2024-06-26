@@ -93,7 +93,7 @@ export default function Produk({
                 </ul>
             </div>
             {/* Pencarian produk */}
-            <div className="flex flex-row justify-center w-1/2 gap-3 mt-5">
+            <div className="flex flex-row justify-center w-1/3 md:w-1/2 gap-3 mt-5">
                 <TextInput
                     type="text"
                     className="w-full p-2 border-2 rounded-lg border-amber-300"
