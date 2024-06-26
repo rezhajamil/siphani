@@ -70,11 +70,11 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
                 <div className='bg-amber-300 h-fit p-5 flex justify-center'>
                     <div className='flex flex-col md:flex-row gap-8 justify-center items-center'>
-                        <img src="images/padi.jpg" alt="padi" className="w-[500px] h-[300px] object-cover" data-aos="fade-up" data-aos-duration="1000" />
+                        <img src="images/padi.jpg" alt="padi" className="w-[500px] h-[300px] object-cover" data-aos="fade-up" data-aos-duration="100" />
                         <div className='flex flex-col justify-center md:justify-start md:w-1/4'>
-                            <p className='text-amber-600 text-md font-medium' data-aos="fade-up" data-aos-duration="1000">About Us</p>
+                            <p className='text-amber-600 text-md font-medium' data-aos="fade-up" data-aos-duration="100">About Us</p>
                             <h1 className='text-black text-xl md:text-3xl font-bold mt-3' data-aos="fade-up" data-aos-duration="1000">Bersama Kami, Jual Hasil Panen Anda Langsung ke Pembeli</h1>
-                            <p className='text-black text-md font-medium mt-3' data-aos="fade-up" data-aos-duration="1000">Kami menghubungkan petani langsung dengan konsumen, menciptakan sebuah ekosistem yang menguntungkan bagi semua pihak. Untuk para petani, inilah kesempatan emas untuk menjual hasil panen Anda langsung ke pembeli tanpa biaya perantara besar, memastikan Anda mendapatkan keuntungan maksimal.</p>
+                            <p className='text-black text-md font-medium mt-3' data-aos="fade-up" data-aos-duration="100">Kami menghubungkan petani langsung dengan konsumen, menciptakan sebuah ekosistem yang menguntungkan bagi semua pihak. Untuk para petani, inilah kesempatan emas untuk menjual hasil panen Anda langsung ke pembeli tanpa biaya perantara besar, memastikan Anda mendapatkan keuntungan maksimal.</p>
                         </div>
                     </div>
                 </div>
