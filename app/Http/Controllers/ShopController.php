@@ -45,7 +45,6 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'name' => ['required', 'string'],
             'phone' => ['required', 'numeric'],
@@ -87,7 +86,9 @@ class ShopController extends Controller
      */
     public function edit(Shop $shop)
     {
-        //
+        return Inertia::render('Shop/Edit', [
+            'shop' => $shop,
+        ]);
     }
 
     /**
@@ -95,7 +96,28 @@ class ShopController extends Controller
      */
     public function update(Request $request, Shop $shop)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string'],
+            'phone' => ['required', 'numeric'],
+            'email' => ['nullable', 'email'],
+            'address' => ['required', 'string'],
+            'maps' => ['nullable', 'string'],
+            'avatar' => ['nullable', 'max:4096'],
+        ]);
+
+        if ($request->hasFile('avatar')) {
+            $url = $request->avatar->store("avatar");
+        }
+
+        $shop->name = ucwords($request->name);
+        $shop->phone = $request->phone;
+        $shop->email = $request->email;
+        $shop->address = $request->address;
+        $shop->maps = $request->maps;
+        $shop->avatar = $url ?? null;
+        $shop->save();
+
+        return redirect()->route('seller.shop.index');
     }
 
     /**
