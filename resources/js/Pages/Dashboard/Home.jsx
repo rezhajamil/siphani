@@ -28,9 +28,9 @@ export default function Dashboard() {
             );
         } else if (user.role === 'Admin') {
             return (
-                <Guest>
+                <AdminLayout>
                     
-                </Guest>
+                </AdminLayout>
             );
         } else {
             return (

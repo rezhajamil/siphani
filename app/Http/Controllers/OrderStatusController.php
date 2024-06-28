@@ -59,7 +59,7 @@ class OrderStatusController extends Controller
 
         $order = Order::with(['status'])->find($order_id);
 
-        $order->status = $request->status;
+        $order->status_id = $request->status;
         $order->save();
 
         $notif = Notification::create([
