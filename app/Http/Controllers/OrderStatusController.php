@@ -54,12 +54,12 @@ class OrderStatusController extends Controller
     public function update(Request $request, $order_id)
     {
         $request->validate([
-            'status' => $request->status
+            'status' => ['required', 'numeric']
         ]);
 
         $order = Order::with(['status'])->find($order_id);
 
-        $order->status = $request->status;
+        $order->status_id = $request->status;
         $order->save();
 
         $notif = Notification::create([
