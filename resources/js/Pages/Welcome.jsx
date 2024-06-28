@@ -2,6 +2,7 @@ import { Link, Head, usePage } from '@inertiajs/react';
 import Template from '@/Layouts/Template';
 import BuyerLayout from '@/Layouts/BuyerLayout'; 
 import SellerLayout from '@/Layouts/SellerLayout';
+import AdminLayout from '@/Layouts/AdminLayout';
 import { useCallback, useEffect } from 'react';
 import Aos from 'aos';
 import 'aos/dist/aos.css'; 
@@ -28,9 +29,9 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
             )
         } else {
             return (
-                <Template>
+                <AdminLayout>
                     {renderContent()}
-                </Template>
+                </AdminLayout>
             );
         }
     };

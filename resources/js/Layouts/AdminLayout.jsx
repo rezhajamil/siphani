@@ -6,10 +6,10 @@ const menuItems = [
     { route: '/', text: 'Home' },
     { route: 'produk', text: 'Produk' },
     { route: 'tentang-kami', text: 'Tentang Kami' },
-    { route: '#', text: "Tag" },
-    { route: '#', text: "Kategori Produk" },
-    { route: '#', text: "Satuan" },
-    { route: "#", text: "Kelola User dan Toko" },
+    { route: 'admin.tag.index', text: "Tag" },
+    { route: 'admin.category.index', text: "Kategori Produk" },
+    { route: 'admin.unit.index', text: "Satuan" },
+    { route: "admin.user.index", text: "Kelola User dan Toko" },
 ];
 
 const authItems = [
