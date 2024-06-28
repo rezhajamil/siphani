@@ -4,8 +4,6 @@ import Navbar from '@/Components/atom/Navbar';
 
 const menuItems = [
     { route: '/', text: 'Home' },
-    { route: 'produk', text: 'Produk' },
-    { route: 'tentang-kami', text: 'Tentang Kami' },
     { route: 'admin.tag.index', text: "Tag" },
     { route: 'admin.category.index', text: "Kategori Produk" },
     { route: 'admin.unit.index', text: "Satuan" },

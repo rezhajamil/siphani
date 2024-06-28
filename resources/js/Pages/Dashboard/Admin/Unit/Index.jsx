@@ -1,9 +1,7 @@
 import React from "react";
-import { usePage } from "@inertiajs/react";
+import { usePage, Link } from "@inertiajs/react";
 import AdminLayout from "@/Layouts/AdminLayout";
 import PrimaryButton from "@/Components/atom/PrimaryButton";
-import { Inertia } from "@inertiajs/inertia";
-
 const Index = () => {
     const { units } = usePage().props; // Mendapatkan data units dari props page
 

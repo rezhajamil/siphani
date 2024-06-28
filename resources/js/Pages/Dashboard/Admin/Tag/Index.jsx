@@ -1,26 +1,26 @@
 import React from "react";
-import { usePage } from "@inertiajs/react";
+import { usePage, Link } from "@inertiajs/react";
 import AdminLayout from "@/Layouts/AdminLayout";
 import PrimaryButton from "@/Components/atom/PrimaryButton";
-import { Inertia } from "@inertiajs/inertia";
+
 
 const Index = () => {
     const { tags } = usePage().props; // Mendapatkan data tags dari props page
 
     const handleToggleStatus = (id) => {
-        Inertia.post(route('admin.tags.toggleStatus', id)); // Mengirimkan POST request untuk toggle status tag
+        Inertia.post(route('admin.tag.toggleStatus', id)); // Mengirimkan POST request untuk toggle status tag
     };
 
     const handleEdit = (id) => {
-        Inertia.visit(route('admin.tags.edit', id)); // Mengarahkan ke halaman edit tag berdasarkan ID
+        Inertia.visit(route('admin.tag.edit', id)); // Mengarahkan ke halaman edit tag berdasarkan ID
     };
 
     return (
         <AdminLayout>
             <div className="container mx-auto px-4 py-8">
                 <h1 className="text-2xl font-bold mb-4">Tag List</h1>
-                <Link href={route('admin.categories.create')}>
-                    <PrimaryButton>Create New Category</PrimaryButton>
+                <Link href={route('admin.tag.create')}>
+                    <PrimaryButton>Create New Tag</PrimaryButton>
                 </Link>
                 <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">

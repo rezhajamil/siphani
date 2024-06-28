@@ -60,12 +60,10 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('admin')->name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
         Route::get('/', [DashboardController::class, 'index']);
-        Route::resource('categories', AdminCategoryController::class);
+        Route::resource('category', AdminCategoryController::class);
         Route::resource('user', AdminUserController::class);
         Route::resource('unit', AdminUnitController::class);
         Route::resource('tag', AdminTagController::class);
-        Route::resource('units', AdminUnitController::class);
-        Route::resource('tags', AdminTagController::class);
         Route::get('toggle-status/{user}', [AdminUserController::class, 'toggleStatus'])->name('toggle-status');
     });
 
