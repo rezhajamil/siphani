@@ -1,8 +1,7 @@
 // Import React dan Inertia
 import React, { useEffect } from "react";
-import { usePage, Link } from '@inertiajs/react';
-import SellerLayout from '@/Layouts/SellerLayout';
-
+import { usePage, Link } from "@inertiajs/react";
+import SellerLayout from "@/Layouts/SellerLayout";
 
 const Index = () => {
     const { orders } = usePage().props;
@@ -10,10 +9,12 @@ const Index = () => {
     useEffect(() => {
         console.log("Orders data:", orders);
     }, [orders]);
-    
+
     return (
         <SellerLayout>
-            <h1 className="text-2xl font-semibold w-fit p-2 mt-20 mx-auto bg-amber-300">Daftar Pesanan</h1>
+            <h1 className="p-2 mx-auto mt-20 text-2xl font-semibold w-fit bg-amber-300">
+                Daftar Pesanan
+            </h1>
             {orders.map((order) => (
                 <Link
                     key={order.id}
@@ -29,9 +30,9 @@ const Index = () => {
                                 <img
                                     src={
                                         order.product.images[0]?.image_url
-                                        ? "/storage/" +
-                                          order.product.images[0]?.image_url
-                                        : "/images/empty.png"
+                                            ? "/storage/" +
+                                              order.product.images[0]?.image_url
+                                            : "/images/empty.png"
                                     }
                                     alt={order.product.name || "Unknown"}
                                     className="w-[120px] h-[80px] object-cover"
