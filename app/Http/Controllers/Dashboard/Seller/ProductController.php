@@ -35,6 +35,7 @@ class ProductController extends Controller
 
         $name = $request->name;
         $tags = $request->tags;
+        $unit = $request->unit;
         $category = $request->category;
         $order = $request->order;
         $sort = $request->sort ?? 'asc';
@@ -55,11 +56,15 @@ class ProductController extends Controller
             $query->where('category_id', $category);
         }
 
+        if ($unit) {
+            $query->where('unit_id', $unit);
+        }
+
         if (in_array($order, ['name', 'price'])) {
             $query->orderBy($order, $sort);
         }
 
-        $products = $query->where('shop_id', $shop)->with(['shop.user', 'category', 'images', 'tags.tag'])->get();
+        $products = $query->where('shop_id', $shop)->with(['shop.user', 'category', 'images', 'tags.tag', 'unit'])->get();
 
         return Inertia::render('Dashboard/Seller/Product/Index', compact('products'));
     }

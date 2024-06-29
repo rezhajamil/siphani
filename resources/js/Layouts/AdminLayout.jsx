@@ -3,7 +3,6 @@ import Navbar from '@/Components/atom/Navbar';
 
 
 const menuItems = [
-    { route: '/', text: 'Home' },
     { route: 'admin.tag.index', text: "Tag" },
     { route: 'admin.category.index', text: "Kategori Produk" },
     { route: 'admin.unit.index', text: "Satuan" },

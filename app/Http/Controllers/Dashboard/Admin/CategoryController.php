@@ -59,7 +59,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
 
-        return Inertia::render('Dashboard/Admin/Category/Create', compact('category'));
+        return Inertia::render('Dashboard/Admin/Category/Edit', compact('category'));
     }
 
     /**
