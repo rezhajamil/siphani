@@ -146,6 +146,7 @@ export default function Create() {
                             type="number"
                             value={data.price}
                             className="mt-2 block w-full"
+                            style={{ appearance: 'textfield' }} 
                             autoComplete="price"
                             isFocused={true}
                             onChange={(e) => setData('price', e.target.value)}
@@ -161,6 +162,7 @@ export default function Create() {
                             name="stock"
                             type="number"
                             value={data.stock}
+                            style={{ appearance: 'textfield' }} 
                             className="mt-2 block w-full"
                             autoComplete="stock"
                             isFocused={true}

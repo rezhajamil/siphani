@@ -29,9 +29,9 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
             )
         } else {
             return (
-                <AdminLayout>
+                <Template>
                     {renderContent()}
-                </AdminLayout>
+                </Template>
             );
         }
     };
