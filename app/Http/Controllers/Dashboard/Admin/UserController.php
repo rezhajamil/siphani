@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         $users = User::with(['shop', 'orders', 'notifications'])->whereIn('role', ['Buyer', 'Seller'])->get();
 
-        return Inertia::render('Dashboard/Admin/Index', compact('users'));
+        return Inertia::render('Dashboard/Admin/User/Index', compact('users'));
     }
 
     /**

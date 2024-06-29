@@ -59,7 +59,7 @@ class TagController extends Controller
     {
         $tag = Tag::find($id);
 
-        return Inertia::render('Dashboard/Admin/Tag/Create', compact('tag'));
+        return Inertia::render('Dashboard/Admin/Tag/Edit', compact('tag'));
     }
 
     /**
