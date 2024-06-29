@@ -103,11 +103,8 @@ class OrderController extends Controller
 
         $url = $request->file('proof')->store('proof/' . $order->id);
 
-
-
         $order->proof_of_payment_url = $url;
         $order->save();
-
 
         $notif = Notification::create([
             'user_id' => Auth::user()->id,
@@ -117,6 +114,6 @@ class OrderController extends Controller
             'is_read' => 0,
         ]);
 
-        return response()->json(['message' => 'Proof uploaded successfully.']);
+        return redirect()->route('order.show', $order)->with('success');
     }
 }

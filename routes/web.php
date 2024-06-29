@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::get('order/{product}/create', [OrderController::class, 'create'])->name('order.create');
     Route::post('order/store', [OrderController::class, 'store'])->name('order.store');
     Route::get('order/{order}', [OrderController::class, 'show'])->name('order.show');
-    Route::put('order/upload-proof/{order}', [OrderController::class, 'uploadProof'])->name('order.uploadProof');
+    Route::post('order/upload-proof/{order}', [OrderController::class, 'uploadProof'])->name('order.uploadProof');
 
     Route::get('/dashboard', [DashboardHomeController::class, 'index'])->name('dashboard');
 
@@ -69,6 +69,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('seller')->name('seller.')->middleware(['checkUserRole:seller'])->group(function () {
         Route::resource('order', SellerOrderController::class);
+        Route::get('report/order', [SellerOrderController::class, 'report'])->name('order.report');
         Route::resource('shop', SellerShopController::class);
         Route::get('/shop/create', [SellerShopController::class, 'create'])->name('shop.create');
         Route::resource('product', SellerProductController::class);

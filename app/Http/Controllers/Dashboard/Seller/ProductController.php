@@ -86,7 +86,7 @@ class ProductController extends Controller
             'category' => ['required'],
             'unit' => ['required'],
             'description' => ['string', 'nullable'],
-            'price' => ['string', 'numeric'],
+            'price' => ['numeric'],
             'stock' => ['numeric', 'min:1'],
             'image' => ['required', 'max:4096'],
         ]);
@@ -148,7 +148,7 @@ class ProductController extends Controller
         $categories = Category::orderBy('name')->get();
         $units = Unit::orderBy('name')->get();
         $tags = Tag::orderBy('name')->get();
-        $product = Product::with(['shop.user', 'category', 'images', 'tags.tag'])->find($id);
+        $product = Product::with(['shop.user', 'category', 'unit', 'images', 'tags.tag'])->find($id);
 
         return Inertia::render('Dashboard/Seller/Product/Edit', compact('categories', 'units', 'tags', 'product'));
     }
@@ -163,9 +163,9 @@ class ProductController extends Controller
             'category' => ['required'],
             'unit' => ['required'],
             'description' => ['string', 'nullable'],
-            'price' => ['string', 'numeric'],
+            'price' => ['numeric'],
             'stock' => ['numeric'],
-            'image' => ['required', 'max:4096'],
+            'image' => ['max:4096'],
         ]);
 
         $product->name = ucfirst($request->name);
