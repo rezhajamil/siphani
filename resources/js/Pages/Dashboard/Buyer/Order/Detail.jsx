@@ -1,5 +1,3 @@
-// DetailOrder.js
-
 import React, { useEffect } from "react";
 import { usePage, useForm, Link } from "@inertiajs/react";
 import TextInput from "@/Components/atom/TextInput";
@@ -17,7 +15,7 @@ const Detail = () => {
         }
     }, [order]);
 
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, post, put, processing, errors } = useForm({
         message: "",
         order_id: order ? order.id : null,
         proof: null,
@@ -104,7 +102,7 @@ const Detail = () => {
 
 
     return (
-    <BuyerLayout>
+        <BuyerLayout>
             <div className="flex flex-col items-center justify-center w-full min-h-screen px-16 bg-white py-15 md:py-10">
                 <div className="flex flex-col w-1/2 justify-center mt-20">
                     <h1 className="mx-auto mb-6 text-lg font-semibold text-center bg-amber-300 md:text-2xl w-fit">
@@ -181,19 +179,19 @@ const Detail = () => {
                                 </li>
                             ))}
                         </ul>
-                    <div className="flex flex-row items-center justify-center gap-2 mt-20">
-                        <textarea
-                        className="w-full p-2 focus:border-amber-400 focus:ring-amber-300  border-2 border-amber-300 rounded-lg"
-                        placeholder="Chat Penjual"
-                        value={data.message}
-                        onChange={(e) => setData("message", e.target.value)}
-                        />
-                        <PrimaryButton disabled={processing} onClick={submit}>Kirim</PrimaryButton>
-                    </div>
+                        <div className="flex flex-row items-center justify-center gap-2 mt-20">
+                            <textarea
+                                className="w-full p-2 focus:border-amber-400 focus:ring-amber-300  border-2 border-amber-300 rounded-lg"
+                                placeholder="Chat Penjual"
+                                value={data.message}
+                                onChange={(e) => setData("message", e.target.value)}
+                            />
+                            <PrimaryButton disabled={processing} onClick={submit}>Kirim</PrimaryButton>
+                        </div>
                     </div>
                 </div>
             </div>
-    </BuyerLayout>
+        </BuyerLayout>
     );
 };
 

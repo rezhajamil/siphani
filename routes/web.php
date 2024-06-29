@@ -55,7 +55,6 @@ Route::middleware('auth')->group(function () {
     Route::post('order/store', [OrderController::class, 'store'])->name('order.store');
     Route::get('order/{order}', [OrderController::class, 'show'])->name('order.show');
     Route::put('order/upload-proof', [OrderController::class, 'uploadProof'])->name('order.uploadProof');
-
     Route::get('/dashboard', [DashboardHomeController::class, 'index'])->name('dashboard');
 
     Route::prefix('admin')->name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
