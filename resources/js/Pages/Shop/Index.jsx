@@ -1,11 +1,12 @@
+// Index.js
 import React from 'react';
 import { Link } from '@inertiajs/react';
 import SellerLayout from '@/Layouts/SellerLayout';
 import PrimaryButton from '@/Components/atom/PrimaryButton';
 
-const Index = ({ shop }) => {
+const Index = ({ shop, notificationCount }) => {
     return (
-        <SellerLayout>
+        <SellerLayout notificationCount={notificationCount}>
             <div className="h-screen flex flex-col sm:justify-center items-center my-10 sm:pt-0 bg-white">
                 <h1 className="text-center bg-amber-300 text-xl md:text-2xl font-semibold mb-6 w-fit mx-auto">Profile Toko Anda</h1>
                 {shop && (

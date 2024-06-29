@@ -83,7 +83,9 @@ const Detail = () => {
         { value: "2", label: "Menunggu Pembayaran" },
         { value: "3", label: "Pembayaran Ditolak" },
         { value: "4", label: "Pesanan Diproses" },
-        { value: "5", label: "Pesanan Dibatalkan" },
+        { value: "5", label: "Pesanan Dikirim" },
+        { value: "6", label: "Pesanan Selesai" },
+        { value: "7", label: "Pesanan Dibatalkan" },
     ];
 
     const submitStatus = (e) => {

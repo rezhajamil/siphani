@@ -37,7 +37,7 @@ const authItems = [
 const BuyerLayout = ({ auth, children, notificationCount }) => {
     return (
         <div className="flex flex-col min-h-screen">
-            <Navbar menuItems={menuItems} authItems={authItems} notificationCount={notificationCount} onOpenShopClick={handleOpenShopClick}  />
+            <Navbar menuItems={menuItems} authItems={authItems} notificationCount={notificationCount > 0 ? notificationCount : null} onOpenShopClick={handleOpenShopClick}  />
             <main className="flex-1">{children}</main>
             <footer className="w-full bg-white">
                 <hr />

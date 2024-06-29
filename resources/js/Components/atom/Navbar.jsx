@@ -57,11 +57,11 @@ const Navbar = ({ menuItems, authItems,  notificationCount, onOpenShopClick }) =
             <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
               {notificationCount}
             </span>
-            <HiBellAlert className="h-5 w-5" />
+            <HiBellAlert className="h-5 w-5 mr-4" />
           </div>
           ) : (
             <>
-            {item.icon && <item.icon className="h-5 w-5" />}
+            {item.icon && <item.icon className="h-5 w-5 mr-4" />}
             {!item.icon && item.text}
             </>
          )}
