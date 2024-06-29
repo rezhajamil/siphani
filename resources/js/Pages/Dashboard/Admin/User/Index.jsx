@@ -1,6 +1,7 @@
 import React from "react";
-import { usePage } from "@inertiajs/react";
+import { usePage, Link } from "@inertiajs/react";
 import AdminLayout from "@/Layouts/AdminLayout";
+import PrimaryButton from "@/Components/atom/PrimaryButton";
 
 const Index = () => {
     const { users } = usePage().props; // Mendapatkan data users dari props page
@@ -20,6 +21,7 @@ const Index = () => {
                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Shop</th>
                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Orders</th>
                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Notifications</th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
@@ -32,6 +34,11 @@ const Index = () => {
                                     <td className="px-6 py-4 whitespace-nowrap">{user.shop ? user.shop.name : '-'}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">{user.orders ? user.orders.length : 0}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">{user.notifications ? user.notifications.length : 0}</td>
+                                    <td className="px-4 py-4 whitespace-nowrap">
+                                        <Link href={route('admin.user.edit', user.id)}>
+                                            <PrimaryButton className="ml-2">Edit</PrimaryButton>
+                                        </Link>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

@@ -1,12 +1,12 @@
-// Import React dan Inertia
 import React from 'react';
+import { Link } from '@inertiajs/react';
 import SellerLayout from '@/Layouts/SellerLayout';
+import PrimaryButton from '@/Components/atom/PrimaryButton';
 
-// Komponen Index
 const Index = ({ shop }) => {
     return (
         <SellerLayout>
-            <div className="min-h-screen flex flex-col sm:justify-center items-center my-10 sm:pt-0 bg-white">
+            <div className="h-screen flex flex-col sm:justify-center items-center my-10 sm:pt-0 bg-white">
                 <h1 className="text-center bg-amber-300 text-xl md:text-2xl font-semibold mb-6 w-fit mx-auto">Profile Toko Anda</h1>
                 {shop && (
                     <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
@@ -29,6 +29,12 @@ const Index = ({ shop }) => {
                             <div className="mb-2">
                                 <span className="font-semibold">Email:</span> {shop.email}
                             </div>
+                        </div>
+                        {/* Tombol Edit */}
+                        <div className="px-6 py-4 flex justify-end">
+                            <Link href={route('seller.shop.edit', shop.id)}>
+                                <PrimaryButton>Edit</PrimaryButton>
+                            </Link>
                         </div>
                     </div>
                 )}

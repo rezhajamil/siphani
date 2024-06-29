@@ -19,10 +19,10 @@ const Index = () => {
         <AdminLayout>
             <div className="container mx-auto px-4 py-8">
                 <h1 className="text-2xl font-bold mb-4">Tag List</h1>
-                <Link href={route('admin.tag.create')}>
+                <Link href={route('admin.tag.create')} className="my-10 ml-10">
                     <PrimaryButton>Create New Tag</PrimaryButton>
                 </Link>
-                <table className="min-w-full divide-y divide-gray-200">
+                <table className="w-full divide-y divide-gray-200 mx-10 mt-5 overflow-hidden">
                     <thead className="bg-gray-50">
                         <tr>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
@@ -37,9 +37,10 @@ const Index = () => {
                                 <td className="px-6 py-4 whitespace-nowrap">{tag.id}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{tag.name}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{tag.status ? 'Active' : 'Inactive'}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                    <PrimaryButton onClick={() => handleToggleStatus(tag.id)}>{tag.status ? 'Deactivate' : 'Activate'}</PrimaryButton>
-                                    <PrimaryButton onClick={() => handleEdit(tag.id)} className="ml-2">Edit</PrimaryButton>
+                                <td className="px-4 py-4 whitespace-nowrap">
+                                    <Link href={route('admin.tag.edit', tag.id)}>
+                                            <PrimaryButton className="ml-2">Edit</PrimaryButton>
+                                    </Link>
                                 </td>
                             </tr>
                         ))}

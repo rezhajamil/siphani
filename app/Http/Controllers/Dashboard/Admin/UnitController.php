@@ -59,7 +59,7 @@ class UnitController extends Controller
     {
         $unit = Unit::find($id);
 
-        return Inertia::render('Dashboard/Admin/Unit/Create', compact('unit'));
+        return Inertia::render('Dashboard/Admin/Unit/Edit', compact('unit'));
     }
 
     /**

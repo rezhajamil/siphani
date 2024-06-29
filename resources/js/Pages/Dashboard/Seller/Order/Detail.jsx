@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { usePage, useForm, Link } from "@inertiajs/react";
-import TextInput from "@/Components/atom/TextInput";
 import Select from "@/Components/atom/Select";
 import InputError from "@/Components/atom/InputError";
 import InputLabel from "@/Components/atom/InputLabel";
