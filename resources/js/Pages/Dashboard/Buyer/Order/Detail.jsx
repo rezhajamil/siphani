@@ -6,6 +6,7 @@ import InputLabel from "@/Components/atom/InputLabel";
 import BuyerLayout from "@/Layouts/BuyerLayout";
 import PrimaryButton from "@/Components/atom/PrimaryButton";
 
+
 const Detail = () => {
     const { order } = usePage().props;
 
@@ -18,16 +19,12 @@ const Detail = () => {
     const { data, setData, post, put, processing, errors } = useForm({
         message: "",
         order_id: order ? order.id : null,
-        proof: null,
+        proof: "",
     });
 
     if (!order) {
         return <p>Pesanan tidak ditemukan.</p>;
     }
-
-    const handleFileChange = (e) => {
-        setData('proof', e.target.files[0]);
-    };
 
     const formatCurrency = (amount) => {
         return new Intl.NumberFormat("id-ID", {
@@ -79,19 +76,18 @@ const Detail = () => {
 
     const submitProof = (e) => {
         e.preventDefault();
-
-        if (!data.proof) {
-            console.error("Proof is required.");
+    
+        if (!data.proof || !order.id) {
+            console.error("Proof and order ID are required.");
             return;
         }
-
+    
         const formData = new FormData();
-        formData.append("proof", data.proof);
-   
-        put(route("order.uploadProof"), {
-            data: formData,
+        formData.append("proof", data.proof); // Append the actual file object here
+    
+        put(route("order.uploadProof", { order: order.id }), formData, {
             onSuccess: () => {
-                setData("proof", null);
+                setData("proof", ""); // Reset the proof field after successful upload
                 console.log("Proof uploaded successfully");
             },
             onError: (errors) => {
@@ -99,8 +95,13 @@ const Detail = () => {
             },
         });
     };
-
-
+    
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        console.log("Selected file:", file);
+        setData('proof', file); // Set the file object directly into 'proof'
+    };
+    
     return (
         <BuyerLayout>
             <div className="flex flex-col items-center justify-center w-full min-h-screen px-16 bg-white py-15 md:py-10">
