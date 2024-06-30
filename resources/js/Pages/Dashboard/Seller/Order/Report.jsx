@@ -137,13 +137,13 @@ const Report = () => {
                                         {order.product.unit.name}
                                     </td>
                                     <td className="px-4 py-2 border">
-                                        {formatCurrency(order.product.price)}
+                                        {formatCurrency(
+                                            order.total_amount / order.quantity
+                                        )}
                                         ,-
                                     </td>
                                     <td className="px-4 py-2 border">
-                                        {formatCurrency(
-                                            order.product.price * order.quantity
-                                        )}
+                                        {formatCurrency(order.total_amount)}
                                         ,-
                                     </td>
                                 </tr>
