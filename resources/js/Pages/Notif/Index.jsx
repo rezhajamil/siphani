@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { usePage, Link } from "@inertiajs/react";
-import axios from 'axios';
+import axios from "axios";
 import SellerLayout from "@/Layouts/SellerLayout";
 import BuyerLayout from "@/Layouts/BuyerLayout";
 import Template from "@/Layouts/Template";
 
-const NotificationList = ( auth ) => {
+const NotificationList = (auth) => {
     const { notifications, user } = usePage().props;
     console.log("notifications", notifications);
 
@@ -29,9 +29,11 @@ const NotificationList = ( auth ) => {
         // Mark all notifications as read when component mounts
         const markNotificationsAsRead = async () => {
             try {
-                await axios.post('/notifications/read', { user_id: user.id });
+                await axios.get("/notification/read-notif", {
+                    user_id: user.id,
+                });
             } catch (error) {
-                console.error('Error marking notifications as read:', error);
+                console.error("Error marking notifications as read:", error);
             }
         };
 
@@ -48,16 +50,24 @@ const NotificationList = ( auth ) => {
                                 key={notification.id}
                                 className="p-4 border rounded-lg shadow-md"
                             >
-                                <Link 
-                                    href={route("seller.order.show", { order: notification.order.id })}
-                                    className={`flex flex-col justify-center w-full  ${notification.is_read ? 'bg-gray-100' : 'bg-white'}`}
-                                    >
+                                <Link
+                                    href={route("order.show", {
+                                        order: notification.order_id,
+                                    })}
+                                    className={`flex flex-col justify-center w-full  ${
+                                        notification.is_read
+                                            ? "bg-gray-100"
+                                            : "bg-white"
+                                    }`}
+                                >
                                     <div className="flex justify-between w-full">
                                         <p className="text-sm font-medium">
                                             Dari: {notification.user.name}
                                         </p>
                                         <p className="text-xs text-gray-600">
-                                            {formatDate(notification.created_at)}
+                                            {formatDate(
+                                                notification.created_at
+                                            )}
                                         </p>
                                     </div>
                                     <p className="mt-2 text-sm text-amber-500">
@@ -70,9 +80,12 @@ const NotificationList = ( auth ) => {
                                             </p>
                                             <p>
                                                 Status:{" "}
-                                                <span className="bg-amber-300 p-1 rounded-lg">
-                                                {notification.order.status.name}
-                                                </span>  
+                                                <span className="p-1 rounded-lg bg-amber-300">
+                                                    {
+                                                        notification.order
+                                                            .status.name
+                                                    }
+                                                </span>
                                             </p>
                                         </div>
                                     )}
@@ -88,24 +101,20 @@ const NotificationList = ( auth ) => {
     };
 
     const renderLayout = () => {
-        if (user && user.role === 'Buyer') {
+        if (user && user.role === "Buyer") {
             return (
                 <BuyerLayout notificationCount={notifications.length}>
                     {renderContent()}
                 </BuyerLayout>
             );
-        } else if (user && user.role === 'Seller') {
+        } else if (user && user.role === "Seller") {
             return (
                 <SellerLayout notificationCount={notifications.length}>
                     {renderContent()}
                 </SellerLayout>
             );
         } else {
-            return (
-                <Template>
-                    {renderContent()}
-                </Template>
-            );
+            return <Template>{renderContent()}</Template>;
         }
     };
 

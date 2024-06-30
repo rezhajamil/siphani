@@ -19,7 +19,7 @@ const authItems = [
     },
 ];
 
-export default function SellerLayout({ auth, children, notificationCount }) {
+export default function SellerLayout({ auth, children, unreadNotif }) {
     // Mendapatkan logoutRoute menggunakan Inertia.js
 
     return (
@@ -27,7 +27,7 @@ export default function SellerLayout({ auth, children, notificationCount }) {
             <Navbar
                 menuItems={menuItems}
                 authItems={authItems}
-                notificationCount={notificationCount}
+                unreadNotif={unreadNotif}
             />
             <main className="flex-1">{children}</main>
             <footer className="w-full bg-white">
