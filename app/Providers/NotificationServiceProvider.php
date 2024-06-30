@@ -24,10 +24,10 @@ class NotificationServiceProvider extends ServiceProvider
     {
         View::composer('*', function ($view) {
             if (auth()->check()) {
-                $unreadNotificationsCount = Notification::where('target_id', Auth::user()->id)
+                $unreadNotif = Notification::where('target_id', Auth::user()->id)
                     ->where('is_read', false)
                     ->count();
-                $view->with('unreadNotif', $unreadNotificationsCount);
+                $view->with('unreadNotif', $unreadNotif);
             }
         });
     }

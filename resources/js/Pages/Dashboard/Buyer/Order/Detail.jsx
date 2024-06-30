@@ -191,14 +191,22 @@ const Detail = () => {
                                 </div>
                                 {order.proof_of_payment_url && (
                                     <div className="mx-auto my-4 border border-amber-400 w-fit">
-                                        <img
-                                            src={
+                                        <a
+                                            href={
                                                 "/storage/" +
                                                 order.proof_of_payment_url
                                             }
-                                            alt={order.proof_of_payment_url}
-                                            className="object-contain h-64"
-                                        />
+                                            target="_blank"
+                                        >
+                                            <img
+                                                src={
+                                                    "/storage/" +
+                                                    order.proof_of_payment_url
+                                                }
+                                                alt={order.proof_of_payment_url}
+                                                className="object-contain h-64"
+                                            />
+                                        </a>
                                     </div>
                                 )}
                             </div>

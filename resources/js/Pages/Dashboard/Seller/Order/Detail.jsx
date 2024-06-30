@@ -11,7 +11,7 @@ const Detail = () => {
 
     useEffect(() => {
         if (order) {
-            console.log("Order ID:", order.id);
+            console.log("Order ID:", order);
         }
     }, [order]);
 
@@ -83,7 +83,9 @@ const Detail = () => {
         { value: "2", label: "Menunggu Pembayaran" },
         { value: "3", label: "Pembayaran Ditolak" },
         { value: "4", label: "Pesanan Diproses" },
-        { value: "5", label: "Pesanan Dibatalkan" },
+        { value: "5", label: "Pesanan Dikirim" },
+        { value: "6", label: "Pesanan Selesai" },
+        { value: "7", label: "Pesanan Dibatalkan" },
     ];
 
     const submitStatus = (e) => {
@@ -100,7 +102,7 @@ const Detail = () => {
         patch(route("order-status.update", { order: order.id }), {
             data: formData,
             onSuccess: () => {
-                setData("status", null);
+                setData("status", data.status);
                 console.log("Status Updated successfully");
             },
             onError: (errors) => {
@@ -173,6 +175,22 @@ const Detail = () => {
                             Update
                         </PrimaryButton>
                     </div>
+                    {order.proof_of_payment_url && (
+                        <div className="mx-auto my-4 border border-amber-400 w-fit">
+                            <a
+                                href={"/storage/" + order.proof_of_payment_url}
+                                target="_blank"
+                            >
+                                <img
+                                    src={
+                                        "/storage/" + order.proof_of_payment_url
+                                    }
+                                    alt={order.proof_of_payment_url}
+                                    className="object-contain h-64"
+                                />
+                            </a>
+                        </div>
+                    )}
                     <div className="p-3 mt-10 rounded-lg shadow-md">
                         <h2 className="text-lg font-semibold">
                             Diskusi Pesanan
