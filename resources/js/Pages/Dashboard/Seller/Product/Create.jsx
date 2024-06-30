@@ -1,37 +1,41 @@
-import React from 'react';
-import { Head, useForm, usePage } from '@inertiajs/react';
-import SellerLayout from '@/Layouts/SellerLayout';
-import InputLabel from '@/Components/atom/InputLabel';
-import TextInput from '@/Components/atom/TextInput';
-import Select from '@/Components/atom/Select';
-import InputError from '@/Components/atom/InputError';
-import PrimaryButton from '@/Components/atom/PrimaryButton';
-import Checkbox from '@/Components/Checkbox';
+import React, { useEffect } from "react";
+import { Head, useForm, usePage } from "@inertiajs/react";
+import SellerLayout from "@/Layouts/SellerLayout";
+import InputLabel from "@/Components/atom/InputLabel";
+import TextInput from "@/Components/atom/TextInput";
+import Select from "@/Components/atom/Select";
+import InputError from "@/Components/atom/InputError";
+import PrimaryButton from "@/Components/atom/PrimaryButton";
+import Checkbox from "@/Components/Checkbox";
 
 const categoryOptions = [
     { value: 1, label: "Padi" },
     { value: 2, label: "Jagung" },
-    { value: 3, label: "Cabai" }
+    { value: 3, label: "Cabai" },
 ];
 
 const unitOptions = [
     { value: 1, label: "Piece" },
     { value: 2, label: "Kg" },
     { value: 3, label: "Ton" },
-    { value: 4, label: "Box" }
+    { value: 4, label: "Box" },
 ];
 
 export default function Create() {
     const { data, setData, post, processing, errors } = useForm({
-        name: '',
-        category: '',
-        unit: '',
-        description: '',
-        price: '',
-        stock: '',
+        name: "",
+        category: "",
+        unit: "",
+        description: "",
+        price: "",
+        stock: "",
         image: null,
         tag: [],
     });
+
+    useEffect(() => {
+        console.log({ image: data.image });
+    }, [data]);
 
     const submit = (e) => {
         e.preventDefault();
@@ -39,141 +43,159 @@ export default function Create() {
         console.log(data);
 
         const formData = new FormData();
-        formData.append('name', data.name);
-        formData.append('category', data.category);
-        formData.append('unit', data.unit);
-        formData.append('description', data.description);
-        formData.append('price', data.price);
-        formData.append('stock', data.stock);
-        formData.append('image', data.image);
-        formData.append('tag', JSON.stringify(data.tag)); // Convert tag array to JSON string
+        formData.append("name", data.name);
+        formData.append("category", data.category);
+        formData.append("unit", data.unit);
+        formData.append("description", data.description);
+        formData.append("price", data.price);
+        formData.append("stock", data.stock);
+        formData.append("image", data.image);
+        formData.append("tag", JSON.stringify(data.tag)); // Convert tag array to JSON string
 
-        post(route('seller.product.store'), {
+        post(route("seller.product.store"), {
             data: formData,
             onSuccess: () => {
-                route('dashboard.seller.product.index');
+                route("dashboard.seller.product.index");
             },
         });
     };
 
     const handleFileChange = (e) => {
         const files = e.target.files;
-        setData('image', files);
+        setData("image", files);
     };
 
     const handleCheckboxChange = (e) => {
         const { value, checked } = e.target;
         const tags = data.tag;
         if (checked) {
-            setData('tag', [...tags, value]);
+            setData("tag", [...tags, value]);
         } else {
-            setData('tag', tags.filter(tag => tag !== value));
+            setData(
+                "tag",
+                tags.filter((tag) => tag !== value)
+            );
         }
     };
 
     return (
         <SellerLayout>
             <Head title="Create Product" />
-            <div className="min-h-screen flex flex-col sm:justify-center items-center my-10 pt-10 bg-white">
-                <h1 className="text-center bg-amber-300 text-xl md:text-2xl font-semibold mb-6 w-fit mx-auto">Tambah Produk di Toko Anda</h1>
-                <form onSubmit={submit} className="flex flex-col items-center w-full">
-                    <div className='md:w-1/4 mt-4'>
+            <div className="flex flex-col items-center min-h-screen pt-10 my-10 bg-white sm:justify-center">
+                <h1 className="mx-auto mb-6 text-xl font-semibold text-center bg-amber-300 md:text-2xl w-fit">
+                    Tambah Produk di Toko Anda
+                </h1>
+                <form
+                    onSubmit={submit}
+                    className="flex flex-col items-center w-full"
+                >
+                    <div className="mt-4 md:w-1/4">
                         <InputLabel htmlFor="name" value="Nama Produk" />
                         <TextInput
                             id="name"
                             type="text"
                             name="name"
                             value={data.name}
-                            className="mt-2 block w-full"
+                            className="block w-full mt-2"
                             autoComplete="name"
                             isFocused={true}
-                            onChange={(e) => setData('name', e.target.value)}
+                            onChange={(e) => setData("name", e.target.value)}
                             required
                         />
                         <InputError message={errors.name} className="mt-2" />
                     </div>
 
-                    <div className='w-[220px] md:w-1/4 mt-4'>
+                    <div className="w-[220px] md:w-1/4 mt-4">
                         <InputLabel htmlFor="category" value="Kategori" />
                         <Select
                             id="category"
                             name="category"
                             value={data.category}
-                            className="mt-2 block w-full"
+                            className="block w-full mt-2"
                             options={categoryOptions}
                             placeholder="Pilih Kategori Produk"
-                            onChange={(e) => setData('category', e.target.value)}
+                            onChange={(e) =>
+                                setData("category", e.target.value)
+                            }
                             required
                         />
-                        <InputError message={errors.category} className="mt-2" />
+                        <InputError
+                            message={errors.category}
+                            className="mt-2"
+                        />
                     </div>
 
-                    <div className='w-[220px] md:w-1/4 mt-4'>
+                    <div className="w-[220px] md:w-1/4 mt-4">
                         <InputLabel htmlFor="unit" value="Unit" />
                         <Select
                             id="unit"
                             name="unit"
                             value={data.unit}
-                            className="mt-2 block w-full"
+                            className="block w-full mt-2"
                             options={unitOptions}
                             placeholder="Pilih Jenis Unit"
-                            onChange={(e) => setData('unit', e.target.value)}
+                            onChange={(e) => setData("unit", e.target.value)}
                             required
                         />
                         <InputError message={errors.unit} className="mt-2" />
                     </div>
 
-                    <div className='md:w-1/4 mt-4'>
+                    <div className="mt-4 md:w-1/4">
                         <InputLabel htmlFor="description" value="Deskripsi" />
                         <TextInput
                             id="description"
                             type="text"
                             name="description"
                             value={data.description}
-                            className="mt-2 block w-full"
+                            className="block w-full mt-2"
                             autoComplete="description"
                             isFocused={true}
-                            onChange={(e) => setData('description', e.target.value)}
+                            onChange={(e) =>
+                                setData("description", e.target.value)
+                            }
                         />
-                        <InputError message={errors.description} className="mt-2" />
+                        <InputError
+                            message={errors.description}
+                            className="mt-2"
+                        />
                     </div>
 
-                    <div className='md:w-1/4 mt-4'>
+                    <div className="mt-4 md:w-1/4">
                         <InputLabel htmlFor="price" value="Harga" />
                         <TextInput
                             id="price"
                             name="price"
                             type="number"
                             value={data.price}
-                            className="mt-2 block w-full"
-                            style={{ appearance: 'textfield' }} 
+                            className="block w-full mt-2"
+                            style={{ appearance: "textfield" }}
                             autoComplete="price"
                             isFocused={true}
-                            onChange={(e) => setData('price', e.target.value)}
+                            onChange={(e) => setData("price", e.target.value)}
                             required
                         />
                         <InputError message={errors.price} className="mt-2" />
                     </div>
 
-                    <div className='md:w-1/4 mt-4'>
+                    <div className="mt-4 md:w-1/4">
                         <InputLabel htmlFor="stock" value="Stok Produk" />
                         <TextInput
                             id="stock"
                             name="stock"
                             type="number"
                             value={data.stock}
-                            style={{ appearance: 'textfield' }} 
-                            className="mt-2 block w-full"
+                            style={{ appearance: "textfield" }}
+                            className="block w-full mt-2"
                             autoComplete="stock"
                             isFocused={true}
-                            onChange={(e) => setData('stock', e.target.value)}
+                            onChange={(e) => setData("stock", e.target.value)}
                             required
                         />
                         <InputError message={errors.stock} className="mt-2" />
                     </div>
 
-                    <div className='w-[220px] md:w-1/4 mt-4'>
-                        <InputLabel htmlFor="image" value="Gambar Produk"/>
+                    <div className="w-[220px] md:w-1/4 mt-4">
+                        <InputLabel htmlFor="image" value="Gambar Produk" />
                         <TextInput
                             id="image"
                             type="file"
@@ -187,7 +209,7 @@ export default function Create() {
                         <InputError message={errors.image} className="mt-2" />
                     </div>
 
-                    <div className='justify-start w-1/2 md:w-1/4 mt-4'>
+                    <div className="justify-start w-1/2 mt-4 md:w-1/4">
                         <InputLabel value="Tag Produk" />
                         <div className="flex items-center mt-2">
                             <Checkbox

@@ -23,7 +23,7 @@ class OrderController extends Controller
 
 
 
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -71,5 +71,15 @@ class OrderController extends Controller
      */
     public function destroy(string $id)
     {
+    }
+
+    public function report(Request $request)
+    {
+        $start_date = $request->start_date ?? date('Y-m-01');
+        $end_date = $request->end_date ?? date('Y-m-d');
+
+        $orders = Order::select('orders.*')->with(['user', 'product.shop', 'product.category', 'product.unit', 'status', 'discuss'])->join('products', 'orders.product_id', '=', 'products.id')->where('products.shop_id', Auth::user()->shop->id)->where('orders.created_at', '>=', $start_date)->where('orders.created_at', '<=', $end_date . ' 23:59:59')->where('orders.status_id', 6)->get();
+
+        return Inertia::render('Dashboard/Seller/Order/Report', compact('orders', 'start_date', 'end_date'));
     }
 }

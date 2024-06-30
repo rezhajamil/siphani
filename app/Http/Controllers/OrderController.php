@@ -89,15 +89,19 @@ class OrderController extends Controller
     {
     }
 
-    public function uploadProof(Request $request, $id)
+    public function uploadProof(Request $request, $order)
     {
-        $order = Order::with(['product.shop.user'])->find($id);
+        $order = Order::with(['product.shop.user'])->find($order);
+
+        if (!$order) {
+            return response()->json(['error' => 'Order not found.'], 404);
+        }
 
         $request->validate([
-            'proof' => 'required'
+            'proof' => 'required|file',
         ]);
 
-        $url = $request->proof->store('proof/' . $order->id);
+        $url = $request->file('proof')->store('proof/' . $order->id);
 
         $order->proof_of_payment_url = $url;
         $order->save();
@@ -110,6 +114,6 @@ class OrderController extends Controller
             'is_read' => 0,
         ]);
 
-        return redirect()->back()->with('success');
+        return redirect()->route('order.show', $order)->with('success');
     }
 }

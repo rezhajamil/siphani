@@ -35,13 +35,14 @@ export default function Product() {
                     {products.map((product) => (
                         <li
                             key={product.id}
-                            className="border-2 border-dashed border-amber-300 p-3 rounded-lg flex flex-col justify-between shadow-xl w-[250px] h-[300px] overflow-hidden"
+                            className="border-2 border-dashed border-amber-300 p-3 rounded-lg flex flex-col justify-between shadow-xl w-[250px] h-[320px] overflow-hidden"
                         >
                             {/* Render product details */}
                             <img
                                 src={
                                     product.images[0]?.image_url
-                                        ? "/storage/" + product.images[0]?.image_url
+                                        ? "/storage/" +
+                                          product.images[0]?.image_url
                                         : "/images/empty.png"
                                 }
                                 alt={product.name}
@@ -50,27 +51,28 @@ export default function Product() {
                             <div className="flex flex-row justify-between my-2">
                                 <p className="font-semibold">{product.name}</p>
                                 <p className="font-medium text-amber-500">
-                                    {product.category ? product.category.name : "Tidak Berkategori"}
+                                    {product.category
+                                        ? product.category.name
+                                        : "Tidak Berkategori"}
                                 </p>
                             </div>
-                            <div className="flex flex-row gap-1">    
-                                {product.tags.map((tag) => (
-                                        <span
-                                            key={tag.tag.id}
-                                            className="p-1 text-sm font-medium text-black rounded-lg bg-amber-400"
-                                        >
-                                            {tag.tag.name}
-                                        </span>
-                                    ))}
+                            <div className="flex flex-row gap-1">
+                                {product.tags?.map((tag) => (
+                                    <span
+                                        key={tag.tag.id}
+                                        className="p-1 text-sm font-medium text-black rounded-lg bg-amber-400"
+                                    >
+                                        {tag.tag.name}
+                                    </span>
+                                ))}
                             </div>
-                            <p className="font-medium text-gray-600">
-                                Unit : {product.unit ? product.unit.name : "Tidak ada unit"}
-                            </p>
-                            <p className="mb-1 font-medium text-gray-500">
+
+                            <p className="mt-3 text-xs font-medium text-gray-500">
                                 Stok: {product.stock}
                             </p>
                             <p className="font-bold text-lime-600">
-                                {formatCurrency(product.price)}
+                                {formatCurrency(product.price)} /{" "}
+                                {product.unit.name}
                             </p>
                             <a
                                 href={`product/edit/${product.id}`}

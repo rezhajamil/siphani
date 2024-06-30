@@ -19,7 +19,7 @@ const Detail = () => {
         message: "",
         order_id: order ? order.id : null,
         proof: null,
-        status: order ? order.status_id : ""
+        status: order.status_id,
     });
 
     if (!order) {
@@ -27,7 +27,7 @@ const Detail = () => {
     }
 
     const handleFileChange = (e) => {
-        setData('proof', e.target.files[0]);
+        setData("proof", e.target.files[0]);
     };
 
     const formatCurrency = (amount) => {
@@ -112,7 +112,7 @@ const Detail = () => {
     return (
         <SellerLayout>
             <div className="flex flex-col items-center justify-center w-full min-h-screen px-16 bg-white py-15 md:py-10">
-                <div className="flex flex-col w-1/2 justify-center mt-20">
+                <div className="flex flex-col justify-center w-1/2 mt-20">
                     <h1 className="mx-auto mb-6 text-lg font-semibold text-center bg-amber-300 md:text-2xl w-fit">
                         Detail Pesanan
                     </h1>
@@ -121,49 +121,59 @@ const Detail = () => {
                             <img
                                 src={
                                     order.product.images[0]?.image_url
-                                        ? "/storage/" + order.product.images[0]?.image_url
+                                        ? "/storage/" +
+                                          order.product.images[0]?.image_url
                                         : "/images/empty.png"
                                 }
                                 alt={order.product.name || "Unknown"}
                                 className="w-[200px] h-[120px] object-cover rounded-lg shadow-md"
                             />
                             <div className="flex flex-col gap-1">
-                                <p className="text-md font-semibold">
+                                <p className="font-semibold text-md">
                                     {order.product.name}
                                 </p>
                                 <p className="text-sm font-medium">
                                     Kategori: {order.product.category.name}
                                 </p>
                                 <p className="text-sm font-medium">
-                                    Jumlah Order: {order.quantity} {order.product.unit.name}
+                                    Jumlah Order: {order.quantity}{" "}
+                                    {order.product.unit.name}
                                 </p>
                                 <p className="text-sm font-medium text-gray-600">
-                                    Status: 
-                                    <span className="mx-1 text-sm font-medium bg-amber-400 p-1 text-black rounded-lg">{order.status.name}</span>
+                                    Status:
+                                    <span className="p-1 mx-1 text-sm font-medium text-black rounded-lg bg-amber-400">
+                                        {order.status.name}
+                                    </span>
                                 </p>
-                                <p className="text-md font-semibold text-lime-600">
-                                    Total Harga: {formatCurrency(order.total_amount)}
+                                <p className="font-semibold text-md text-lime-600">
+                                    Total Harga:{" "}
+                                    {formatCurrency(order.total_amount)}
                                 </p>
                             </div>
                         </div>
                     )}
 
-                    <div className="w-full flex flex-row mt-10 items-center gap-5">
+                    <div className="flex flex-row items-center w-full gap-5 mt-10">
                         <InputLabel htmlFor="status" value="Status Orderan" />
                         <Select
                             id="status"
                             name="status"
                             value={data.status}
-                            className="mt-1 block w-full"
+                            className="block w-full mt-1"
                             options={statusOption}
                             autoComplete="status"
-                            onChange={(e) => setData('status', e.target.value)}
+                            onChange={(e) => setData("status", e.target.value)}
                             required
                         />
                         <InputError message={errors.status} className="mt-2" />
-                        <PrimaryButton disabled={processing} onClick={submitStatus}>Update</PrimaryButton>
+                        <PrimaryButton
+                            disabled={processing}
+                            onClick={submitStatus}
+                        >
+                            Update
+                        </PrimaryButton>
                     </div>
-                    <div className="mt-10 p-3 shadow-md rounded-lg">
+                    <div className="p-3 mt-10 rounded-lg shadow-md">
                         <h2 className="text-lg font-semibold">
                             Diskusi Pesanan
                         </h2>
@@ -171,28 +181,35 @@ const Detail = () => {
                             {order.discuss.map((discussion) => (
                                 <li
                                     key={discussion.id}
-                                    className="border p-3 rounded-lg shadow-md mb-3"
+                                    className="p-3 mb-3 border rounded-lg shadow-md"
                                 >
                                     <p className="text-sm font-medium">
-                                        Pengirim: {discussion.user?.name || "Unknown User"}
+                                        Pengirim:{" "}
+                                        {discussion.user?.name ||
+                                            "Unknown User"}
                                     </p>
                                     <p className="text-xs text-gray-600">
                                         {formatDate(discussion.created_at)}
                                     </p>
-                                    <p className="mt-2">
-                                        {discussion.message}
-                                    </p>
+                                    <p className="mt-2">{discussion.message}</p>
                                 </li>
                             ))}
                         </ul>
                         <div className="flex flex-row items-center justify-center gap-2 mt-20">
                             <textarea
-                                className="w-full p-2 focus:border-amber-400 focus:ring-amber-300  border-2 border-amber-300 rounded-lg"
+                                className="w-full p-2 border-2 rounded-lg focus:border-amber-400 focus:ring-amber-300 border-amber-300"
                                 placeholder="Chat Penjual"
                                 value={data.message}
-                                onChange={(e) => setData("message", e.target.value)}
+                                onChange={(e) =>
+                                    setData("message", e.target.value)
+                                }
                             />
-                            <PrimaryButton disabled={processing} onClick={submit}>Kirim</PrimaryButton>
+                            <PrimaryButton
+                                disabled={processing}
+                                onClick={submit}
+                            >
+                                Kirim
+                            </PrimaryButton>
                         </div>
                     </div>
                 </div>

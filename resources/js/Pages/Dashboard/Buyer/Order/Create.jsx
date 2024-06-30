@@ -22,7 +22,7 @@ export default function Create() {
         if (product) {
             setData("product_id", product.id);
             setData("total_amount", product.price);
-            setMaxQuantity(product.stock); 
+            setMaxQuantity(product.stock);
         }
     }, [product]);
 
@@ -50,7 +50,6 @@ export default function Create() {
 
     const handleQuantityChange = (step) => {
         setData((prevData) => {
-
             const newQuantity = data.quantity + step;
             const Quantity = Math.max(1, Math.min(newQuantity, maxQuantity));
             const newTotalAmount = Quantity * product.price;
@@ -68,7 +67,7 @@ export default function Create() {
     }
 
     const tags = product.tags || [];
-    console.log(tags); 
+    console.log(tags);
 
     return (
         <BuyerLayout>
@@ -81,10 +80,9 @@ export default function Create() {
                     <img
                         src={
                             product.images[0]?.image_url
-                                ? "/storage/" +
-                                  product.images[0]?.image_url
+                                ? "/storage/" + product.images[0]?.image_url
                                 : "/images/empty.png"
-                        } 
+                        }
                         alt={product.name || "Unknown"}
                         className="w-[250px] h-[150px] object-cover"
                     />
@@ -94,13 +92,18 @@ export default function Create() {
                             {product.category.name}
                         </p>
                         {tags.length > 0 ? (
-                    <div className="flex flex-row gap-1">
-                        {tags.map(tag => (
-                            <span key={tag.tag_id} className="p-1 text-sm font-medium text-black rounded-lg bg-amber-400">{tag.tag && tag.tag.name}</span>
-                            ))}
-                        </div>
+                            <div className="flex flex-row gap-1">
+                                {tags.map((tag) => (
+                                    <span
+                                        key={tag.tag_id}
+                                        className="p-1 text-sm font-medium text-black rounded-lg bg-amber-400"
+                                    >
+                                        {tag.tag && tag.tag.name}
+                                    </span>
+                                ))}
+                            </div>
                         ) : (
-                         <p className="p-1 text-sm font-medium bg-transparent rounded-lg"></p>
+                            <p className="p-1 text-sm font-medium bg-transparent rounded-lg"></p>
                         )}
                     </div>
                 </div>
@@ -121,7 +124,7 @@ export default function Create() {
                             <div className="flex items-center gap-0">
                                 <button
                                     type="button"
-                                    className="px-2 h-8 w-8 bg-white border border-black rounded-l-md"
+                                    className="w-8 h-8 px-2 bg-white border border-black rounded-l-md"
                                     onClick={() => handleQuantityChange(-1)}
                                 >
                                     -
@@ -134,7 +137,7 @@ export default function Create() {
                                 />
                                 <button
                                     type="button"
-                                    className="px-2 h-8 w-8 bg-white border border-black rounded-r-md"
+                                    className="w-8 h-8 px-2 bg-white border border-black rounded-r-md"
                                     onClick={() => handleQuantityChange(1)}
                                 >
                                     +
