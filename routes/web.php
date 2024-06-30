@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::get('order/{order}', [OrderController::class, 'show'])->name('order.show');
     Route::post('order/upload-proof/{order}', [OrderController::class, 'uploadProof'])->name('order.uploadProof');
 
+
     Route::get('/dashboard', [DashboardHomeController::class, 'index'])->name('dashboard');
 
     Route::prefix('admin')->name('admin.')->middleware(['checkUserRole:admin'])->group(function () {
