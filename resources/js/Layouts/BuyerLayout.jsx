@@ -12,7 +12,7 @@ const menuItems = [
 
 const handleOpenShopClick = () => {
     const userConfirmed = window.confirm(
-        "Apakah Anda yakin ingin membuka toko?"
+        "Apakah anda yakin ingin membuka toko?"
     );
     if (userConfirmed) {
         window.location.href =
