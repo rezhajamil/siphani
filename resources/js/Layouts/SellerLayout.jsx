@@ -21,7 +21,7 @@ const authItems = [
 
 export default function SellerLayout({ auth, children, unreadNotif }) {
     // Mendapatkan logoutRoute menggunakan Inertia.js
-
+    console.log({ auth });
     return (
         <div className="flex flex-col min-h-screen">
             <Navbar
