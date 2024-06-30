@@ -126,7 +126,7 @@ export default function Produk({
                     filteredProducts.map((product, index) => (
                         <li
                             key={product.id || index}
-                            className="border-2 border-dashed border-amber-300 p-2 rounded-lg flex flex-col overflow-hidden justify-start gap-3 shadow-xl shadow-xl p-3 w-[310px] h-[450px]"
+                            className="border-2 border-dashed border-amber-300 rounded-lg flex flex-col overflow-hidden justify-start gap-3 shadow-xl p-3 w-[310px] h-[450px]"
                         >
                             <img
                                 src={
@@ -176,14 +176,17 @@ export default function Produk({
                                 {formatCurrency(product.price)} /{" "}
                                 {product.unit.name}
                             </p>
-                            {product.stock > 0 && (
-                                <Link
-                                    href={`/order/${product.id}/create`}
-                                    className="justify-end px-4 py-2 text-base font-medium text-center text-white rounded-lg bg-amber-500 w-fit hover:bg-amber-400"
-                                >
-                                    Beli
-                                </Link>
-                            )}
+                            <Link
+                                href={`/order/${product.id}/create`}
+                                className={`justify-end px-4 py-2 text-base rounded-lg font-medium text-center w-fit ${
+                                    product.stock > 0
+                                        ? "text-white bg-amber-500 hover:bg-amber-400"
+                                        : "text-gray-400 bg-gray-200 cursor-not-allowed"
+                                }`}
+                                disabled={product.stock === 0}
+                            >
+                                Beli
+                            </Link>
                         </li>
                     ))
                 ) : (
