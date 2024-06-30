@@ -51,9 +51,14 @@ const NotificationList = (auth) => {
                                 className="p-4 border rounded-lg shadow-md"
                             >
                                 <Link
-                                    href={route("order.show", {
-                                        order: notification.order_id,
-                                    })}
+                                    href={route(
+                                        auth.user.role === "Buyer"
+                                            ? "order.show"
+                                            : "seller.order.show",
+                                        {
+                                            order: notification.order_id,
+                                        }
+                                    )}
                                     className={`flex flex-col justify-center w-full  ${
                                         notification.is_read
                                             ? "bg-gray-100"
