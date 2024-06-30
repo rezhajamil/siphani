@@ -126,7 +126,7 @@ export default function Produk({
                     filteredProducts.map((product, index) => (
                         <li
                             key={product.id || index}
-                            className="border-2 border-dashed border-amber-300 p-2 rounded-lg flex flex-col overflow-hidden justify-start gap-3 shadow-xl shadow-xl p-3 w-[310px] h-[420px]"
+                            className="border-2 border-dashed border-amber-300 p-2 rounded-lg flex flex-col overflow-hidden justify-start gap-3 shadow-xl shadow-xl p-3 w-[310px] h-[450px]"
                         >
                             <img
                                 src={
@@ -169,16 +169,21 @@ export default function Produk({
                             <p className="text-sm font-normal">
                                 {product.description?.slice(0, 50)}
                             </p>
+                            <p className="text-xs font-medium text-gray-500">
+                                Stok: {product.stock}
+                            </p>
                             <p className="font-semibold text-md text-lime-600">
                                 {formatCurrency(product.price)} /{" "}
                                 {product.unit.name}
                             </p>
-                            <Link
-                                href={`/order/${product.id}/create`}
-                                className="justify-end px-4 py-2 text-base font-medium text-center text-white rounded-lg bg-amber-500 w-fit hover:bg-amber-400"
-                            >
-                                Beli
-                            </Link>
+                            {product.stock > 0 && (
+                                <Link
+                                    href={`/order/${product.id}/create`}
+                                    className="justify-end px-4 py-2 text-base font-medium text-center text-white rounded-lg bg-amber-500 w-fit hover:bg-amber-400"
+                                >
+                                    Beli
+                                </Link>
+                            )}
                         </li>
                     ))
                 ) : (
