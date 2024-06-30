@@ -93,7 +93,7 @@ export default function Produk({
                 </ul>
             </div>
             {/* Pencarian produk */}
-            <div className="flex flex-row justify-center w-1/3 md:w-1/2 gap-3 mt-5">
+            <div className="flex flex-row justify-center w-1/3 gap-3 mt-5 md:w-1/2">
                 <TextInput
                     type="text"
                     className="w-full p-2 border-2 rounded-lg border-amber-300"
@@ -150,21 +150,28 @@ export default function Produk({
                                         : "Tidak Berkategori"}
                                 </p>
                             </div>
+                            <Link
+                                href={route("shop.show", product.shop.id)}
+                                className="-mt-4 text-sm font-light text-gray-500 hover:underline"
+                            >
+                                {product.shop.name}
+                            </Link>
                             <div className="flex flex-row gap-1">
-                                    {product.tags.map((tag) => (
-                                        <span
-                                            key={tag.tag.id}
-                                            className="p-1 text-sm font-medium text-black rounded-lg bg-amber-400"
-                                        >
-                                            {tag.tag.name}
-                                        </span>
-                                    ))}
+                                {product.tags.map((tag) => (
+                                    <span
+                                        key={tag.tag.id}
+                                        className="p-1 text-sm font-medium text-black rounded-lg bg-amber-400"
+                                    >
+                                        {tag.tag.name}
+                                    </span>
+                                ))}
                             </div>
                             <p className="text-sm font-normal">
                                 {product.description?.slice(0, 50)}
                             </p>
                             <p className="font-semibold text-md text-lime-600">
-                                {formatCurrency(product.price)}
+                                {formatCurrency(product.price)} /{" "}
+                                {product.unit.name}
                             </p>
                             <Link
                                 href={`/order/${product.id}/create`}

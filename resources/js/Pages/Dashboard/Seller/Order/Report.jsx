@@ -71,9 +71,9 @@ const Report = () => {
                 action={route("seller.order.report")}
                 method="get"
                 onSubmit={submit}
-                className="p-8 my-6 w-fit"
+                className="flex justify-center w-full p-8 my-6"
             >
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-center gap-4 w-fit">
                     <TextInput
                         id="start_date"
                         type="date"

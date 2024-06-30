@@ -223,4 +223,12 @@ class ProductController extends Controller
 
         return back();
     }
+
+    public function toggleStatus(Product $product)
+    {
+        $product->status = !$product->status;
+        $product->save();
+
+        return back();
+    }
 }

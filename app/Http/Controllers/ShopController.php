@@ -78,7 +78,7 @@ class ShopController extends Controller
      */
     public function show(Shop $shop)
     {
-        $shop = Shop::with(['user', 'products.category', 'products.unit', 'products.tag', 'products.images', 'product.orders'])->find($shop->id);
+        $shop = Shop::with(['user', 'products.category', 'products.unit', 'products.tags.tag', 'products.images', 'products.orders'])->find($shop->id);
 
         return Inertia::render('Shop/Show', compact('shop'));
     }

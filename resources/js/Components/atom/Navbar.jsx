@@ -103,7 +103,7 @@ const Navbar = ({ menuItems, authItems, unreadNotif, onOpenShopClick }) => {
                                 className={`${item.className} ${
                                     activeMenuItem === index + menuItems.length
                                         ? "text-black"
-                                        : "hover:text-amber-300"
+                                        : "hover:text-amber-300 whitespace-nowrap"
                                 }`}
                                 onClick={() => {
                                     handleMenuItemClick(

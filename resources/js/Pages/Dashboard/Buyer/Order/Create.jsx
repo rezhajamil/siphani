@@ -62,6 +62,14 @@ export default function Create() {
         });
     };
 
+    const formatCurrency = (amount) => {
+        return new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR",
+            minimumFractionDigits: 0,
+        }).format(amount);
+    };
+
     if (!product) {
         return <div>Loading...</div>; // Handle the case where product is not yet loaded
     }
@@ -114,7 +122,8 @@ export default function Create() {
                     <div className="flex flex-row justify-between w-full">
                         <div className="flex flex-col gap-1">
                             <p className="text-sm font-semibold">
-                                {product.price}/{product.unit.name}
+                                {formatCurrency(product.price)}/
+                                {product.unit.name}
                             </p>
                             <p className="text-black text-normal">
                                 Stok: {product.stock}

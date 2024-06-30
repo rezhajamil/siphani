@@ -74,12 +74,26 @@ export default function Product() {
                                 {formatCurrency(product.price)} /{" "}
                                 {product.unit.name}
                             </p>
-                            <a
-                                href={`product/edit/${product.id}`}
-                                className="px-4 py-2 my-3 text-base font-medium text-center text-white rounded-lg bg-amber-500 w-fit hover:bg-amber-400"
-                            >
-                                Edit
-                            </a>
+                            <div className="flex justify-between gap-2">
+                                <a
+                                    href={`product/edit/${product.id}`}
+                                    className="px-4 py-2 my-3 text-base font-medium text-center text-white rounded-lg bg-amber-500 w-fit hover:bg-amber-400"
+                                >
+                                    Edit
+                                </a>
+                                <a
+                                    href={`product/${product.id}/toggle-status`}
+                                    className={`px-4 py-2 my-3 text-base font-medium border text-center rounded-lg w-fit transition-all ${
+                                        product.status
+                                            ? "border-red-600 text-red-600 hover:bg-red-600 hover:text-white"
+                                            : "border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
+                                    }`}
+                                >
+                                    {product.status
+                                        ? "Nonaktifkan"
+                                        : "Aktifkan"}
+                                </a>
+                            </div>
                         </li>
                     ))}
                 </ul>

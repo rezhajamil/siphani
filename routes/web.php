@@ -73,10 +73,12 @@ Route::middleware('auth')->group(function () {
         Route::resource('order', SellerOrderController::class);
         Route::get('report/order', [SellerOrderController::class, 'report'])->name('order.report');
         Route::resource('shop', SellerShopController::class);
+        Route::post('shop/{shop}/update', [SellerShopController::class, 'update'])->name('shop.update');
         Route::get('/shop/create', [SellerShopController::class, 'create'])->name('shop.create');
         Route::resource('product', SellerProductController::class);
         Route::get('/product/create', [SellerProductController::class, 'create'])->name('product.create');
         Route::get('/product/edit/{id}', [SellerProductController::class, 'edit'])->name('product.edit');
+        Route::get('product/{product}/toggle-status', [SellerProductController::class, 'toggleStatus'])->name('product.toggle-status');
     });
 });
 
