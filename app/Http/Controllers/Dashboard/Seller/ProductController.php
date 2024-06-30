@@ -191,13 +191,14 @@ class ProductController extends Controller
             if ($request->hasFile('image')) {
                 ProductImage::where('product_id', $product->id)->delete();
 
-                foreach ($request->file('image') as $key => $image) {
-                    $url = $image->store("product_images/$product->id");
-                    ProductImage::create([
-                        'product_id' => $product->id,
-                        'image_url' => $url,
-                    ]);
-                }
+                $url = $request->image->store("product_images/$product->id");
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_url' => $url,
+                ]);
+
+                // foreach ($request->file('image') as $key => $image) {
+                // }
             }
         }
 

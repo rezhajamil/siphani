@@ -19,7 +19,7 @@ export default function Edit({ categories, units, tags, product, id }) {
               price: product.price || "",
               stock: product.stock || "",
               image: null,
-              tag: product.tags ? product.tags.map((tag) => tag.id) : [], // Default ke array kosong jika tidak ada tags
+              tag: product.tags ? product.tags.map((tag) => tag.tag_id) : [], // Default ke array kosong jika tidak ada tags
           }
         : {
               name: "",
@@ -32,15 +32,21 @@ export default function Edit({ categories, units, tags, product, id }) {
               tag: [],
           };
 
-    const { data, setData, put, processing, errors } = useForm(initialData);
+    const { data, setData, post, processing, errors } = useForm(initialData);
+    console.log(data);
 
     useEffect(() => {
         if (product) {
             // Update tag checkboxes based on product.tags
-            const initialTags = product.tags.map((tag) => tag.id.toString());
+            const initialTags = product.tags.map((tag) =>
+                tag.tag_id.toString()
+            );
             setData("tag", initialTags);
         }
     }, [product]);
+
+    // useEffect(() => {console.log({data})
+    // }, [data]);
 
     const submit = (e) => {
         e.preventDefault();
@@ -58,7 +64,7 @@ export default function Edit({ categories, units, tags, product, id }) {
         }
         formData.append("tag", JSON.stringify(data.tag));
 
-        put(route("seller.product.update", product.id), {
+        post(route("seller.product.update", product.id), {
             data: formData,
             onSuccess: () => {
                 route("seller.product.index");
@@ -73,6 +79,7 @@ export default function Edit({ categories, units, tags, product, id }) {
     const handleCheckboxChange = (e) => {
         const { value, checked } = e.target;
         const tags = data.tag;
+        console.log({ tags });
         if (checked) {
             setData("tag", [...tags, value]);
         } else {
@@ -208,6 +215,7 @@ export default function Edit({ categories, units, tags, product, id }) {
                             accept="image/*"
                             className="mt-1 w-full p-2.5 focus:outline file:rounded-lg file:border-0 file:bg-amber-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-amber-400"
                             onChange={handleFileChange}
+                            multiple
                         />
                         <InputError message={errors.image} className="mt-2" />
                     </div>

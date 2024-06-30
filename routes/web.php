@@ -78,6 +78,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('product', SellerProductController::class);
         Route::get('/product/create', [SellerProductController::class, 'create'])->name('product.create');
         Route::get('/product/edit/{id}', [SellerProductController::class, 'edit'])->name('product.edit');
+        Route::post('/product/{product}/update', [SellerProductController::class, 'update'])->name('product.update');
         Route::get('product/{product}/toggle-status', [SellerProductController::class, 'toggleStatus'])->name('product.toggle-status');
     });
 });
