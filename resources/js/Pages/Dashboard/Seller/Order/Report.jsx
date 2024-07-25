@@ -78,7 +78,7 @@ const Report = () => {
                         id="start_date"
                         type="date"
                         name="start_date"
-                        value={start_date}
+                        value={data.start_date}
                         className="block w-full mt-2"
                         autoComplete="start_date"
                         isFocused={true}
@@ -90,7 +90,7 @@ const Report = () => {
                         id="end_date"
                         type="date"
                         name="end_date"
-                        value={end_date}
+                        value={data.end_date}
                         className="block w-full mt-2"
                         autoComplete="end_date"
                         isFocused={true}
