@@ -126,7 +126,7 @@ export default function Produk({
                     filteredProducts.map((product, index) => (
                         <li
                             key={product.id || index}
-                            className="border-2 border-dashed border-amber-300 rounded-lg flex flex-col overflow-hidden justify-start gap-3 shadow-xl p-3 w-[310px] h-[450px]"
+                            className="border-2 border-dashed border-amber-300 rounded-lg flex flex-col overflow-hidden justify-start gap-3 shadow-xl p-3 w-[310px] h-[500px]"
                         >
                             <img
                                 src={
@@ -156,7 +156,7 @@ export default function Produk({
                             >
                                 {product.shop.name}
                             </Link>
-                            <div className="flex flex-row gap-1">
+                            <div className="flex flex-row gap-1 min-h-[28px]">
                                 {product.tags.map((tag) => (
                                     <span
                                         key={tag.tag.id}
@@ -166,27 +166,37 @@ export default function Produk({
                                     </span>
                                 ))}
                             </div>
-                            <p className="text-sm font-normal">
-                                {product.description?.slice(0, 50)}
+                            <p className="h-full text-sm font-normal">
+                                {product.description?.slice(0, 130)}
+                                {product.description?.length > 130 ? "..." : ""}
+                                {product.description?.length < 1 ? (
+                                    <span className="italic font-light">
+                                        Tidak ada deskripsi produk
+                                    </span>
+                                ) : (
+                                    ""
+                                )}
                             </p>
-                            <p className="text-xs font-medium text-gray-500">
-                                Stok: {product.stock}
-                            </p>
-                            <p className="font-semibold text-md text-lime-600">
-                                {formatCurrency(product.price)} /{" "}
-                                {product.unit.name}
-                            </p>
-                            <Link
-                                href={`/order/${product.id}/create`}
-                                className={`justify-end px-4 py-2 text-base rounded-lg font-medium text-center w-fit ${
-                                    product.stock > 0
-                                        ? "text-white bg-amber-500 hover:bg-amber-400"
-                                        : "text-gray-400 bg-gray-200 cursor-not-allowed"
-                                }`}
-                                disabled={product.stock === 0}
-                            >
-                                Beli
-                            </Link>
+                            <div className="flex flex-col gap-2 mt-auto">
+                                <p className="mt-auto text-xs font-medium text-gray-500">
+                                    Stok: {product.stock}
+                                </p>
+                                <p className="mt-auto font-semibold text-md text-lime-600">
+                                    {formatCurrency(product.price)} /{" "}
+                                    {product.unit.name}
+                                </p>
+                                <Link
+                                    href={`/order/${product.id}/create`}
+                                    className={`justify-end px-4 py-2 text-base justify-items-end mt-auto rounded-lg font-medium text-center w-fit ${
+                                        product.stock > 0
+                                            ? "text-white bg-amber-500 hover:bg-amber-400"
+                                            : "text-gray-400 bg-gray-200 cursor-not-allowed"
+                                    }`}
+                                    disabled={product.stock === 0}
+                                >
+                                    Beli
+                                </Link>
+                            </div>
                         </li>
                     ))
                 ) : (
